@@ -1,0 +1,62 @@
+%run('BYSJ_channelmodel.m')
+%%
+% 信号生成
+length_sample = NoSamples;
+sample = rand(length_sample,Nu);
+sample = round(sample);
+signal_t = ones(length_sample,Nu);
+for i = 1:length_sample
+    for j = 1:Nu
+        if(sample(i,j) == 0)
+            signal_t(i,j) = -1;
+        end
+    end
+end
+
+%%
+% 接收信号
+signal_c = zeros(Nr,length_sample,Nu);
+for n_link=1:Nu
+    for n_path=1:NoPath
+        for n_sample=1:NoSamples
+            H_i = H(:,:,n_path,n_sample,n_link);
+            H_i = H_i(:,:);
+            signal_c(:,n_sample,n_link) = signal_c(:,n_sample,n_link) + H_i'* signal_t(n_sample,n_link);
+        end
+    end
+end
+
+SNR = ;
+sigma = 10^(SNR/10);
+%加噪
+signal_r =awgn(signal_c,SNR);
+%%
+% MMSE检测矩阵
+
+signal_d = zeros(length_sample,Nu);
+for n_link=1:Nu
+    for n_path=1:NoPath
+        for n_sample=1:NoSamples
+            H_i = H(:,:,n_path,n_sample,n_link);
+            H_i = H_i(:,:);
+            W = inv(H_i'*H_i+eye(Nr)/sigma)*H_i';
+            signal_d(n_sample,n_link) = signal_d(n_sample,n_link) + W'* signal_r(:,n_sample,n_link);
+        end
+    end
+end
+
+% %%
+% % 判决
+signal_rc = ones(length_sample,Nu);
+for i = 1:length_sample
+    for j = 1:Nu
+        d_1 = abs(signal_d(i,j)-1);
+        d_2 = abs(signal_d(i,j)+1);
+        if(d_1 > d_2)
+            signal_rc(i,j) = 0;
+        end
+    end
+end
+errortimes = sum(abs(signal_rc-sample));
+
+
