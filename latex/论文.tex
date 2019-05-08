@@ -910,7 +910,15 @@ E((\mathcal{X}_1\mathcal{X}_2...\mathcal{X}_n)) = \sum_{\pi \in NC(n)} \mathcal{
 \mathbb{E}[\mathcal{X}^{2m+2}]=\overline{\mathbf{X}}\mathbb{E}[\mathcal{X}^{2m+1}]+\sum_{j=0}^{m}\eta(\mathbb{E}[\mathcal{X}^{2j}])\mathbb{E}[\mathcal{X}^{2m-2j}]  \\
 \mathbb{E}[\mathcal{X}^{2m+1}]=\overline{\mathbf{X}}\mathbb{E}[\mathcal{X}^{2m}]+\sum_{j=0}^{m}\eta(\mathbb{E}[\mathcal{X}^{2j}])\mathbb{E}[\mathcal{X}^{2m-2j-1}] 
 \end{eqnarray}
-
+用代数形式表示$\mathcal{D}$
+\begin{equation}\label{key}
+\mathcal{D} = \mathrm{diag}(\mathcal{M}_N(\mathbb{C}),\mathcal{M}_{M_1}(\mathbb{C}),...,\mathcal{M}_{M_K}(\mathbb{C}))
+\end{equation}
+本文在论文模型部分讨论过所选用统计模型
+\begin{equation}\label{key}
+\mathbf{H} = \mathbf{U}_{r}\tilde{\mathbf{H}}\mathbf{U}_{t}^{H} = \mathbf{U}_{r}(\mathbf{D}+\mathbf{M}\odot \mathbf{H}_{idd})\mathbf{U}_{t}^{H}
+\end{equation}
+考虑其中的$\mathbf{D}$为0，在此算子自由度模型中即$\overline{\mathbf{X}} = 0_N$。即又可以得到下式的递推结论。
 
 
 
