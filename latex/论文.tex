@@ -40,7 +40,7 @@
 \title{大规模MIMO的检测与估计}{}{Detection and Estimation of Massive MIMO System}{subtitle}
 \author{郑奕飞}{Yifei Zheng}
 \advisor{孙晨}{讲师}{Chen Sun}{Prof.}
-\coadvisor{黄清}{教授}{Wenjin Wang}{Associate Prof.} % 没有
+\coadvisor{王闻今}{教授}{Wenjin Wang}{Associate Prof.} % 没有
 
 % \degree{工学硕士} % 详细学位名称
 \major[12em]{信息工程}
@@ -525,9 +525,9 @@ n_r - N_R \quad \frac{n_r-1}{N_R} \geq \frac{1}{2}
 \section{本章小结}
 本章主要研究了MIMO信道物理模型，统计模型和波束域信道模型。其中物理模型主要是研究了影响信道情况的各种参数，并为后续各种模型的基础。统计信道模型主要研究了联合相关模型，作为实际相关仿真模型的基础模型。波束域信道模型主要体现的是大规模MIMO信道的特性和研究方式，通过波束域信道模型的特征，提供了减少计算复杂度切入点。
 
-\chapter{基于多项式展开的MMSE接收机}
+\chapter{MMSE与低复杂度PE接收机}
 \section{引言}
-信号在通过上述复杂信道之后，信号会发生改变，此时需要利用一些判决方法将接收信号恢复为发送信号。但是因为通过信道后信号同样会收到随机干扰，所以完全恢复为初始信号某种意义上是不存在的，但是通过一些方法，可以尽可能地或者说最大概率的接近发送信号。这些根据接收信号恢复发送信号的方法在通信系统中称为检测，目前针对MIMO系统最佳的检测方法为MMSE估计。
+信号在通过上述复杂信道之后，信号会发生改变，此时需要利用一些判决方法将接收信号恢复为发送信号。但是因为通过信道后信号同样会收到随机干扰，所以完全恢复为初始信号某种意义上是不存在的，但是通过一些方法，可以尽可能地或者说最大概率的接近发送信号。这些根据接收信号恢复发送信号的方法在通信系统中称为检测，目前针对MIMO系统最佳的检测方法为MMSE估计。但是MMSE估计的计算复杂度随着天线的增多，信道矩阵维度的扩大，会变得非常高，实际系统实现会非常占用资源。基于MMSE检测准则，衍生出了PE接收机，即多项式展开(polynomial expansion)接收机。其一定程度降低了复杂度，同时提供了优化方向。本章节会提出一种基于算子自由度的算法，将多项式展开得到的系数替换为确定性等同。通过替换可以略过计算多项式展开的计算，同时降低PE接收机的复杂度。
 \section{系统模型}
 在一个大规模MIMO系统中，一个基站将使用数以百计的天线来提供巨大的用户容量提高。在用户端，一般认为用户只有一根天线。但是，由于目前用户多天线的技术已经运用，将用户多天线应用到大规模MIMO系统中具有理论与实践的双重意义。所以在建立系统模型时，可以考虑用户多天线的情况。系统模型如下
 
@@ -574,10 +574,10 @@ y = \sum_{i=1}^{K} \mathbf{H}_i \mathbf{x}_i + \mathbf{Z}
 \end{eqnarray}
 其中$U_r$和$U_t$以及其他符号均与上面推导的式子相同，此处本文为了方便后续计算将$\mathbf{H}_{idd}$的方差设为$\frac{1}{M}$。
 令
-\begin{eqnarray}\label{key}
+\begin{gather}\label{key}
 \overline{\mathbf{H}}_i = \mathbf{U}_{r}\mathbf{D}\mathbf{U}_{t}^{H} \\
 \tilde{\mathbf{H}}_i = \mathbf{U}_{r}(\mathbf{M}_i\odot \mathbf{H}_{idd})\mathbf{U}_{t}^{H}\mathbf{U}_{t}^{H}
-\end{eqnarray}
+\end{gather}
 根据性质，可以得出结论
 \begin{equation}\label{key}
 \mathbb{E} \lbrace \tilde{\mathbf{H}}_i \mathbf{C}_{ij} \tilde{\mathbf{H}}_j^{H} \rbrace = 0_{N*N}
@@ -651,13 +651,17 @@ C_{x|y}=C_{x}-C_{x}H^{H}(HC_{x}H^{H}+\sigma^{2}I)^{-1}HC_{x}
 (A + BCD)^{-1} = A^{-1} - A^{-1}B(DA^{-1}B+C^{-1})^{-1}DA^{-1}
 \end{equation}
 根据上式，可以将式(3.29)和(3.30)转换成如下形式
-\begin{eqnarray}\label{key}
+\begin{gather}\label{key}
 E[x|y] = \mu_{x} + (HC_n^{-1}H^H + C_x^{-1})^{-1}H^H C_n^{-1}(y-H\mu_{x}) \\ 
 C_{x|y} = (H C_n^{-1} H^H + C_x^{-1})^{-1}
-\end{eqnarray}
+\end{gather}
 根据式(3.24)可以知道，且一般情况下，二进制采样后的信号均值为0，则MMSE的检测矩阵为
 \begin{equation}\label{key}
 \mathbf{W} = (\mathbf{H}\mathbf{H}^H + \sigma^2 \mathbf{I})^{-1}\mathbf{H}^H
+\end{equation}
+同时得到MMSE准则计算公式
+\begin{equation}\label{key}
+\hat{x}_{MMSE} = (\mathbf{H}\mathbf{H}^H + \sigma^2 \mathbf{I})^{-1}\mathbf{H}^H y
 \end{equation}
 虽然可以通过上式，很容易得到MMSE的检测矩阵的表达式，但需要注意的是信道矩阵$\mathbf{H}$是一个维度相对较大的矩阵，所以上式计算是非常困难的。并且在FPGA等硬件上实现矩阵求逆转置是比较繁琐的，所以通常MMSE矩阵硬件上实现是以QR分解为基础进行计算，其复杂度一定程度上得到简化，但是仍然处于$\Theta(n^3)$的水平。
 下面简单介绍QR分解，即将信道矩阵分解为Q阵和R阵，其中Q阵为正交阵，R阵为上三角矩阵
@@ -709,7 +713,7 @@ G(i,j,\theta) = \left[
 \right]
 \end{eqnarray}
 $c=\cos\theta$ 和 $s = \sin\theta$ 出现在第i行和第j行与第i列和第j列的交叉点上，亦可以这样描述Givens矩阵的非零元素
-\begin{eqnarray}\label{key}
+\begin{gather}\label{key}
 g_{kk} = 1 , \quad k \neq i,j  \nonumber\\ 
 g_{ii} = c  \nonumber \\
 g_{jj} = c  \nonumber \\
@@ -717,7 +721,7 @@ g_{ij} = s  \nonumber \\
 g_{ji} = -s  \nonumber \\  
 c=\cos\theta  \nonumber \\
 s = \sin\theta  \nonumber
-\end{eqnarray}
+\end{gather}
 主要是对目标矩阵的第i行和第j行进行变换，即将其旋转到坐标轴即可不断变化直至上三角阵。
 
 householder变换主要是利用householder矩阵将$\overline{\mathbf{H}}$特定位置的值转换为0，即求解$\overline{\mathbf{H}}$的上三角阵$\mathbf{R}$。householder矩阵对一个向量的表达式如下
@@ -726,15 +730,15 @@ householder变换主要是利用householder矩阵将$\overline{\mathbf{H}}$特�
 \end{equation}
 即分别对$\overline{\mathbf{H}}$每列进行householder变化将其变换为上三角正，而householder矩阵的乘积和即为QR分解的$\mathbf{Q}$阵。
 householder矩阵是对称矩阵，正交矩阵，hermitian矩阵，对合矩阵
-\begin{eqnarray}\label{key}
+\begin{gather}\label{key}
 \mathbf{H}^T = \mathbf{H}  \nonumber \\
 \mathbf{H}^T = \mathbf{H}^{-1}  \nonumber\\
 \mathbf{H}^H = \mathbf{H}  \nonumber\\
 \mathbf{H}^2 = \mathbf{I} \nonumber
-\end{eqnarray}
+\end{gather}
 
 以上是利用QR分解进行的MMSE估计。借助QR分解，使得其方便硬件实现，其复杂度的降低非常有限。
-根据MMSE估计，本文做了MMSE估计的仿真，并以MMSE估计作为评判基准，此处考虑的为BPSK调制。目前考虑的是用户单天线
+根据MMSE估计，本文做了MMSE估计的仿真，并以MMSE估计作为评判基准，此处考虑的为BPSK调制。分别考虑用户单天线和用户多天线，多天线时设置为2
 \begin{table}[htbp]
 	\centering
 	\caption{\label{tab:test}MMSE仿真参数设置}
@@ -746,7 +750,7 @@ householder矩阵是对称矩阵，正交矩阵，hermitian矩阵，对合矩阵
 		\bottomrule
 		基站侧天线数 & 128 \\
 		\bottomrule
-		用户数天线	& 1 \\
+		用户数天线	& 1 \quad or\quad2 \\
 		\bottomrule
 		用户数	& 4 \\
 		\bottomrule
@@ -758,38 +762,55 @@ householder矩阵是对称矩阵，正交矩阵，hermitian矩阵，对合矩阵
 		\bottomrule
 	\end{tabular}
 \end{table}
+
 \begin{figure}[htbp!]
-	\centering \includegraphics[width=0.45\textwidth]{img/3_1.jpg} \caption{MMSE检测BER}
+	\centering \includegraphics[width=0.45\textwidth]{img/3_1.jpg} \caption{单天线MMSE检测BER}
 \end{figure}
 
-\section{多项式展开接收机及复杂度优化}
+\begin{figure}[htbp!]
+	\centering \includegraphics[width=0.45\textwidth]{img/3_3.jpg} \caption{多天线MMSE检测BER}
+\end{figure}
+
+
+\section{PE接收机及复杂度优化}
 通过上述计算过程，可以知道在用户数较多用户天线数较多的情况下，MMSE接收机的复杂度将会非常的高。所以基于MMSE接收机的基本原理有提出了多项式展开的方法对MMSE矩阵进行合理的化简，化简表达式如下
-\begin{eqnarray}\label{key}
+\begin{gather}\label{key}
 \mathbf{W} = (\mathbf{H}\mathbf{H}^H + \sigma^2 \mathbf{I})^{-1}\mathbf{H}^H  \nonumber \\
 \mathbf{x}_{MMSE} = \mathbf{W} \mathbf{y}  \nonumber \\
 (\mathbf{H}^H\mathbf{H}+\sigma^2\mathbf{I})^-1 \approx \sum_{i=1}^{L} b_{PE,i}^{(L)}(\mathbf{H}^H\mathbf{H})^{i-1}
-\end{eqnarray}
+\end{gather}
 仍然利用MMSE接收机的判断准则，并令$\mathbf{b}^{(L)}_{PE}$ 表示 $b_{PE,i}^{(L)}$的合集。这里考虑的$L \leq M$,$M$为发送端用户天线总数
 令
-\begin{eqnarray}\label{key}
+\begin{gather}\label{key}
 \mathbf{B}_N = \mathbf{H}\mathbf{H}^H \nonumber \\
 \mu_k = \frac{1}{N} \mathrm{tr}(\mathbf{B}_N^k) \nonumber
-\end{eqnarray}
+\end{gather}
 其中$\frac{1}{N} \mathrm{tr}(\mathbf{B}_N^k)$指的是信道的经验矩。
-\begin{eqnarray}\label{key}
+\begin{gather}\label{key}
 [\mathbf{\Phi}_{PE}]_{ij} = \mu_{i+j} + \sigma_{z}^2 \mu_{i+j-1} \nonumber \\
 \left[\mathbf{\alpha}_{PE}\right]_i = \mu_i
-\end{eqnarray}
+\end{gather}
 
+通过上式可以得到PE接收机检测表达式
+\begin{equation}\label{key}
+\hat{x}_{PE}^{(L)} = \sum_{i=1}^{L}b_{PE,i}^{(L)}(\mathbf{H}^H\mathbf{H})^{i-1}  \mathbf{H}^H y
+\end{equation}
+其中L的取值越大，计算复杂度越高，相对应的准确也会提升。
 \begin{figure}[htbp!]
 	\centering \includegraphics[width=0.45\textwidth]{img/3_2.jpg} \caption{L=3的普通PE接收机与MMSE接收机比较}
 \end{figure}
 
-上面为使用MMSE准则的多项式接收机，可以注意到当信道矩阵的维度较大的时候，利用经验矩计算每个信道同样会有较大的复杂度。但是在信道慢变的情况下，数据CSI变化得非常的慢，可以利用确定性等同$\overline{\mu}_k$代替$\mu_k$。此时，PE接收机只用计算$\sum_{i=1}^{L} b_{PE,i}^{(L)}(\mathbf{H}^H\mathbf{H})^{i-1}$ 即可。此式又可以被称为Krylov 域的计算，计算复杂度只有$\Theta(M^2)$。这里提出了利用算子自由度从而得到$\overline{\mu}_k$的方法。考虑本文是建立在大规模MIMO背景下的，所以本章开头提到的基站侧接收天线数量$N_R$可以看作是数量相当大。所以参考文献，当$N \rightarrow \infty$，有$\mu - \mathbb{E}[\mu] \rightarrow 0$。不过即使这步趋近并不能很好的获得，仍然可以利用下面的公式进行替代原来的方法。
-\begin{eqnarray}\label{key}
+上面为使用MMSE准则的多项式接收机，可以注意到当信道矩阵的维度较大的时候，利用经验矩计算每个信道同样会有较大的复杂度。但是在信道慢变的情况下，数据CSI变化得非常的慢，可以利用确定性等同$\overline{\mu}_k$代替$\mu_k$。此时，PE接收机只用计算$\sum_{i=1}^{L} b_{PE,i}^{(L)}(\mathbf{H}^H\mathbf{H})^{i-1}$ 即可。此式又可以被称为Krylov 域的计算，计算复杂度只有$\Theta(M^2)$。这里提出了利用算子自由度从而得到$\overline{\mu}_k$的方法。考虑本文是建立在大规模MIMO背景下的，所以本章开头提到的基站侧接收天线数量$N_R$可以看作是数量相当大。
+
+所以参考文献，当$N \rightarrow \infty$，有$\mu - \mathbb{E}[\mu] \rightarrow 0$。写成公式
+\begin{equation}\label{key}
+\lim_{N \rightarrow \infty} \mathbb{E}[\mu_k] -\mu_k =0
+\end{equation}
+不过即使这步趋近并不能很好的获得，仍然可以利用下面的公式进行替代原来的方法。
+\begin{gather}\label{key}
 [\mathbf{\Phi}_{PE}]_{ij} = \mathbb{E}[\mu_{i+j}] + \sigma_{z}^2 \mathbb{E}[\mu_{i+j-1}] \nonumber \\
 \left[\mathbf{\alpha}_{PE}\right]_i = \mathbb{E}[\mu_i]
-\end{eqnarray}
+\end{gather}
 但是式(3.41)的请况并不在本文的考虑范围内，所以接下来本文将用$\mathbb{E}[\mu]$代替$\mu$。而本文提出的利用算子自由度，即将期望$\mathbb{E}[\mu]$由数转为算子，利用算子自由度对其进行计算。
 这里本文简要介绍算子自由度的定义。
 
@@ -885,7 +906,11 @@ E((\mathcal{X}_1\mathcal{X}_2...\mathcal{X}_n)) = \sum_{\pi \in NC(n)} \mathcal{
 \mathbf{A}_k = \mathrm{diag}(\mathbf{U}_k,0_{M_1},\ldots,\mathbf{V}_k,0_{M_{k+1}},\ldots)
 \end{equation}
 
-通过替换$\hat{\mathbf{W}}$中的独立高斯变变量为相同方差的自由圆形变量，可以获得自由确定性等同$\hat{\mathcal{W}}$。而此时，令$\hat{\mathcal{X}}_k = \mathbf{A}_k \hat{\mathcal{W}}_k \mathbf{A}_k$ 则也可以用自由确定性等同$\mathcal{X}$代替$\mathbf{X}$。一般的，自由确定性等同$\mathcal{X}$和原始模型数据$\mathbf{X}$在L趋近于无穷时都有相同算子分布。令$\mathcal{B}_N$代表$<\mathcal{X}>_N$。$<\mathcal{X}>_N$指的是$\mathcal{X}$行列下标1到N的子矩阵。并且有这样$\overline{\mu}_k = \frac{1}{N}\mathbb{E}[\mathrm{tr}(\mathcal{B}_N^k)]$，就将原始模型的矩阵矩的确定性等同转换到算子自由度模型上，接着可以利用上文提到的算子自由度的定理和公式来计算$\overline{\mu}_k$。令$\mathcal{B}$表示代数$\mathcal{M}_{N+M}(\mathbb{C})$。利用元素的累差可以就计算出$\tilde{\mathcal{X}}_1,\tilde{\mathcal{X}}_2,\ldots,\tilde{\mathcal{X}}_K$。通过计算，可以得到所有的$\mathcal{B}$累差各不相同，并且只有第二阶$\mathcal{B}$算子累差是非零矩阵。因此$\tilde{\mathcal{X}}_1,\tilde{\mathcal{X}}_2,\ldots,\tilde{\mathcal{X}}_K$关于$\mathcal{B}$自由，并且每一个$\tilde{\mathcal{X}}$都是关于$\mathcal{B}$的半圆形变量。并且非零的累差可以用下式表示
+通过替换$\hat{\mathbf{W}}$中的独立高斯变变量为相同方差的自由圆形变量，可以获得自由确定性等同$\hat{\mathcal{W}}$。而此时，令$\hat{\mathcal{X}}_k = \mathbf{A}_k \hat{\mathcal{W}}_k \mathbf{A}_k$ 则也可以用自由确定性等同$\mathcal{X}$代替$\mathbf{X}$。一般的，自由确定性等同$\mathcal{X}$和原始模型数据$\mathbf{X}$在L趋近于无穷时都有相同算子分布。令$\mathcal{B}_N$代表$<\mathcal{X}>_N$。$<\mathcal{X}>_N$指的是$\mathcal{X}$行列下标1到N的子矩阵。并且有这样$\overline{\mu}_k = \frac{1}{N}\mathbb{E}[\mathrm{tr}(\mathcal{B}_N^k)]$，就将原始模型的矩阵矩的确定性等同转换到算子自由度模型上，并且可作出这样的近似
+\begin{equation}\label{key}
+\lim_{N \rightarrow \infty} \mathbb{E}[\mu_k] -\overline{\mu_k} =0
+\end{equation}
+接着可以利用上文提到的算子自由度的定理和公式来计算$\overline{\mu}_k$。下文简要介绍计算理论，令$\mathcal{B}$表示代数$\mathcal{M}_{N+M}(\mathbb{C})$。利用元素的累差可以就计算出$\tilde{\mathcal{X}}_1,\tilde{\mathcal{X}}_2,\ldots,\tilde{\mathcal{X}}_K$。通过计算，可以得到所有的$\mathcal{B}$累差各不相同，并且只有第二阶$\mathcal{B}$算子累差是非零矩阵。因此$\tilde{\mathcal{X}}_1,\tilde{\mathcal{X}}_2,\ldots,\tilde{\mathcal{X}}_K$关于$\mathcal{B}$自由，并且每一个$\tilde{\mathcal{X}}$都是关于$\mathcal{B}$的半圆形变量。并且非零的累差可以用下式表示
 \begin{equation}\label{key}
 \mathcal{K}_2(\tilde{\mathcal{X}},\mathbf{D}\tilde{\mathcal{X}})=\mathbb{E}[\mathcal{X}\mathbf{D}\tilde{\mathcal{X}}]
 \end{equation}
@@ -900,16 +925,18 @@ E((\mathcal{X}_1\mathcal{X}_2...\mathcal{X}_n)) = \sum_{\pi \in NC(n)} \mathcal{
 \end{equation}
 之前有$\mathcal{X}=\overline{\mathbf{X}}+\tilde{\mathcal{X}}$因为$\overline{\mathbf{X}}\in \mathcal{B}$，本文$\overline{\mathbf{X}}$和$\overline{\mathcal{X}}$关于$\mathcal{B}$算子自由。
 则有
-\begin{eqnarray}\label{key}
+\begin{gather}\label{key}
 \mathcal{K}_1(\mathcal{X}) = \mathcal{K}_1(\overline{\mathbf{X}}) + \mathcal{K}_1(\overline{\mathcal{X}}) = \overline{\mathbf{X}} \nonumber\\
-\mathcal{K}_2({\mathcal{X}},\mathbf{D}{\mathcal{X}})=\mathcal{K}_2(\tilde{\mathcal{X}},\mathbf{D}\tilde{\mathcal{X}}) + \mathcal{K}_2(\overline{\mathcal{X}},\mathbf{D}\overline{\mathcal{X}}) =\mathbb{E}[\mathcal{X}\mathbf{D}\tilde{\mathcal{X}}]\nonumber \\= 
+\mathcal{K}_2({\mathcal{X}},\mathbf{D}{\mathcal{X}})=\mathcal{K}_2(\tilde{\mathcal{X}},\mathbf{D}\tilde{\mathcal{X}}) + \mathcal{K}_2(\overline{\mathcal{X}},\mathbf{D}\overline{\mathcal{X}})\\ =\mathbb{E}[\mathcal{X}\mathbf{D}\tilde{\mathcal{X}}]\nonumber = 
 \mathbb{E}[\mathbf{X}\mathbf{D}\tilde{\mathbf{X}}] = \eta(\mathbf{D})
-\end{eqnarray}
+\end{gather}
 由此本文得到下面的推论来计算$\mathbb{E}[\mathcal{X}^k]$从而能够推导到$\overline{\mu}_k$。下面的递推公式可以计算出$\mathbb{E}[\mathcal{X}^k]$。
 \begin{eqnarray}\label{key}
 \mathbb{E}[\mathcal{X}^{2m+2}]=\overline{\mathbf{X}}\mathbb{E}[\mathcal{X}^{2m+1}]+\sum_{j=0}^{m}\eta(\mathbb{E}[\mathcal{X}^{2j}])\mathbb{E}[\mathcal{X}^{2m-2j}]  \\
 \mathbb{E}[\mathcal{X}^{2m+1}]=\overline{\mathbf{X}}\mathbb{E}[\mathcal{X}^{2m}]+\sum_{j=0}^{m}\eta(\mathbb{E}[\mathcal{X}^{2j}])\mathbb{E}[\mathcal{X}^{2m-2j-1}] 
 \end{eqnarray}
+其中m是自然数，$\mathbb{E}[\mathcal{X}^0] = \mathbf{I}_n$
+
 用代数形式表示$\mathcal{D}$
 \begin{equation}\label{key}
 \mathcal{D} = \mathrm{diag}(\mathcal{M}_N(\mathbb{C}),\mathcal{M}_{M_1}(\mathbb{C}),...,\mathcal{M}_{M_K}(\mathbb{C}))
@@ -919,13 +946,35 @@ E((\mathcal{X}_1\mathcal{X}_2...\mathcal{X}_n)) = \sum_{\pi \in NC(n)} \mathcal{
 \mathbf{H} = \mathbf{U}_{r}\tilde{\mathbf{H}}\mathbf{U}_{t}^{H} = \mathbf{U}_{r}(\mathbf{D}+\mathbf{M}\odot \mathbf{H}_{idd})\mathbf{U}_{t}^{H}
 \end{equation}
 考虑其中的$\mathbf{D}$为0，在此算子自由度模型中即$\overline{\mathbf{X}} = 0_N$。即又可以得到下式的递推结论。
+\begin{gather}\label{key}
+\mathbb{E}[\mathcal{B}^{m+1}_N] = \sum_{j=0}^{m}(\sum_{k=0}^{K}\tilde{\eta_k}(\mathbf{S}_{jk}))\mathbb{E}[\mathcal{B}_N^{m-j}] \\
+\mathbf{S}_{(m+1)k} =\sum_{j=0}^{m}\eta(\mathbb{E}(\mathcal{B}_N^j))\mathbf{S}_{m-j}k
+\end{gather}
+其中m是自然数，$\mathbb{E}[\mathcal{B}_N^0]=\mathbf{I}_N$和$\mathbf{S}_{0k}=\mathbf{I}_{M_k}$
 
+以上是基于算子自由度低复杂度，下面将简要介绍低复杂多项式展开(PE)接收机的算法。如上文所叙述的，本文考虑的是$\overline{\mathbf{X}} = 0_N$的情况，所以低复杂度PE接收机首先根据式(3.66) 
+和(3.67)计算$\mathbb{E}[\mathcal{B}_N^{m}]$和$\mathbf{S}_{(m)k}$。
+\begin{equation}\label{key}
+\overline{\mu}_{m} = \frac{1}{N} \mathrm{tr}(\mathbb{E}[\mathcal{B}_N^{m}])
+\end{equation}
+令维度为$L*L$的矩阵$\overline{\Phi}_{PE}$为
+\begin{equation}\label{key}
+[\overline{\Phi_{PE}}]_{ij} = \overline{\mu}_{i+j} + \sigma_z^2 \overline{\mu}_{i+j-1}
+\end{equation}
+令向量$\bm{\alpha}_{PE}$为
+\begin{equation}\label{key}
+[\overline{\bm{\alpha}}_{PE}]_i = \overline{\mu}_i
+\end{equation}
+利用上面两等式计算出估计系数为
+\begin{equation}\label{key}
+\overline{\mathbf{b}}_{PE}^{L} = \overline{\Phi}_{PE}^{-1} [\overline{\bm{\alpha}}_{PE}]
+\end{equation}
+带入系数PE接收机判决公式
+\begin{equation}\label{key}
+\hat{x}_{LPE}^{(L)} = \sum_{i=1}^{L}\overline{b}_{PE,i}^{(L)}(\mathbf{H}^H\mathbf{H})^{i-1}  \mathbf{H}^H y
+\end{equation}
 
-
-
-
-
-
+上面描述低复杂度PE接收机利用确定性等同进行计算
 
 
 
@@ -949,5 +998,5 @@ E((\mathcal{X}_1\mathcal{X}_2...\mathcal{X}_n)) = \sum_{\pi \in NC(n)} \mathcal{
 %\bibliographystyle{ieee}
 %\bibliography{seuthesis}
 
-
+ 
 \end{document}

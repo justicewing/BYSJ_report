@@ -21,14 +21,16 @@ for n_link=1:Nu
         for n_sample=1:NoSamples
             H_i = H(:,:,n_path,n_sample,n_link);
             H_i = H_i(:,:);
-            signal_c(:,n_sample,n_link) = signal_c(:,n_sample,n_link) + H_i'* signal_t(n_sample,n_link);
+            signal_c(:,n_sample,n_link) = signal_c(:,n_sample,n_link) + H_i'* repmat(signal_t(n_sample,n_link),Nt,1);
         end
     end
 end
 
-L = 3;
+
 SNR =zeros(7,1);
 BER_PE =zeros(7,1);
+
+L = 3;%PE 接收机阶数
 for k = 1:7
     SNR(k) = -20+k*5;
     sigma2 = 10^(SNR(k)/10);
@@ -60,7 +62,7 @@ for k = 1:7
                     W = W + b(i)*(H_i'*H_i)^(i-1);
                 end
                 W = W *H_i';
-                signal_PE(n_sample,n_link) = signal_PE(n_sample,n_link) + W'* signal_r(:,n_sample,n_link);
+                signal_PE(n_sample,n_link) = signal_PE(n_sample,n_link) + mean(W'* signal_r(:,n_sample,n_link));
             end
         end
     end
@@ -78,12 +80,13 @@ for k = 1:7
         end
     end
     errortimes = sum(abs(result_PE-sample));
-    BER_PE(k) = sum(errortimes)/(Nu*1000);
+    BER_PE(k) = sum(errortimes)/(Nu*NoSamples);
 end
+save('BER_PE_3.mat','BER_PE');
 
-semilogy(SNR,BER_PE,'Color','red','LineStyle','-','Marker','+');
-hold on;
-semilogy(SNR,BER_MMSE,'Color','blue','LineStyle','-','Marker','o');
-xlabel('SNR');
-ylabel('BER');
-legend('PEdetect','MMSEdetect');
+% semilogy(SNR,BER_PE,'Color','red','LineStyle','-','Marker','+');
+% hold on;
+% semilogy(SNR,BER_MMSE,'Color','blue','LineStyle','-','Marker','o');
+% xlabel('SNR');
+% ylabel('BER');
+% legend('PEdetect','MMSEdetect');

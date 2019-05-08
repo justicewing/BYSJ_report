@@ -13,9 +13,9 @@
 \contentsline {subsection}{\numberline {2.5.2}对应波束}{11}{subsection.2.5.2}
 \contentsline {subsection}{\numberline {2.5.3}特征矩阵稀疏性}{13}{subsection.2.5.3}
 \contentsline {section}{\numberline {2.6}本章小结}{14}{section.2.6}
-\contentsline {chapter}{\numberline {3}基于多项式展开的MMSE接收机}{15}{chapter.3}
+\contentsline {chapter}{\numberline {3}MMSE与低复杂度PE接收机}{15}{chapter.3}
 \contentsline {section}{\numberline {3.1}引言}{15}{section.3.1}
 \contentsline {section}{\numberline {3.2}系统模型}{15}{section.3.2}
 \contentsline {section}{\numberline {3.3}MMSE估计}{17}{section.3.3}
-\contentsline {section}{\numberline {3.4}多项式展开接收机及复杂度优化}{20}{section.3.4}
+\contentsline {section}{\numberline {3.4}PE接收机及复杂度优化}{20}{section.3.4}
 \contentsfinish 

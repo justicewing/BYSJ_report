@@ -1,4 +1,4 @@
-%run('BYSJ_channelmodel.m')
+%run('BYSJ_channelmodel.m');
 %%
 % ÐÅºÅÉú³É
 length_sample = NoSamples;
@@ -21,7 +21,7 @@ for n_link=1:Nu
         for n_sample=1:NoSamples
             H_i = H(:,:,n_path,n_sample,n_link);
             H_i = H_i(:,:);
-            signal_c(:,n_sample,n_link) = signal_c(:,n_sample,n_link) + H_i'* signal_t(n_sample,n_link);
+            signal_c(:,n_sample,n_link) = signal_c(:,n_sample,n_link) + H_i'* repmat(signal_t(n_sample,n_link),Nt,1);
         end
     end
 end
@@ -43,7 +43,7 @@ for k = 1:7
                 H_i = H(:,:,n_path,n_sample,n_link);
                 H_i = H_i(:,:);
                 W = inv(H_i'*H_i+eye(Nr)/sigma2)*H_i';
-                signal_MMSE(n_sample,n_link) = signal_MMSE(n_sample,n_link) + W'* signal_r(:,n_sample,n_link);
+                signal_MMSE(n_sample,n_link) = signal_MMSE(n_sample,n_link) + mean(W'* signal_r(:,n_sample,n_link));
             end
         end
     end
@@ -61,10 +61,11 @@ for k = 1:7
         end
     end
     errortimes = sum(abs(result_MMSE-sample));
-    BER_MMSE(k) = sum(errortimes)/(Nu*1000);
+    BER_MMSE(k) = sum(errortimes)/(Nu*NoSamples);
 end
+save('BER_MMSE.mat','BER_MMSE');
 
-semilogy(SNR,BER_MMSE,'Color','blue','LineStyle','-','Marker','o');
-xlabel('SNR');
-ylabel('BER');
-legend('MMSEdetect');
+% semilogy(SNR,BER_MMSE,'Color','blue','LineStyle','-','Marker','o');
+% xlabel('SNR');
+% ylabel('BER');
+% legend('MMSEdetect');
