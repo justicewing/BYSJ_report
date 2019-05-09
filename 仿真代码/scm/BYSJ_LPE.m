@@ -63,10 +63,10 @@ end
 phi_a=zeros(L,L);
 for p =1:L
     for q=1:L
-        phi_a(p,q) = mu(p+q) + mu(p+q-1)/sigma2;
+        phi_a(p,q) = mu_a(p+q) + mu_a(p+q-1)/sigma2;
     end
 end
-b_a = pinv(phi_a)*mu(1:L);
+b_a = pinv(phi_a)*mu_a(1:L);
 
 for k = 1:7
     SNR(k) = -20+k*5;

@@ -31,7 +31,7 @@ SNR =zeros(7,1);
 BER_LPE =zeros(7,1);
 
 % LPE接收机参数
-L = 3;
+L = 1;
 E_B =zeros(Nr,Nr,2*L+1);
 S=zeros(Nt,Nt,2*L+1,Nu);
 E_B(:,:,1) = eye(Nr);
@@ -63,7 +63,7 @@ end
 phi_a=zeros(L,L);
 for p =1:L
     for q=1:L
-        phi_a(p,q) = mu(p+q) + mu(p+q-1)/sigma2;
+        phi_a(p,q) = mu_a(p+q) + mu_a(p+q-1)/sigma2;
     end
 end
 b_a = pinv(phi_a)*mu(1:L);
@@ -106,11 +106,10 @@ for k = 1:7
     errortimes = sum(abs(result_LPE-sample));
     BER_LPE(k) = sum(errortimes)/(Nu*NoSamples);
 end
-
-
-semilogy(SNR,BER_PE,'Color','red','LineStyle','-','Marker','+');
-% hold on;
-% semilogy(SNR,BER_MMSE,'Color','blue','LineStyle','-','Marker','*');
-xlabel('SNR');
-ylabel('BER');
-legend('LPEdetect');
+save('BER_LPE_3.mat','BER_LPE');
+% semilogy(SNR,BER_PE,'Color','red','LineStyle','-','Marker','+');
+% % hold on;
+% % semilogy(SNR,BER_MMSE,'Color','blue','LineStyle','-','Marker','*');
+% xlabel('SNR');
+% ylabel('BER');
+% legend('LPEdetect');

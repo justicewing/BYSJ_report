@@ -906,11 +906,29 @@ E((\mathcal{X}_1\mathcal{X}_2...\mathcal{X}_n)) = \sum_{\pi \in NC(n)} \mathcal{
 \mathbf{A}_k = \mathrm{diag}(\mathbf{U}_k,0_{M_1},\ldots,\mathbf{V}_k,0_{M_{k+1}},\ldots)
 \end{equation}
 
-通过替换$\hat{\mathbf{W}}$中的独立高斯变变量为相同方差的自由圆形变量，可以获得自由确定性等同$\hat{\mathcal{W}}$。而此时，令$\hat{\mathcal{X}}_k = \mathbf{A}_k \hat{\mathcal{W}}_k \mathbf{A}_k$ 则也可以用自由确定性等同$\mathcal{X}$代替$\mathbf{X}$。一般的，自由确定性等同$\mathcal{X}$和原始模型数据$\mathbf{X}$在L趋近于无穷时都有相同算子分布。令$\mathcal{B}_N$代表$<\mathcal{X}>_N$。$<\mathcal{X}>_N$指的是$\mathcal{X}$行列下标1到N的子矩阵。并且有这样$\overline{\mu}_k = \frac{1}{N}\mathbb{E}[\mathrm{tr}(\mathcal{B}_N^k)]$，就将原始模型的矩阵矩的确定性等同转换到算子自由度模型上，并且可作出这样的近似
+通过替换$\hat{\mathbf{W}}$中的独立高斯变变量为相同方差的自由圆形变量，可以获得自由确定性等同$\hat{\mathcal{W}}$。而此时，令$\hat{\mathcal{X}}_k = \mathbf{A}_k \hat{\mathcal{W}}_k \mathbf{A}_k$ 则也可以用自由确定性等同$\mathcal{X}$代替$\mathbf{X}$。一般的，自由确定性等同$\mathcal{X}$和原始模型数据$\mathbf{X}$在L趋近于无穷时都有相同算子分布。令$\mathcal{B}_N$代表$<\mathcal{X}>_N$。$<\mathcal{X}>_N$指的是$\mathcal{X}$行列下标1到N的子矩阵。
+令$F_{\mathbf{B}_N}(\lambda)$代表随机矩阵$\mathbf{B}_N$的元素的累计分布。令$\mathbb{C}^+$代表集合$\lbrace z\in \mathbb{C}: \mathcal{J}(z) > 0 \rbrace$。参考文献，$z \in \mathbb{C}^+$的柯西变换$G_{\mathbf{B}_N}(z)$
+\begin{equation}\label{key}
+G_{\mathbf{B}_N}(z) = \int_0^\infty \frac{1}{z-\lambda} dF_{\mathbf{B}_N}(\lambda) = \frac{1}{N} \mathbb{E}\lbrace \mathrm{tr}(z \mathbf{I}_N - \mathbf{B}_N)^{-1}\rbrace
+\end{equation}
+对于所有代表柯西变换的$F_{\mathbf{B}_N}$，都有反变换，可以写成下面形式
+\begin{equation}\label{key}
+F_{\mathbf{B}_N}(\lambda) = -\frac{1}{\pi} \lim_{\epsilon \rightarrow 0^+} \int_{-\infty}^{\lambda}  \mathcal{J}(\mathbf{G}_{\mathbf{B}_N}(x+i\epsilon))dx
+\end{equation}
+参考文献，有柯西变换$G_{\mathcal{B}_N}(z)$是$G_{\mathbf{B}_N}(z)$的确定性等同
+\begin{equation}\label{key}
+\lim_{N \rightarrow \infty}(G_{\mathbf{B}_N}(z)-G_{\mathcal{B}_N}(z)) = 0
+\end{equation}
+$\mathcal{B}_N$是$\mathbf{B}_N$的确定性等同。并且有这样$\overline{\mu}_k = \frac{1}{N}\mathbb{E}[\mathrm{tr}(\mathcal{B}_N^k)]$。并且可作出这样的近似
 \begin{equation}\label{key}
 \lim_{N \rightarrow \infty} \mathbb{E}[\mu_k] -\overline{\mu_k} =0
 \end{equation}
-接着可以利用上文提到的算子自由度的定理和公式来计算$\overline{\mu}_k$。下文简要介绍计算理论，令$\mathcal{B}$表示代数$\mathcal{M}_{N+M}(\mathbb{C})$。利用元素的累差可以就计算出$\tilde{\mathcal{X}}_1,\tilde{\mathcal{X}}_2,\ldots,\tilde{\mathcal{X}}_K$。通过计算，可以得到所有的$\mathcal{B}$累差各不相同，并且只有第二阶$\mathcal{B}$算子累差是非零矩阵。因此$\tilde{\mathcal{X}}_1,\tilde{\mathcal{X}}_2,\ldots,\tilde{\mathcal{X}}_K$关于$\mathcal{B}$自由，并且每一个$\tilde{\mathcal{X}}$都是关于$\mathcal{B}$的半圆形变量。并且非零的累差可以用下式表示
+参考文献，给出的$E{\mu_m}$和$\mu_m$做比较
+\begin{figure}[htbp!]
+	\centering \includegraphics[width=1\textwidth]{img/3_6.jpg} 
+\end{figure}
+
+将原始模型的矩阵矩的确定性等同转换到算子自由度模型上。接着可以利用上文提到的算子自由度的定理和公式来计算$\overline{\mu}_k$。下文简要介绍计算理论，令$\mathcal{B}$表示代数$\mathcal{M}_{N+M}(\mathbb{C})$。利用元素的累差可以就计算出$\tilde{\mathcal{X}}_1,\tilde{\mathcal{X}}_2,\ldots,\tilde{\mathcal{X}}_K$。通过计算，可以得到所有的$\mathcal{B}$累差各不相同，并且只有第二阶$\mathcal{B}$算子累差是非零矩阵。因此$\tilde{\mathcal{X}}_1,\tilde{\mathcal{X}}_2,\ldots,\tilde{\mathcal{X}}_K$关于$\mathcal{B}$自由，并且每一个$\tilde{\mathcal{X}}$都是关于$\mathcal{B}$的半圆形变量。并且非零的累差可以用下式表示
 \begin{equation}\label{key}
 \mathcal{K}_2(\tilde{\mathcal{X}},\mathbf{D}\tilde{\mathcal{X}})=\mathbb{E}[\mathcal{X}\mathbf{D}\tilde{\mathcal{X}}]
 \end{equation}
@@ -975,6 +993,22 @@ E((\mathcal{X}_1\mathcal{X}_2...\mathcal{X}_n)) = \sum_{\pi \in NC(n)} \mathcal{
 \end{equation}
 
 上面描述低复杂度PE接收机利用确定性等同进行计算，因为省略了计算多项式展开的系数的过程，那么用确定量计算的PE接收机计算复杂度将仅仅是Krylov域的计算，其计算复杂度为$\Theta(M^2)$，M为用户天线总数。
+\begin{figure}[htbp!]
+	\centering \includegraphics[width=0.6\textwidth]{img/3_5.jpg} \caption{L=3 普通PE接收机，低复杂度PE接收机与MMSE接收机比较}
+\end{figure}
+
+\section{仿真结果分析}
+上述给出的图形都是用户单天线的情况，可以看出在单天线条件下，L=3时，普通PE接收机和低复杂度PE接收机性能和MMSE接收机的性能是非常接近的。
+下面将给出不同阶数的PE接收机和低复杂度PE接收机的性能图
+
+用户天线为1，采样样本为4*10000
+\begin{figure}[htbp!]
+	\centering \includegraphics[width=0.6\textwidth]{img/3_7.jpg} \caption{单天线情况下 普通PE接收机，低复杂度PE接收机与MMSE接收机比较}
+\end{figure}
+由上图，可以明显的看见各个接收机的测试性能非常接近，本章提出的低复杂度PE接收机能够很好保证性能。
+
+PE接收机的性能随着阶数的增高会随之提升，本文将不再论证，下面主要讨论在单天线情况下低复杂度PE接收机的性能
+
 
 
 
