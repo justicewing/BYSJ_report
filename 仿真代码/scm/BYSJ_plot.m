@@ -3,20 +3,19 @@ for k = 1:7
     SNR(k) = -20+k*5;
 end
 
-load('BER_MMSE.mat');
-load('BER_PE_3.mat');
-load('BER_LPE_3.mat');
+% load('BER_MMSE.mat');
+% load('BER_PE_3.mat');
+% load('BER_LPE_3.mat');
 %%
-%图一
-% semilogy(SNR,BER_MMSE,'Color','blue','LineStyle','-','Marker','o');
-% hold on;
-% semilogy(SNR,BER_PE,'Color','red','LineStyle','-','Marker','+');
-% hold on;
-% semilogy(SNR,BER_LPE,'Color','black','LineStyle','-','Marker','*');
-% hold on;
-
+% 图一
+semilogy(SNR,BER_MMSE,'Color','blue','LineStyle','-','Marker','o');
+hold on;
+semilogy(SNR,BER_PE,'Color','red','LineStyle','-','Marker','+');
+hold on;
+semilogy(SNR,BER_LPE,'Color','black','LineStyle','-','Marker','*');
+legend('MMSE detect','L=3 PE detect','L=3 LPE detect');
 %%
-%图二
+% 图二
 % semilogy(SNR,BER_MMSE,'Color','blue','LineStyle','-','Marker','o');
 % hold on;
 % semilogy(SNR,BER_PE,'Color','red','LineStyle','-','Marker','+');
@@ -38,6 +37,12 @@ load('BER_LPE_3.mat');
 % legend('MMSE detect','L=3 PE detect','L=3 LPE detect','L=2 PE detect','L=2 LPE detect','L=1 PE detect','L=1 LPE detect');
 
 %%
-%图三
-% semilogy(SNR,BER_LPE,'Color','black','LineStyle','-','Marker','*');
+% %图三
+% semilogy(SNR,BER_LPE,'Color','red','LineStyle','-','Marker','*');
 % hold on;
+% load('BER_LPE_2.mat');
+% semilogy(SNR,BER_LPE,'Color','black','LineStyle','-','Marker','o');
+% hold on;
+% load('BER_LPE_1.mat');
+% semilogy(SNR,BER_LPE,'Color','blue','LineStyle','-','Marker','+');
+% legend('L=3 LPE detect','L=2 LPE detect','L=1 LPE detect');

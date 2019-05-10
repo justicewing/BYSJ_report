@@ -15,13 +15,13 @@ end
 
 %%
 % Ω” ’–≈∫≈
-signal_c = zeros(Nr,length_sample,Nu);
+signal_c = zeros(Nr,length_sample);
 for n_link=1:Nu
     for n_path=1:NoPath
         for n_sample=1:NoSamples
             H_i = H(:,:,n_path,n_sample,n_link);
             H_i = H_i(:,:);
-            signal_c(:,n_sample,n_link) = signal_c(:,n_sample,n_link) + H_i'* repmat(signal_t(n_sample,n_link),Nt,1);
+            signal_c(:,n_sample) = signal_c(:,n_sample) + H_i'* repmat(signal_t(n_sample,n_link),Nt,1);
         end
     end
 end
@@ -43,7 +43,7 @@ for k = 1:7
                 H_i = H(:,:,n_path,n_sample,n_link);
                 H_i = H_i(:,:);
                 W = inv(H_i'*H_i+eye(Nr)/sigma2)*H_i';
-                signal_MMSE(n_sample,n_link) = signal_MMSE(n_sample,n_link) + mean(W'* signal_r(:,n_sample,n_link));
+                signal_MMSE(n_sample,n_link) = signal_MMSE(n_sample,n_link) + mean(W'* signal_r(:,n_sample));
             end
         end
     end
@@ -65,7 +65,7 @@ for k = 1:7
 end
 save('BER_MMSE.mat','BER_MMSE');
 
-% semilogy(SNR,BER_MMSE,'Color','blue','LineStyle','-','Marker','o');
-% xlabel('SNR');
-% ylabel('BER');
-% legend('MMSEdetect');
+semilogy(SNR,BER_MMSE,'Color','blue','LineStyle','-','Marker','o');
+xlabel('SNR');
+ylabel('BER');
+legend('MMSEdetect');

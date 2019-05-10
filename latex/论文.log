@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (MiKTeX 2.9.6840 64-bit) (preloaded format=xelatex 2018.11.8)  9 MAY 2019 21:21
+This is XeTeX, Version 3.14159265-2.6-0.99999 (MiKTeX 2.9.6840 64-bit) (preloaded format=xelatex 2018.11.8)  10 MAY 2019 15:03
 entering extended mode
 **./论文.tex
 (论文.tex
@@ -2115,13 +2115,15 @@ File: img/3_5.jpg Graphic file (type bmp)
 [25]
 File: img/3_7.jpg Graphic file (type bmp)
 <img/3_7.jpg>
- [26]
+File: img/3_8.jpg Graphic file (type bmp)
+<img/3_8.jpg>
+ [26] [27]
 No file 论文.ind.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1030.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1030.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1040.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1040.
 (论文.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1030.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1030.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1040.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1040.
 
 Package rerunfilecheck Info: File `论文.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E.
@@ -2129,15 +2131,15 @@ Package rerunfilecheck Info: File `论文.out' has not changed.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1030.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1040.
  ) 
 Here is how much of TeX's memory you used:
- 31414 strings out of 427792
- 599683 string characters out of 3151724
+ 31418 strings out of 427792
+ 599736 string characters out of 3151724
  821188 words of memory out of 3000000
- 34987 multiletter control sequences out of 15000+200000
+ 34990 multiletter control sequences out of 15000+200000
  649278 words of font info for 213 fonts, out of 3000000 for 9000
  1328 hyphenation exceptions out of 8191
  62i,18n,83p,9120b,843s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on 论文.pdf (31 pages).
+Output written on 论文.pdf (32 pages).

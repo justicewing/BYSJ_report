@@ -59,4 +59,3 @@ delay_ts = delay/Ts;
 % figure(2)
 % mesh(abs(Omega(:,:,1)))
 % plot(abs(Omega))
-save('data/channelmodel.mat');
