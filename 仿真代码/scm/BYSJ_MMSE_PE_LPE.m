@@ -27,36 +27,34 @@ for n_link=1:Nu
 end
 
 
-L=3; %PE阶数
+L=2; %PE阶数
 
 SNR =zeros(7,1);
 BER_MMSE =zeros(7,1);
 BER_PE =zeros(7,1);
 BER_LPE =zeros(7,1);
 for k = 1:7
-    SNR(k) = -20+k*5;
+    SNR(k) = -20+k*2;
     sigma2 = 10^(SNR(k)/10);
     %加噪
     signal_r =awgn(signal_c,SNR(k));
     %%
     % MMSE检测
-
-    signal_MMSE = zeros(length_sample,Nu);
-    for n_link=1:Nu
-        for n_path=1:NoPath
-            for n_sample=1:NoSamples
-                H_i = H(:,:,n_path,n_sample,n_link);
-                H_i = H_i(:,:);
-                W = inv(H_i'*H_i+eye(Nr)/sigma2)*H_i';
-                signal_MMSE(n_sample,n_link) = signal_MMSE(n_sample,n_link) + mean(W'* signal_r(:,n_sample));
+    signal_MMSE = zeros(NoSamples,Nu);
+    H_k =sum(H,3);
+    for n_sample=1:NoSamples
+            H_A = H_k(:,:,1,n_sample,1);
+            for n_link=2:Nu
+                H_A =[H_A;H_k(:,:,1,n_sample,n_link)];
             end
-        end
+         W = (H_A'*H_A + eye(Nr)/sigma2)\H_A';
+         signal_MMSE(n_sample,:) = W' *signal_r(:,n_sample);
     end
-
-
-    % 判决
-    result_MMSE = ones(length_sample,Nu);
-    for i = 1:length_sample
+    
+    
+    %判决
+    result_MMSE = ones(NoSamples,Nu);
+    for i = 1:NoSamples
         for j = 1:Nu
             d_1 = abs(signal_MMSE(i,j)-1);
             d_2 = abs(signal_MMSE(i,j)+1);
@@ -69,14 +67,15 @@ for k = 1:7
     BER_MMSE(k) = sum(errortimes)/(Nu*NoSamples);
     
     %%
-    % PE检测
+    % PE检测    
     signal_PE = zeros(length_sample,Nu);
-    for n_link=1:Nu
-        for n_path=1:NoPath
-            for n_sample=1:NoSamples
-                H_i = H(:,:,n_path,n_sample,n_link);
-                H_i = H_i(:,:);
-                B=H_i*H_i';
+    H_k =sum(H,3);
+    for n_sample=1:NoSamples
+            H_A = H_k(:,:,1,n_sample,1);
+            for n_link=2:Nu
+                H_A =[H_A;H_k(:,:,1,n_sample,n_link)];
+            end
+                B=H_A*H_A';
                 mu =zeros(2*L,1);
                 for u=1:2*L
                     mu(u) = trace(B^u)/Nr;
@@ -90,12 +89,10 @@ for k = 1:7
                 b = pinv(phi)*mu(1:L);
                 W=zeros(Nr,Nt);
                 for i=1:L
-                    W = W + b(i)*(H_i'*H_i)^(i-1);
+                    W = W + b(i)*(H_A'*H_A)^(i-1);
                 end
-                W = W *H_i';
-                signal_PE(n_sample,n_link) = signal_PE(n_sample,n_link) + mean(W'* signal_r(:,n_sample));
-            end
-        end
+                W = W *H_A';
+                signal_PE(n_sample,:) = W' *signal_r(:,n_sample);
     end
 
     % 判决
@@ -114,34 +111,37 @@ for k = 1:7
     
    %%
     % LPE检测
-    %%LPE 确定性等同计算
+
+    % LPE接收机参数
     E_B =zeros(Nr,Nr,2*L+1);
-    S=zeros(Nt,Nt,2*L+1,Nu);
+    S=zeros(Nu,Nu,2*L+1,Nu);
     E_B(:,:,1) = eye(Nr);
     for n_link = 1:Nu
         S(:,:,1,n_link) = eye(Nt);
     end
-
+    
+    H_k =sum(H,3);
+    H_A = H_k(:,:,1,1,1);
+    for n_link=2:Nu
+        H_A =[H_A;H_k(:,:,1,1,n_link)];
+    end
     for m = 2:2*L+1
         for j= 1:m-1
             sum_S = zeros(Nr,Nr);
-            for n_link = 1:Nu
-                H_k = H(:,:,1,1,n_link);
-                H_k = H_k(:,:);
-                sum_S = sum_S + corrcoef(H_k'*S(:,:,j,n_link)*H_k);
+                sum_S = sum_S + corrcoef(H_A'*S(:,:,j,n_link)*H_A);
                 if(Nt>1)
-                    S(:,:,m,n_link)= S(:,:,m,n_link) + corrcoef(H_k*E_B(:,:,j)*H_k')*S(:,:,m-j,n_link);
+                    S(:,:,m,n_link)= S(:,:,m,n_link) + corrcoef(H_A*E_B(:,:,j)*H_A')*S(:,:,m-j,n_link);
                 else
-                    S(:,:,m,n_link)= S(:,:,m,n_link) + (H_k*E_B(:,:,j)*H_k')*S(:,:,m-j,n_link);
+                    S(:,:,m,n_link)= S(:,:,m,n_link) + (H_A*E_B(:,:,j)*H_A')*S(:,:,m-j,n_link);
                 end
-            end
             E_B(:,:,m) = E_B(:,:,m) + sum_S*E_B(:,:,m-j);
         end
     end
     mu_a =zeros(2*L,1);
     for m =1:2*L
-        mu_a(m) = real(trace(E_B(:,:,m+1))/Nr);
+        mu_a(m) = trace(E_B(:,:,m+1))/Nr;
     end
+
     phi_a=zeros(L,L);
     for p =1:L
         for q=1:L
@@ -149,21 +149,20 @@ for k = 1:7
         end
     end
     b_a = pinv(phi_a)*mu_a(1:L);
-    
-    
+
+    % LPE检测
     signal_LPE = zeros(length_sample,Nu);
-    for n_link=1:Nu
-        for n_path=1:NoPath
-            for n_sample=1:NoSamples
-                H_i = H(:,:,n_path,n_sample,n_link);
-                H_i = H_i(:,:);
-                for i=1:L
-                    W = W + b_a(i)*(H_i'*H_i)^(i-1);
-                end
-                W = W *H_i';
-                signal_LPE(n_sample,n_link) = signal_LPE(n_sample,n_link) + mean(W'* signal_r(:,n_sample));
-            end
+    for n_sample=1:NoSamples
+        H_A = H_k(:,:,1,n_sample,1);
+        for n_link=2:Nu
+            H_A =[H_A;H_k(:,:,1,n_sample,n_link)];
         end
+        W=zeros(Nr,Nt);
+        for i=1:L
+            W = W + b_a(i)*(H_A'*H_A)^(i-1);
+        end
+            W = W *H_A';
+        signal_LPE(n_sample,:) = W'* signal_r(:,n_sample);
     end
 
     % 判决
@@ -177,14 +176,18 @@ for k = 1:7
             end
         end
     end
-    errortimes = sum(abs(result_LPE-sample));
-    BER_LPE(k) = sum(errortimes)/(Nu*NoSamples);
+    errortimes_LPE = sum(abs(result_LPE-sample));
+    BER_LPE(k) = sum(errortimes_LPE)/(Nu*NoSamples);
 end
 save('BER_MMSE.mat','BER_MMSE');
+save('BER_PE_2.mat','BER_PE');
+save('BER_LPE_2.mat','BER_LPE');
 
 semilogy(SNR,BER_MMSE,'Color','blue','LineStyle','-','Marker','o');
 hold on;
 semilogy(SNR,BER_PE,'Color','red','LineStyle','-','Marker','+');
 hold on;
 semilogy(SNR,BER_LPE,'Color','black','LineStyle','-','Marker','*');
-legend('MMSE detect','L=3 PE detect','L=3 LPE detect');
+xlabel('SNR');
+ylabel('BER');
+legend('MMSE detect','L=2 PE detect','L=2 LPE detect');

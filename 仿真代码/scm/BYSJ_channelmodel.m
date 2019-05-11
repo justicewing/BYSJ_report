@@ -9,9 +9,9 @@ Scenario = 'suburban_macro';
 Nu = 4;        %   小区中用户数
 Nt = 1;         %   发送天线
 Nr = 128;        %   接收天线
-NoSamples = 10000;
+NoSamples = 100000;
 NoFreq = 256;
-NoPath = 1;
+NoPath = 6;
 Ts = 1/(16*3.84e6);
 
 %   SCM Parameters

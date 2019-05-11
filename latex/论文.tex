@@ -527,18 +527,18 @@ n_r - N_R \quad \frac{n_r-1}{N_R} \geq \frac{1}{2}
 
 \chapter{MMSE接收机与复杂度优化}
 \section{引言}
-信号在通过上述复杂信道之后，信号会发生改变，此时需要利用一些判决方法将接收信号恢复为发送信号。但是因为通过信道后信号同样会收到随机干扰，所以完全恢复为初始信号某种意义上是不存在的，但是通过一些方法，可以尽可能地或者说最大概率的接近发送信号。这些根据接收信号恢复发送信号的方法在通信系统中称为检测，目前针对MIMO系统最佳的检测方法为MMSE估计。但是MMSE估计的计算复杂度随着天线的增多，信道矩阵维度的扩大，会变得非常高，实际系统实现会非常占用资源。基于MMSE检测准则，衍生出了PE接收机，即多项式展开(polynomial expansion)接收机。其一定程度降低了复杂度，同时提供了优化方向。本章节会提出一种基于算子自由度的算法，将多项式展开得到的系数替换为确定性等同。通过替换可以略过计算多项式展开的计算，同时降低PE接收机的复杂度。
+信号在通过上述复杂信道之后，信号会发生改变，此时需要利用一些判决方法将接收信号恢复为发送信号。但是因为通过信道后信号同样会收到随机干扰，所以完全恢复为初始信号某种意义上是不存在的，但是通过一些方法，可以尽可能地或者说最大概率的接近发送信号。这些根据接收信号恢复发送信号的方法在通信系统中称为检测，目前针对MIMO系统最佳的检测方法为MMSE估计。但是MMSE估计的计算复杂度随着天线的增多，信道矩阵维度的扩大，会变得非常高，实际系统实现会非常占用资源。而其主要复杂度主要来自于矩阵的求逆运算，而通过QR分解，可以将矩阵求逆运算化简为QR分解。QR分解的复杂度会比原始MMSE的复杂度大大降低。并且本文在信道模型重点描述了波束域信道，此时可以注意到波束域信道的信道是稀疏的，同样一定程度上减少了计算复杂度，本章的后续部分还会讨论空间域的MMSE以及复杂度优化
 \section{系统模型}
 在一个大规模MIMO系统中，一个基站将使用数以百计的天线来提供巨大的用户容量提高。在用户端，一般认为用户只有一根天线。但是，由于目前用户多天线的技术已经运用，将用户多天线应用到大规模MIMO系统中具有理论与实践的双重意义。所以在建立系统模型时，可以考虑用户多天线的情况。系统模型如下
 
 考虑一个由一个基站(BS)和K个用户终端组成的系统，其中K个用户分别讨论其拥有单天线和多天线的情况。基站(BS)配有$N_R$根天线，第$k$个用户终端拥有$M_k$根天线，并且$\sum_{k=1}^K M_k = M$。根据上面的推导，可以得到基站第n根接收第i个用户的第r根的信号为
 \begin{equation}\label{key}
-r_{n,r} = \sum^{M_i}_{i=1} \sum_{p=1}^{P} \sum_{q=1}^{Q_p} \mathrm{Re} \left \lbrace u_{i,p,q} h_{p,q} (t) w_{i,p,q} s_b(t-\tau_{p,q}) e^{j 2\pi f_c t} \right \rbrace + n_{n,r}(t)
+r_{n,r} = \sum^{M_i}_{i=1} \sum_{p=1}^{P} \sum_{q=1}^{Q_p} \mathrm{Re} \left \lbrace u_{i,p,q} h_{p,q} (t) w_{i,p,q} s_b(t) e^{j 2\pi f_c t} \right \rbrace + n_{n,r}(t)
 \end{equation}
 其中，$h(t)$ 和 阵列响应如上。
 \begin{eqnarray}\label{key}
 h_{p,q}(t) = \alpha_{LNA}\beta\alpha_{PA}a_{p,q}e^{j(2\pi 
-	(v_{p,q}t-f_{c}\tau_{p,q}-v_{p,q}\tau_{p,q})+\phi_{p,q}
+	(v_{p,q}t-v_{p,q}\tau_{p,q})+\phi_{p,q}
 	)} \\
 w_{n_{T},p,q} = \mathrm{exp}(-j2\pi \frac{d_{n_{T}}}{\lambda}\sin \theta_{p,q,AOD})\\
 u_{n_{R},p,q} = \mathrm{exp}(-j2\pi \frac{d_{n_{R}}}{\lambda}\sin \theta_{p,q,AOA})
@@ -557,11 +557,11 @@ h_{N_{R},1,p}(t) & h_{N_{R},2,p}(t) & \ldots & h_{N_{R},M_{i},p}(t)
 \end{eqnarray}
 由上面的矩阵表达和信号的物理表达式，可以将基带信号建模为
 \begin{equation}\label{key}
-\mathbf{r}_{i}(t) = \sum_{p=1}^{P}\mathbf{H}_{i,p}(t)s_{i}(t-\tau_{p}) + n_{i}(t)
+\mathbf{r}_{i}(t) = \sum_{p=1}^{P}\mathbf{H}_{i,p}(t)s_{i}(t) + n_{i}(t)
 \end{equation}
 本文在这里将信道模型简写为
 \begin{equation}\label{key}
-y = \sum_{i=1}^{K} \mathbf{H}_i \mathbf{x}_i + \mathbf{Z}
+\mathbf{y} = \sum_{i=1}^{K} \mathbf{H}_i \mathbf{x}_i + \mathbf{Z}
 \end{equation}
 有这样的性质
 \begin{equation}\label{key}
@@ -663,6 +663,42 @@ C_{x|y} = (H C_n^{-1} H^H + C_x^{-1})^{-1}
 \begin{equation}\label{key}
 \hat{x}_{MMSE} = (\mathbf{H}\mathbf{H}^H + \sigma^2 \mathbf{I})^{-1}\mathbf{H}^H y
 \end{equation}
+
+以上是利用QR分解进行的MMSE估计。借助QR分解，使得其方便硬件实现，其复杂度的降低非常有限。
+根据MMSE估计，本文做了MMSE估计的仿真，并以MMSE估计作为评判基准，此处考虑的为BPSK调制。分别考虑用户单天线和用户多天线，多天线时设置为2
+\begin{table}[htbp]
+	\centering
+	\caption{\label{tab:test}MMSE仿真参数设置}
+	\begin{tabular}{ll}
+		\toprule
+		参数 &  设置值 \\
+		\bottomrule
+		场景 &  郊区宏蜂窝 \\
+		\bottomrule
+		基站侧天线数 & 128 \\
+		\bottomrule
+		用户数天线	& 1 \quad or\quad2 \\
+		\bottomrule
+		用户数	& 4 \\
+		\bottomrule
+		天线间距 & 0.5$\lambda$ \\
+		\bottomrule
+		路径数 & 6 \\
+		\bottomrule
+		用户采样数量 & 10000*4 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{figure}[htbp!]
+	\centering \includegraphics[width=0.45\textwidth]{img/3_1.jpg} \caption{单天线MMSE检测BER}
+\end{figure}
+
+\begin{figure}[htbp!]
+	\centering \includegraphics[width=0.45\textwidth]{img/3_3.jpg} \caption{多天线单流MMSE检测BER}
+\end{figure}
+
+\section{QR分解}
 虽然可以通过上式，很容易得到MMSE的检测矩阵的表达式，但需要注意的是信道矩阵$\mathbf{H}$是一个维度相对较大的矩阵，所以上式计算是非常困难的。并且在FPGA等硬件上实现矩阵求逆转置是比较繁琐的，所以通常MMSE矩阵硬件上实现是以QR分解为基础进行计算，其复杂度一定程度上得到简化。
 下面简单介绍QR分解，即将信道矩阵分解为Q阵和R阵，其中Q阵为正交阵，R阵为上三角矩阵
 令
@@ -678,11 +714,19 @@ C_{x|y} = (H C_n^{-1} H^H + C_x^{-1})^{-1}
 \mathbf{Q}_2
 \end{array} \right] \mathbf{R}
 \end{equation}
+根据MMSE检测计算公式
+\begin{equation}\label{key}
+\hat{x}_{MMSE} = (\mathbf{H}\mathbf{H}^H + \sigma^2 \mathbf{I})^{-1}\mathbf{H}^H y
+\end{equation}
+有
+\begin{equation}\label{key}
+\mathbf{W}=(\overline{\mathbf{H}}^H \overline{\mathbf{H}})^{-1} \mathbf{H}^H
+\end{equation}
+
 由此可以容易得到检测矩阵的表达式为
 \begin{equation}\label{key}
 \mathbf{W}=(\overline{\mathbf{H}}^H \overline{\mathbf{H}})^{-1} \mathbf{H}^H = \frac{1}{\sigma} \mathbf{Q}_2 \mathbf{Q}_1^H
 \end{equation}
-
 下面本文简单介绍一下常用的QR分解的方法，一般使用QR分解可以用下面三种方法来完成，Gram-Schmit正交化QR分解，Givens矩阵与Givens旋转，householder矩阵与householder变换。上面三个不同的QR分解适合不同的系统模型，或者是指不同的情况下。
 Gram-Schmit正交化适用于满秩矩阵，当$\mathbf{H}$为满秩矩阵时，$\overline{\mathbf{H}}$也是一个满秩矩阵。将$\overline{\mathbf{H}}$写为$[\alpha_1^T \alpha_2^T ... \alpha_n^T]$形式，
 令
@@ -737,42 +781,12 @@ householder矩阵是对称矩阵，正交矩阵，hermitian矩阵，对合矩阵
 \mathbf{H}^2 = \mathbf{I} \nonumber
 \end{gather}
 
-以上是利用QR分解进行的MMSE估计。借助QR分解，使得其方便硬件实现，其复杂度的降低非常有限。
-根据MMSE估计，本文做了MMSE估计的仿真，并以MMSE估计作为评判基准，此处考虑的为BPSK调制。分别考虑用户单天线和用户多天线，多天线时设置为2
-\begin{table}[htbp]
-	\centering
-	\caption{\label{tab:test}MMSE仿真参数设置}
-	\begin{tabular}{ll}
-		\toprule
-		参数 &  设置值 \\
-		\bottomrule
-		场景 &  郊区宏蜂窝 \\
-		\bottomrule
-		基站侧天线数 & 128 \\
-		\bottomrule
-		用户数天线	& 1 \quad or\quad2 \\
-		\bottomrule
-		用户数	& 4 \\
-		\bottomrule
-		天线间距 & 0.5$\lambda$ \\
-		\bottomrule
-		路径数 & 6 \\
-		\bottomrule
-		用户采样数量 & 10000*4 \\
-		\bottomrule
-	\end{tabular}
-\end{table}
-
-\begin{figure}[htbp!]
-	\centering \includegraphics[width=0.45\textwidth]{img/3_1.jpg} \caption{单天线MMSE检测BER}
-\end{figure}
-
-\begin{figure}[htbp!]
-	\centering \includegraphics[width=0.45\textwidth]{img/3_3.jpg} \caption{多天线MMSE检测BER}
-\end{figure}
 
 
 \chapter{PE接收机及复杂度优化}
+\section{引言}
+。基于MMSE检测准则，衍生出了PE接收机，即多项式展开(polynomial expansion)接收机。其一定程度降低了复杂度，同时提供了优化方向。本章节会提出一种基于算子自由度的算法，将多项式展开得到的系数替换为确定性等同。通过替换可以略过计算多项式展开的计算，同时降低PE接收机的复杂度。
+\section{PE接收机}
 通过上述计算过程，可以知道在用户数较多用户天线数较多的情况下，MMSE接收机的复杂度将会非常的高。所以基于MMSE接收机的基本原理有提出了多项式展开的方法对MMSE矩阵进行合理的化简，化简表达式如下
 \begin{gather}\label{key}
 \mathbf{W} = (\mathbf{H}\mathbf{H}^H + \sigma^2 \mathbf{I})^{-1}\mathbf{H}^H  \nonumber \\

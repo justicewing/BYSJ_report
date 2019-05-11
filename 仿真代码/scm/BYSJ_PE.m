@@ -30,9 +30,9 @@ end
 SNR =zeros(7,1);
 BER_PE =zeros(7,1);
 
-L = 3;%PE 接收机阶数
+L = 1;%PE 接收机阶数
 for k = 1:7
-    SNR(k) = -20+k*5;
+    SNR(k) = -20+k*2;
     sigma2 = 10^(SNR(k)/10);
     %加噪
     signal_r =awgn(signal_c,SNR(k));
@@ -40,12 +40,13 @@ for k = 1:7
     % PE检测
 
     signal_PE = zeros(length_sample,Nu);
-    for n_link=1:Nu
-        for n_path=1:NoPath
-            for n_sample=1:NoSamples
-                H_i = H(:,:,n_path,n_sample,n_link);
-                H_i = H_i(:,:);
-                B=H_i*H_i';
+    H_k =sum(H,3);
+    for n_sample=1:NoSamples
+            H_A = H_k(:,:,1,n_sample,1);
+            for n_link=2:Nu
+                H_A =[H_A;H_k(:,:,1,n_sample,n_link)];
+            end
+                B=H_A*H_A';
                 mu =zeros(2*L,1);
                 for u=1:2*L
                     mu(u) = trace(B^u)/Nr;
@@ -56,15 +57,13 @@ for k = 1:7
                         phi(p,q) = mu(p+q) + mu(p+q-1)/sigma2;
                     end
                 end
-                b = pinv(phi)*mu(1:L);
+                b = (phi)\mu(1:L);
                 W=zeros(Nr,Nt);
                 for i=1:L
-                    W = W + b(i)*(H_i'*H_i)^(i-1);
+                    W = W + b(i)*(H_A'*H_A)^(i-1);
                 end
-                W = W *H_i';
-                signal_PE(n_sample,n_link) = signal_PE(n_sample,n_link) + mean(W'* signal_r(:,n_sample));
-            end
-        end
+                W = W *H_A';
+                signal_PE(n_sample,:) = W' *signal_r(:,n_sample);
     end
 
     %%
@@ -84,9 +83,9 @@ for k = 1:7
 end
 save('BER_PE_3.mat','BER_PE');
 
-semilogy(SNR,BER_MMSE,'Color','blue','LineStyle','-','Marker','o');
-hold on;
+% semilogy(SNR,BER_MMSE,'Color','blue','LineStyle','-','Marker','o');
+% hold on;
 semilogy(SNR,BER_PE,'Color','red','LineStyle','-','Marker','+');
-hold on;
-semilogy(SNR,BER_LPE,'Color','black','LineStyle','-','Marker','*');
-legend('MMSE detect','L=3 PE detect','L=3 LPE detect');
+% hold on;
+% semilogy(SNR,BER_LPE,'Color','black','LineStyle','-','Marker','*');
+% legend('MMSE detect','L=3 PE detect','L=3 LPE detect');
