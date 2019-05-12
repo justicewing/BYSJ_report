@@ -39,7 +39,7 @@ for k = 1:7
     %%
     % LPE接收机参数
     E_B =zeros(Nr,Nr,2*L+1);
-    S=zeros(Nu,Nu,2*L+1,Nu);
+    S=zeros(Nt,Nt,2*L+1,Nu);
     E_B(:,:,1) = eye(Nr);
     for n_link = 1:Nu
         S(:,:,1,n_link) = eye(Nt);
@@ -80,11 +80,11 @@ for k = 1:7
         for n_link=2:Nu
             H_A =[H_A;H_k(:,:,1,n_sample,n_link)];
         end
-        W=zeros(Nr,Nt);
+        K=zeros(Nr,Nr);
         for i=1:L
-            W = W + b_a(i)*(H_A'*H_A)^(i-1);
+            K = K + b_a(i)*(H_A'*H_A)^(i-1);
         end
-            W = W *H_A';
+            W = K *H_A';
         signal_LPE(n_sample,:) = W'* signal_r(:,n_sample);
     end
 
