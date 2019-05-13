@@ -525,11 +525,11 @@ n_r - N_R \quad \frac{n_r-1}{N_R} \geq \frac{1}{2}
 \section{本章小结}
 本章主要研究了MIMO信道物理模型，统计模型和波束域信道模型。其中物理模型主要是研究了影响信道情况的各种参数，并为后续各种模型的基础。统计信道模型主要研究了联合相关模型，作为实际相关仿真模型的基础模型。波束域信道模型主要体现的是大规模MIMO信道的特性和研究方式，通过波束域信道模型的特征，提供了减少计算复杂度切入点。
 
-\chapter{MMSE接收机与复杂度优化}
+\chapter{基于MMSE接收机的复杂度优化}
 \section{引言}
 信号在通过上述复杂信道之后，信号会发生改变，此时需要利用一些判决方法将接收信号恢复为发送信号。但是因为通过信道后信号同样会收到随机干扰，所以完全恢复为初始信号某种意义上是不存在的，但是通过一些方法，可以尽可能地或者说最大概率的接近发送信号。这些根据接收信号恢复发送信号的方法在通信系统中称为检测，目前针对MIMO系统最佳的检测方法为MMSE估计。但是MMSE估计的计算复杂度随着天线的增多，信道矩阵维度的扩大，会变得非常高，实际系统实现会非常占用资源。而其主要复杂度主要来自于矩阵的求逆运算，而通过QR分解，可以将矩阵求逆运算化简为QR分解。QR分解的复杂度会比原始MMSE的复杂度大大降低。并且本文在信道模型重点描述了波束域信道，此时可以注意到波束域信道的信道是稀疏的，同样一定程度上减少了计算复杂度，本章的后续部分还会讨论空间域的MMSE以及复杂度优化
 \section{系统模型}
-在一个大规模MIMO系统中，一个基站将使用数以百计的天线来提供巨大的用户容量提高。在用户端，一般认为用户只有一根天线。但是，由于目前用户多天线的技术已经运用，将用户多天线应用到大规模MIMO系统中具有理论与实践的双重意义。所以在建立系统模型时，可以考虑用户多天线的情况。系统模型如下
+在一个大规模MIMO系统中，一个基站将使用数以百计的天线来提供巨大的用户容量提高。在用户端，一般认为用户只有一根天线。但是，由于目前用户多天线的技术已经运用，将用户多天线应用到大规模MIMO系统中具有理论与实践的双重意义。所以在建立系统模型时，可以考虑用户多天线的情况。本文后续仿真将同时考虑用户单天线，用户多天线单流，用户多天线多流的情况。系统模型如下
 
 考虑一个由一个基站(BS)和K个用户终端组成的系统，其中K个用户分别讨论其拥有单天线和多天线的情况。基站(BS)配有$N_R$根天线，第$k$个用户终端拥有$M_k$根天线，并且$\sum_{k=1}^K M_k = M$。根据上面的推导，可以得到基站第n根接收第i个用户的第r根的信号为
 \begin{equation}\label{key}
@@ -606,7 +606,7 @@ h_{N_{R},1,p}(t) & h_{N_{R},2,p}(t) & \ldots & h_{N_{R},M_{i},p}(t)
 \begin{equation}\label{key}
 \tilde{\eta}_i = \mathbf{U}_r \tilde{\Pi}_i \mathbf{U}_r^H
 \end{equation}
-\section{MMSE估计}
+\section{MMSE接收机}
 MMSE估计是最小均放误差估计的缩写，其判决准则如下式
 \begin{equation}\label{key}
 \hat{x}_{MMSE}(y) = \arg \min E[\| x - \hat{x} \|^{2}]
@@ -657,14 +657,19 @@ C_{x|y} = (H C_n^{-1} H^H + C_x^{-1})^{-1}
 \end{gather}
 根据式(3.24)可以知道，且一般情况下，二进制采样后的信号均值为0，则MMSE的检测矩阵为
 \begin{equation}\label{key}
-\mathbf{W} = (\mathbf{H}\mathbf{H}^H + \sigma^2 \mathbf{I})^{-1}\mathbf{H}^H
+{W} = ({H}{H}^H + \sigma^2 {I})^{-1}{H}^H
 \end{equation}
 同时得到MMSE准则计算公式
 \begin{equation}\label{key}
-\hat{x}_{MMSE} = (\mathbf{H}\mathbf{H}^H + \sigma^2 \mathbf{I})^{-1}\mathbf{H}^H y
+\hat{x}_{MMSE} = (HH^H + \sigma^2 I)^{-1}H^H y
 \end{equation}
+而代入上述系统模型，则上式应写作
+\begin{equation}\label{key}
+\hat{\mathbf{x}}_{MMSE} = (\mathbf{H}\mathbf{H}^H + \sigma^2 \mathbf{I})^{-1}\mathbf{H}^H \mathbf{y}
+\end{equation}
+其中$\mathbf{H}$代表$[\mathbf{H}_1,\mathbf{H}_2,...,\mathbf{H}_K]$，令$\mathbf{x}$代表$[\mathbf{x}_1^T,\mathbf{x}_2^T,...,\mathbf{x}_K^T]$
 
-以上是利用QR分解进行的MMSE估计。借助QR分解，使得其方便硬件实现，其复杂度的降低非常有限。
+
 根据MMSE估计，本文做了MMSE估计的仿真，并以MMSE估计作为评判基准，此处考虑的为BPSK调制。分别考虑用户单天线和用户多天线，多天线时设置为2
 \begin{table}[htbp]
 	\centering
@@ -685,7 +690,7 @@ C_{x|y} = (H C_n^{-1} H^H + C_x^{-1})^{-1}
 		\bottomrule
 		路径数 & 6 \\
 		\bottomrule
-		用户采样数量 & 10000*4 \\
+		用户采样数量 & 10000 \\
 		\bottomrule
 	\end{tabular}
 \end{table}
@@ -697,6 +702,11 @@ C_{x|y} = (H C_n^{-1} H^H + C_x^{-1})^{-1}
 \begin{figure}[htbp!]
 	\centering \includegraphics[width=0.45\textwidth]{img/3_3.jpg} \caption{多天线单流MMSE检测BER}
 \end{figure}
+
+\begin{figure}[htbp!]
+	\centering \includegraphics[width=0.45\textwidth]{img/3_8.jpg} \caption{多天线多流MMSE检测BER}
+\end{figure}
+从上图，可以看出对于不同的情况即用户单天线，用户多天线单流，用户多天线多流的情况各不相同。其中多天线单流应是判断准确度最高，其次为用户单天线，其次用户多天线多流。其中多天线单流，因为多天线传输的相同的数据能够通过综合所得到的数据得出最好的结果，而用户单天线与用户多天线多流的不同在于多天线多流带来了天线与天线之间的干扰，导致判断准确度下降。本文将主要从这三种情况对本文提出的低复杂度算法进行分析研究。而上述的MMSE模型将作为判断低复杂度算法是否达标的基准。
 
 \section{QR分解}
 虽然可以通过上式，很容易得到MMSE的检测矩阵的表达式，但需要注意的是信道矩阵$\mathbf{H}$是一个维度相对较大的矩阵，所以上式计算是非常困难的。并且在FPGA等硬件上实现矩阵求逆转置是比较繁琐的，所以通常MMSE矩阵硬件上实现是以QR分解为基础进行计算，其复杂度一定程度上得到简化。
@@ -722,11 +732,29 @@ C_{x|y} = (H C_n^{-1} H^H + C_x^{-1})^{-1}
 \begin{equation}\label{key}
 \mathbf{W}=(\overline{\mathbf{H}}^H \overline{\mathbf{H}})^{-1} \mathbf{H}^H
 \end{equation}
-
+\begin{equation}\label{key}
+\mathbf{H} = \mathbf{Q}_1 \mathbf{R} ,\sigma\mathbf{I} = \mathbf{Q}_2\mathbf{R}
+\end{equation}
+又因为$\mathbf{Q}_1,\mathbf{Q}_2$是正交阵
+\begin{equation}\label{key}
+\mathbf{R} = \sigma \mathbf{Q}_2^{-1}
+\end{equation}
+\begin{equation}\label{key}
+(\overline{\mathbf{H}}^H \overline{\mathbf{H}})^{-1} = (\mathbf{R}^H \mathbf{Q}^H\mathbf{Q} \mathbf{R})^{-1} =(\mathbf{R}^H \mathbf{R})^{-1}
+\end{equation}
+又有
+\begin{equation}\label{key}
+\mathbf{H}^{H} =\mathbf{R}^{H} \mathbf{Q}_1^H 
+\end{equation}
+所以式(3.39)有
+\begin{equation}\label{key}
+\mathbf{W} = \mathbf{R}^{-1} \mathbf{Q}_1^H
+\end{equation}
 由此可以容易得到检测矩阵的表达式为
 \begin{equation}\label{key}
 \mathbf{W}=(\overline{\mathbf{H}}^H \overline{\mathbf{H}})^{-1} \mathbf{H}^H = \frac{1}{\sigma} \mathbf{Q}_2 \mathbf{Q}_1^H
 \end{equation}
+
 下面本文简单介绍一下常用的QR分解的方法，一般使用QR分解可以用下面三种方法来完成，Gram-Schmit正交化QR分解，Givens矩阵与Givens旋转，householder矩阵与householder变换。上面三个不同的QR分解适合不同的系统模型，或者是指不同的情况下。
 Gram-Schmit正交化适用于满秩矩阵，当$\mathbf{H}$为满秩矩阵时，$\overline{\mathbf{H}}$也是一个满秩矩阵。将$\overline{\mathbf{H}}$写为$[\alpha_1^T \alpha_2^T ... \alpha_n^T]$形式，
 令
@@ -740,7 +768,7 @@ Gram-Schmit正交化适用于满秩矩阵，当$\mathbf{H}$为满秩矩阵时，
 \begin{equation}\label{key}
 k_j = \frac{<\alpha_i,\beta_j>}{<\beta_j,\beta_j>}, j= 1,2,3,...,i \nonumber
 \end{equation}
-从而，得到的$\mathbf{Q}$矩阵可令其为$[\beta_1^T,\beta_2^T,...,\beta_n^T]$，$\mathbf{Q}$矩阵是正交阵，$\mathbf{R}$矩阵是$\overline{\mathbf{H}}$到$\mathbf{R}$的变换矩阵。
+从而，得到的$\mathbf{Q}$矩阵可令其为$[\beta_1^T,\beta_2^T,...,\beta_n^T]$，$\mathbf{Q}$矩阵是正交阵，$\mathbf{R}$矩阵是$\overline{\mathbf{H}}$到$\mathbf{R}$的变换矩阵。\\
 
 Givens旋转主要是利用Givens矩阵的旋转特性去计算上三角阵$\mathbf{R}$而多个Givens矩阵的乘法和矩阵$\mathbf{G}_1...\mathbf{G}_n$根据Givens矩阵的特性也满足要求，为正交阵。
 \begin{eqnarray}\label{key}
@@ -766,7 +794,83 @@ g_{ji} = -s  \nonumber \\
 c=\cos\theta  \nonumber \\
 s = \sin\theta  \nonumber
 \end{gather}
-主要是对目标矩阵的第i行和第j行进行变换，即将其旋转到坐标轴即可不断变化直至上三角阵。
+主要是对目标矩阵的第i行和第j行进行变换。QR分解的Givens变换是为了将部分元素变换为0,即
+\begin{eqnarray}\label{key}
+\left[
+\begin{array}{ccccccc}
+1 & \ldots & 0 & \ldots & 0 & \ldots & 0 \\
+\vdots & \ddots & \vdots & \quad & \vdots & \quad & \vdots \\
+0 & \ldots & c & \ldots & s & \ldots & 0 \\
+\vdots & \quad & \vdots & \ddots & \vdots & \quad & \vdots \\
+0 & \ldots & -s & \ldots & c & \ldots & 0 \\
+\vdots & \quad & \vdots & \quad & \vdots & \ddots & \vdots \\
+0 & \ldots & 0 & \ldots & 0 & \ldots & 1 
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+x \\
+\vdots \\
+\alpha \\
+\vdots \\
+\beta \\
+\vdots  \\
+x
+\end{array}
+\right]
+=\left[
+\begin{array}{c}
+x \\
+\vdots \\
+\gamma \\
+\vdots \\
+0 \\
+\vdots  \\
+x
+\end{array}
+\right]
+\end{eqnarray}
+即
+\begin{equation}\label{key}
+c = \frac{\alpha}{\sqrt{\alpha^2+\beta^2}}
+\end{equation}
+\begin{equation}\label{key}
+s =\frac{\beta}{\sqrt{\alpha^2+\beta^2}}
+\end{equation}
+而类似(3.42)，QR分解MMSE检测矩阵就是将$\mathbf{W}$看作列向量的结合，将向量按照从下至上依次转置为0，即
+\begin{eqnarray}\label{key}
+\left[
+\begin{array}{cccccc}
+1 & \ldots & 0 &  0 & \ldots & 0 \\
+\vdots & \ddots & \vdots &  \vdots & \quad & \vdots \\
+0 & \ldots & c &  s & \ldots & 0 \\
+0 & \ldots & -s &  c & \ldots & 0 \\
+\vdots & \quad & \vdots &  \vdots & \ddots & \vdots \\
+0 & \ldots & 0 &  0 & \ldots & 1 
+\end{array}
+\right]
+\left[
+\begin{array}{ccc}
+x_{11} & \ldots & x_{1n} \\
+\vdots & \ldots & x_{pn}\\
+\alpha & \ldots & x_{qn}\\
+\beta& \ldots & x_{rn} \\
+\vdots  & \ldots & x_{tn}\\
+0& \ldots & x_{sn}
+\end{array}
+\right]
+=\left[
+\begin{array}{ccc}
+x_{11}' & \ldots & x_{1n}'\\
+\vdots & \ldots & x_{pn}'\\
+\gamma & \ldots & x_{qn}'\\
+0 & \ldots & x_{rn}'\\
+\vdots  & \ldots & x_{tn}'\\
+0& \ldots & x_{sn}'
+\end{array}
+\right]
+\end{eqnarray}
+通过$n*n/2$次Givens旋转，可以得到一个上三角阵，而Givens矩阵的乘积即为Q阵。\\
 
 householder变换主要是利用householder矩阵将$\overline{\mathbf{H}}$特定位置的值转换为0，即求解$\overline{\mathbf{H}}$的上三角阵$\mathbf{R}$。householder矩阵对一个向量的表达式如下
 \begin{equation}\label{key}
@@ -780,12 +884,83 @@ householder矩阵是对称矩阵，正交矩阵，hermitian矩阵，对合矩阵
 \mathbf{H}^H = \mathbf{H}  \nonumber\\
 \mathbf{H}^2 = \mathbf{I} \nonumber
 \end{gather}
+即可以根据$\mathbf{H}^H\mathbf{H}=\mathbf{I}$得到$vv^H =I$
+而householder变换可以将矩阵变换到$v$向量代表的坐标轴的投影。即
+\begin{equation}\label{key}
+\mathbf{H}x =\alpha [1 \quad 0 \quad \ldots 0]^T
+\end{equation}
+令$e_1=[1 \quad 0 \quad \ldots 0]^T$,
+根据householder矩阵的定义，可以得到
+\begin{equation}\label{key}
+\frac{1}{2}(x-\alpha e_1)=(v^Hx)v
+\end{equation}
+其中每一个$v$向量中的元素可以如下定义
+\begin{eqnarray}\label{key}
+v_1 & = & \frac{x_1-\alpha}{\| x - \alpha e_1 \|_2} \nonumber \\
+& = & -\frac{\alpha-x_1}{\sqrt{2\alpha(\alpha-x_1)}} \nonumber \\
+v_2 & = & \frac{x_2}{2\alpha v_1} \nonumber  \\
+\vdots \nonumber \\
+v_n & = & \frac{x_n}{2\alpha v_1}
+\end{eqnarray}
+利用householder变换求解QR分解的步骤大致如下，下面用$\mathbf{P}^{(n)}$表示第n个householder矩阵。目标矩阵写为
+\begin{eqnarray}\label{key}
+\mathbf{H}^{(i)} =
+\left[
+\begin{array}{ccccccc}
+x_{11} & \ldots & x_{1i} & \ldots & x_{1j} & \ldots & x_{1k} \\
+\vdots & \ddots & \vdots & \quad & \vdots & \quad & \vdots \\
+0 & \ldots & x_{pi} & \ldots & x_{pj} & \ldots & x_{pk} \\
+\vdots & \quad & \vdots & \ddots & \vdots & \quad & \vdots \\
+0 & \ldots & x_{qi} & \ldots & x_{qj} & \ldots & x_{qk} \\
+\vdots & \quad & \vdots & \quad & \vdots & \ddots & \vdots \\
+0 & \ldots & x_{ni} & \ldots & x_{nj} & \ldots & x_{nk} 
+\end{array}
+\right]
+\end{eqnarray}
+对i列进行处理，即选取i列的$i+1 ~ n$个元素，用$S$代替，得到第i个householder矩阵$\mathbf{P}^{(i)}$，即
+\begin{equation}\label{key}
+\mathbf{P}^{(i)} \S = [1 \quad 0 \quad \ldots 0]^T
+\end{equation}
+即
+\begin{equation}\label{key}
+\mathbf{P}^{(i)}\mathbf{H}^{(i)} =\mathbf{P}^{(i)}
+\left[
+\begin{array}{ccccccc}
+x_{11} & \ldots & x_{1i} & \ldots & x_{1j} & \ldots & x_{1k} \\
+\vdots & \ddots & \vdots & \quad & \vdots & \quad & \vdots \\
+0 & \ldots & x_{pi} & \ldots & x_{pj} & \ldots & x_{pk} \\
+\vdots & \quad & \vdots & \ddots & \vdots & \quad & \vdots \\
+0 & \ldots & x_{qi} & \ldots & x_{qj} & \ldots & x_{qk} \\
+\vdots & \quad & \vdots & \quad & \vdots & \ddots & \vdots \\
+0 & \ldots & x_{ni} & \ldots & x_{nj} & \ldots & x_{nk} 
+\end{array}
+\right]
+= 
+\left[
+\begin{array}{ccccccc}
+x_{11} & \ldots & x_{1i} & \ldots & x_{1j} & \ldots & x_{1k} \\
+\vdots & \ddots & \vdots & \quad & \vdots & \quad & \vdots \\
+0 & \ldots & x_{ii} & \ldots & x_{ij} & \ldots & x_{ik} \\
+\vdots & \quad & \vdots & \ddots & \vdots & \quad & \vdots \\
+0 & \ldots & 0 & \ldots & x_{qj} & \ldots & x_{qk} \\
+\vdots & \quad & \vdots & \quad & \vdots & \ddots & \vdots \\
+0 & \ldots & 0 & \ldots & x_{nj} & \ldots & x_{nk} 
+\end{array}
+\right]
+\end{equation}
+这个过程总共只需要进行n次即可以得到上三角阵$\mathbf{R}$，而变换矩阵的乘积即为正交矩阵$\mathbf{Q}$。
+
+\section{复杂度分析}
+从本文上面所写的一般的MMSE复杂度主要是信道矩阵的求逆带来的，普通MMSE的复杂度为$Theta(M^3)$。如果采用QR分解优化的MMSE的计算，采用不同的QR分解有不同的复杂度。Gram-Schmit正交化QR分解和Givens变换QR分解的计算复杂度在计算一般信道矩阵时仍为$Theta(M^3)$。而householder变换的计算复杂度为$Theta(M^2)$。对于一般情况的信道矩阵时，Givens旋转计算复杂度并不会比普通的MMSE减少很多，但Givens旋转由于其矩阵的特定形式，可以只改变旋转的i行i列和j行j列，所以可以利用这个性质，对MMSE进行并行计算，从而降低MMSE检测的时间，但是计算复杂度上并不会减少。
+由于QR分解计算MMSE是有严格数学推导的，所以所得到的结果应该与MMSE检测的结果一致。
+
+但是，可以注意到
 
 
 
 \chapter{PE接收机及复杂度优化}
 \section{引言}
-。基于MMSE检测准则，衍生出了PE接收机，即多项式展开(polynomial expansion)接收机。其一定程度降低了复杂度，同时提供了优化方向。本章节会提出一种基于算子自由度的算法，将多项式展开得到的系数替换为确定性等同。通过替换可以略过计算多项式展开的计算，同时降低PE接收机的复杂度。
+基于MMSE检测准则，衍生出了PE接收机，即多项式展开(polynomial expansion)接收机。其一定程度降低了复杂度，同时提供了优化方向。本章节会提出一种基于算子自由度的算法，将多项式展开得到的系数替换为确定性等同。通过替换可以略过计算多项式展开的计算，同时降低PE接收机的复杂度。
 \section{PE接收机}
 通过上述计算过程，可以知道在用户数较多用户天线数较多的情况下，MMSE接收机的复杂度将会非常的高。所以基于MMSE接收机的基本原理有提出了多项式展开的方法对MMSE矩阵进行合理的化简，化简表达式如下
 \begin{gather}\label{key}
@@ -1022,9 +1197,7 @@ $\mathcal{B}_N$是$\mathbf{B}_N$的确定性等同。并且有这样$\overline{\
 由图3.5，可以明显的看见各个接收机的测试性能非常接近，本章提出的低复杂度PE接收机能够很好保证性能。
 
 PE接收机的性能随着阶数的增高会随之提升，本文将不再论证，下面主要讨论不同天线情况下低复杂度PE接收机的性能。
-\begin{figure}[htbp!]
-	\centering \includegraphics[width=0.6\textwidth]{img/3_8.jpg} \caption{单天线情况下 不同阶数的低复杂度PE接收机}
-\end{figure}
+
 从图3.6，可以发现与普通PE接收机类似的，本章所提出的低复杂度的PE接收机的性能同样也是随着PE接收机的阶数增多而提高。但是在单天线的情况下，随着阶数提高而得到的性能提升并不是很高。但是与普通PE接收机不同的是，低复杂度的PE接收机提高阶数所增加的计算复杂度会比较小，高阶的krylov域的计算仍然属于复杂度$\Theta(M^2)$的范围内。
 
 

@@ -1,21 +1,14 @@
 run('BYSJ_channelmodel.m');
 %%
 % 信号生成
-length_sample = NoSamples;
-sample = rand(length_sample,Nu);
+sample = rand(NoSamples,Nu);
 sample = round(sample);
-signal_t = ones(length_sample,Nu);
-for i = 1:length_sample
-    for j = 1:Nu
-        if(sample(i,j) == 0)
-            signal_t(i,j) = -1;
-        end
-    end
-end
+signal_t = sample;
+signal_t(signal_t(:,:)==0) = -1;
 
 %%
 % 接收信号
-signal_c = zeros(Nr,length_sample);
+signal_c = zeros(Nr,NoSamples);
 for n_link=1:Nu
     for n_path=1:NoPath
         for n_sample=1:NoSamples
@@ -27,7 +20,7 @@ for n_link=1:Nu
 end
 
 
-L=2; %PE阶数
+L=4; %PE阶数
 
 SNR =zeros(7,1);
 BER_MMSE =zeros(7,1);
@@ -112,28 +105,24 @@ for k = 1:7
    %%
     % LPE检测
 
-    % LPE接收机参数
     E_B =zeros(Nr,Nr,2*L+1);
-    S=zeros(Nu,Nu,2*L+1,Nu);
+    S=zeros(Nt,Nt,2*L+1,Nu);
     E_B(:,:,1) = eye(Nr);
     for n_link = 1:Nu
         S(:,:,1,n_link) = eye(Nt);
     end
-    
     H_k =sum(H,3);
-    H_A = H_k(:,:,1,1,1);
-    for n_link=2:Nu
-        H_A =[H_A;H_k(:,:,1,1,n_link)];
-    end
     for m = 2:2*L+1
         for j= 1:m-1
             sum_S = zeros(Nr,Nr);
-                sum_S = sum_S + corrcoef(H_A'*S(:,:,j,n_link)*H_A);
+            for n_link = 1:Nu
+                sum_S = sum_S + corrcoef(H_k(:,:,1,1,n_link)'*S(:,:,j,n_link)*H_k(:,:,1,1,n_link));
                 if(Nt>1)
-                    S(:,:,m,n_link)= S(:,:,m,n_link) + corrcoef(H_A*E_B(:,:,j)*H_A')*S(:,:,m-j,n_link);
+                    S(:,:,m,n_link)= S(:,:,m,n_link) + corrcoef(H_k(:,:,1,1,n_link)*E_B(:,:,j)*H_k(:,:,1,1,n_link)')*S(:,:,m-j,n_link);
                 else
-                    S(:,:,m,n_link)= S(:,:,m,n_link) + (H_A*E_B(:,:,j)*H_A')*S(:,:,m-j,n_link);
+                    S(:,:,m,n_link)= S(:,:,m,n_link) + (H_k(:,:,1,1,n_link)*E_B(:,:,j)*H_k(:,:,1,1,n_link)')*S(:,:,m-j,n_link);
                 end
+            end
             E_B(:,:,m) = E_B(:,:,m) + sum_S*E_B(:,:,m-j);
         end
     end
@@ -157,11 +146,11 @@ for k = 1:7
         for n_link=2:Nu
             H_A =[H_A;H_k(:,:,1,n_sample,n_link)];
         end
-        W=zeros(Nr,Nt);
+        K=zeros(Nr,Nr);
         for i=1:L
-            W = W + b_a(i)*(H_A'*H_A)^(i-1);
+            K = K + b_a(i)*(H_A'*H_A)^(i-1);
         end
-            W = W *H_A';
+            W = K *H_A';
         signal_LPE(n_sample,:) = W'* signal_r(:,n_sample);
     end
 
@@ -180,8 +169,8 @@ for k = 1:7
     BER_LPE(k) = sum(errortimes_LPE)/(Nu*NoSamples);
 end
 save('BER_MMSE.mat','BER_MMSE');
-save('BER_PE_2.mat','BER_PE');
-save('BER_LPE_2.mat','BER_LPE');
+save('BER_PE_4.mat','BER_PE');
+save('BER_LPE_4.mat','BER_LPE');
 
 semilogy(SNR,BER_MMSE,'Color','blue','LineStyle','-','Marker','o');
 hold on;
@@ -190,4 +179,4 @@ hold on;
 semilogy(SNR,BER_LPE,'Color','black','LineStyle','-','Marker','*');
 xlabel('SNR');
 ylabel('BER');
-legend('MMSE detect','L=2 PE detect','L=2 LPE detect');
+legend('MMSE detect','L=4 PE detect','L=4 LPE detect');

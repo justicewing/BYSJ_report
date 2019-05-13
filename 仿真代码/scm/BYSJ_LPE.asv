@@ -1,14 +1,21 @@
-% run('BYSJ_channelmodel.m')
+run('BYSJ_channelmodel.m')
 %
 % 信号生成
-sample = rand(NoSamples,Nu);
+length_sample = NoSamples;
+sample = rand(length_sample,Nu);
 sample = round(sample);
-signal_t = sample;
-signal_t(signal_t(:,:)==0) = -1;
+signal_t = ones(length_sample,Nu);
+for i = 1:length_sample
+    for j = 1:Nu
+        if(sample(i,j) == 0)
+            signal_t(i,j) = -1;
+        end
+    end
+end
 
 %%
 % 接收信号
-signal_c = zeros(Nr,NoSamples);
+signal_c = zeros(Nr,length_sample);
 for n_link=1:Nu
     for n_path=1:NoPath
         for n_sample=1:NoSamples
@@ -22,7 +29,7 @@ end
 
 SNR =zeros(7,1);
 BER_LPE =zeros(7,1);
-L = 3;
+L = 2;
 
 for k = 1:7
     SNR(k) = -20+k*2;
