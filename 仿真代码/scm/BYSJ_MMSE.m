@@ -77,6 +77,8 @@ end
 % save('BER_MMSE.mat','BER_MMSE');
 % 
 semilogy(SNR,BER_MMSE,'Color','blue','LineStyle','-','Marker','o');
+hold on;
+semilogy(SNR,BER_MMSE,'Color','yellow','LineStyle','-','Marker','^');
 xlabel('SNR');
 ylabel('BER');
-legend('MMSEdetect');
+legend('MMSEdetect','QRMMSEdetect');

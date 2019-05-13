@@ -953,6 +953,9 @@ x_{11} & \ldots & x_{1i} & \ldots & x_{1j} & \ldots & x_{1k} \\
 \section{复杂度分析}
 从本文上面所写的一般的MMSE复杂度主要是信道矩阵的求逆带来的，普通MMSE的复杂度为$Theta(M^3)$。如果采用QR分解优化的MMSE的计算，采用不同的QR分解有不同的复杂度。Gram-Schmit正交化QR分解和Givens变换QR分解的计算复杂度在计算一般信道矩阵时仍为$Theta(M^3)$。而householder变换的计算复杂度为$Theta(M^2)$。对于一般情况的信道矩阵时，Givens旋转计算复杂度并不会比普通的MMSE减少很多，但Givens旋转由于其矩阵的特定形式，可以只改变旋转的i行i列和j行j列，所以可以利用这个性质，对MMSE进行并行计算，从而降低MMSE检测的时间，但是计算复杂度上并不会减少。
 由于QR分解计算MMSE是有严格数学推导的，所以所得到的结果应该与MMSE检测的结果一致。
+\begin{figure}[htbp!]
+	\centering \includegraphics[width=0.45\textwidth]{img/3_9.jpg} \caption{QR分解MMSE}
+\end{figure}
 
 但是，可以注意到
 
