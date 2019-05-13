@@ -18,9 +18,10 @@
 \contentsline {section}{\numberline {3.2}系统模型}{15}{section.3.2}
 \contentsline {section}{\numberline {3.3}MMSE接收机}{17}{section.3.3}
 \contentsline {section}{\numberline {3.4}QR分解}{19}{section.3.4}
-\contentsline {section}{\numberline {3.5}复杂度分析}{23}{section.3.5}
-\contentsline {chapter}{\numberline {4}PE接收机及复杂度优化}{25}{chapter.4}
+\contentsline {section}{\numberline {3.5}仿真结果}{24}{section.3.5}
+\contentsline {chapter}{\numberline {4}基于PE接收机及复杂度优化}{25}{chapter.4}
 \contentsline {section}{\numberline {4.1}引言}{25}{section.4.1}
 \contentsline {section}{\numberline {4.2}PE接收机}{25}{section.4.2}
-\contentsline {section}{\numberline {4.3}仿真结果分析}{30}{section.4.3}
+\contentsline {section}{\numberline {4.3}算子确定性等同替换}{26}{section.4.3}
+\contentsline {section}{\numberline {4.4}仿真结果}{30}{section.4.4}
 \contentsfinish 

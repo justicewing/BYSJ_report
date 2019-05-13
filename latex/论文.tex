@@ -950,20 +950,21 @@ x_{11} & \ldots & x_{1i} & \ldots & x_{1j} & \ldots & x_{1k} \\
 \end{equation}
 这个过程总共只需要进行n次即可以得到上三角阵$\mathbf{R}$，而变换矩阵的乘积即为正交矩阵$\mathbf{Q}$。
 
-\section{复杂度分析}
 从本文上面所写的一般的MMSE复杂度主要是信道矩阵的求逆带来的，普通MMSE的复杂度为$Theta(M^3)$。如果采用QR分解优化的MMSE的计算，采用不同的QR分解有不同的复杂度。Gram-Schmit正交化QR分解和Givens变换QR分解的计算复杂度在计算一般信道矩阵时仍为$Theta(M^3)$。而householder变换的计算复杂度为$Theta(M^2)$。对于一般情况的信道矩阵时，Givens旋转计算复杂度并不会比普通的MMSE减少很多，但Givens旋转由于其矩阵的特定形式，可以只改变旋转的i行i列和j行j列，所以可以利用这个性质，对MMSE进行并行计算，从而降低MMSE检测的时间，但是计算复杂度上并不会减少。
 由于QR分解计算MMSE是有严格数学推导的，所以所得到的结果应该与MMSE检测的结果一致。
 \begin{figure}[htbp!]
 	\centering \includegraphics[width=0.45\textwidth]{img/3_9.jpg} \caption{QR分解MMSE}
 \end{figure}
 
-但是，可以注意到
+但是，可以注意到的是当矩阵稀疏时，Givens变换的计算复杂度就会降低，而由本文上面提到的波束域信道模型，当物理信道乘以信道矩阵的特征矩阵时，此时为波束域信道，此时信道矩阵为稀疏阵，此时使用Givens变换的复杂度将会降低。但是需要验证的是当使用波束域信道时，MMSE检测准确度不会受到大幅度的影响。
+
+\section{仿真结果}
 
 
 
-\chapter{PE接收机及复杂度优化}
+\chapter{基于PE接收机及复杂度优化}
 \section{引言}
-基于MMSE检测准则，衍生出了PE接收机，即多项式展开(polynomial expansion)接收机。其一定程度降低了复杂度，同时提供了优化方向。本章节会提出一种基于算子自由度的算法，将多项式展开得到的系数替换为确定性等同。通过替换可以略过计算多项式展开的计算，同时降低PE接收机的复杂度。
+基于MMSE检测准则，利用检测矩阵约等式，利用系数代替检测矩阵，衍生出了PE接收机，即多项式展开(polynomial expansion)接收机。PE接收机其一定程度降低了复杂度，但是其不能很好的解决当上行信道用户天线总数比较大时系统检测矩阵系数计算仍然很复杂的问题。所以，本章节还会提出一种基于算子自由度的算法，将多项式展开得到的系数替换为确定性等同。通过替换可以略过计算多项式展开的计算，同时降低PE接收机的复杂度。本章将推导利用算子自由度理论证明算子自由等同能够代替系数，并且在一定程度上能够很好
 \section{PE接收机}
 通过上述计算过程，可以知道在用户数较多用户天线数较多的情况下，MMSE接收机的复杂度将会非常的高。所以基于MMSE接收机的基本原理有提出了多项式展开的方法对MMSE矩阵进行合理的化简，化简表达式如下
 \begin{gather}\label{key}
@@ -992,6 +993,7 @@ x_{11} & \ldots & x_{1i} & \ldots & x_{1j} & \ldots & x_{1k} \\
 	\centering \includegraphics[width=0.45\textwidth]{img/3_2.jpg} \caption{L=3的普通PE接收机与MMSE接收机比较}
 \end{figure}
 
+\section{算子确定性等同替换}
 上面为使用MMSE准则的多项式接收机，可以注意到当信道矩阵的维度较大的时候，利用经验矩计算每个信道同样会有较大的复杂度。但是在信道慢变的情况下，数据CSI变化得非常的慢，可以利用确定性等同$\overline{\mu}_k$代替$\mu_k$。此时，PE接收机只用计算$\sum_{i=1}^{L} b_{PE,i}^{(L)}(\mathbf{H}^H\mathbf{H})^{i-1}$ 即可。此式又可以被称为Krylov 域的计算，计算复杂度只有$\Theta(M^2)$。这里提出了利用算子自由度从而得到$\overline{\mu}_k$的方法。考虑本文是建立在大规模MIMO背景下的，所以本章开头提到的基站侧接收天线数量$N_R$可以看作是数量相当大。
 
 所以参考文献，当$N \rightarrow \infty$，有$\mu - \mathbb{E}[\mu] \rightarrow 0$。写成公式
@@ -1189,7 +1191,7 @@ $\mathcal{B}_N$是$\mathbf{B}_N$的确定性等同。并且有这样$\overline{\
 	\centering \includegraphics[width=0.6\textwidth]{img/3_5.jpg} \caption{L=3 普通PE接收机，低复杂度PE接收机与MMSE接收机比较}
 \end{figure}
 
-\section{仿真结果分析}
+\section{仿真结果}
 上述给出的图形都是用户单天线的情况，可以看出在单天线条件下，L=3时，普通PE接收机和低复杂度PE接收机性能和MMSE接收机的性能是非常接近的。
 下面将给出不同阶数的PE接收机和低复杂度PE接收机的性能图
 
