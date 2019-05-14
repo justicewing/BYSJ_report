@@ -457,6 +457,10 @@ n_r - N_R \quad \frac{n_r-1}{N_R} \geq \frac{1}{2}
 \begin{figure}[htbp!]
 	\centering \includegraphics[width=0.6\textwidth]{img/2_2.jpg} \caption{用户单天线波束域信道能量耦合矩阵}
 \end{figure}
+多用户时，还可以发现，单个用户只占用部分波束，在一定情况下，可以将用户分配不同的波束，从而减少传输中不同用户的干扰，从而提高判断各用户的信号的准确度。
+\begin{figure}[htbp!]
+	\centering \includegraphics[width=0.6\textwidth]{img/2_5.jpg} \caption{多用户波束域信道能量耦合矩阵}
+\end{figure}
 考虑用户多天线的情况，此时耦合矩阵不再是单维的，所以多天线的耦合矩阵是3维视图
 \begin{table}[htbp]
 	\centering
@@ -956,9 +960,19 @@ x_{11} & \ldots & x_{1i} & \ldots & x_{1j} & \ldots & x_{1k} \\
 	\centering \includegraphics[width=0.45\textwidth]{img/3_9.jpg} \caption{QR分解MMSE}
 \end{figure}
 
-但是，可以注意到的是当矩阵稀疏时，Givens变换的计算复杂度就会降低，而由本文上面提到的波束域信道模型，当物理信道乘以信道矩阵的特征矩阵时，此时为波束域信道，此时信道矩阵为稀疏阵，此时使用Givens变换的复杂度将会降低。但是需要验证的是当使用波束域信道时，MMSE检测准确度不会受到大幅度的影响。
+但是，可以注意到的是当矩阵稀疏时，Givens变换的计算复杂度就会降低。而推导QR分解使用矩阵
+\begin{equation}\label{key}
+\overline{\mathbf{H}} = \left[
+\begin{array}{c}
+\mathbf{H}\\
+\sigma \mathbf{I}
+\end{array} \right]
+\end{equation}
+其下半部分属于单位阵，所以在并行计算的同时，Givens变换的复杂度同样降低了n次操作，所以此时的Givens变换的计算复杂度同样为$\Theta(M^2)$
+而由本文上面提到的波束域信道模型，当物理信道乘以信道矩阵的特征矩阵时，此时为波束域信道，信道矩阵为稀疏阵，此时使用Givens变换和householder变换的复杂度将会进一步的降低。但是在一般的信道矩阵，因为接收天线的数量不能逼近无穷大，按照一般公式无法计算出严格稀疏的信道矩阵，而讨论的降低复杂度需要稀疏矩阵。所以这里进行了近似处理，将相对较小的元素直接赋值为0。这必然会带来一定的误差，而接下来的部分，将利用仿真结果去判断。
 
-\section{仿真结果}
+\section{基于波束特性的MMSE接收机}
+上部分提到了波束域信道相关阵是稀疏的，即某一个用户在基站接收侧时发射的信号能量在基站侧的某一些天线上得到了最大的能量，从而可以推知通过解耦
 
 
 
@@ -970,9 +984,13 @@ x_{11} & \ldots & x_{1i} & \ldots & x_{1j} & \ldots & x_{1k} \\
 \begin{gather}\label{key}
 \mathbf{W} = (\mathbf{H}\mathbf{H}^H + \sigma^2 \mathbf{I})^{-1}\mathbf{H}^H  \nonumber \\
 \mathbf{x}_{MMSE} = \mathbf{W} \mathbf{y}  \nonumber \\
-(\mathbf{H}^H\mathbf{H}+\sigma^2\mathbf{I})^-1 \approx \sum_{i=1}^{L} b_{PE,i}^{(L)}(\mathbf{H}^H\mathbf{H})^{i-1}
+(\mathbf{H}^H\mathbf{H}+\sigma^2\mathbf{I})^{-1} \approx \sum_{i=1}^{L} b_{PE,i}^{(L)}(\mathbf{H}^H\mathbf{H})^{i-1}
 \end{gather}
-仍然利用MMSE接收机的判断准则，并令$\mathbf{b}^{(L)}_{PE}$ 表示 $b_{PE,i}^{(L)}$的合集。这里考虑的$L \leq M$,$M$为发送端用户天线总数
+仍然利用MMSE接收机的判断准则
+\begin{equation}\label{key}
+\mathrm{arg} \min
+\end{equation}
+并令$\mathbf{b}^{(L)}_{PE}$ 表示 $b_{PE,i}^{(L)}$的合集。这里考虑的$L \leq M$,$M$为发送端用户天线总数
 令
 \begin{gather}\label{key}
 \mathbf{B}_N = \mathbf{H}\mathbf{H}^H \nonumber \\
@@ -990,7 +1008,7 @@ x_{11} & \ldots & x_{1i} & \ldots & x_{1j} & \ldots & x_{1k} \\
 \end{equation}
 其中L的取值越大，计算复杂度越高，相对应的准确也会提升。
 \begin{figure}[htbp!]
-	\centering \includegraphics[width=0.45\textwidth]{img/3_2.jpg} \caption{L=3的普通PE接收机与MMSE接收机比较}
+	\centering \includegraphics[width=0.6\textwidth]{img/3_2.jpg} \caption{L=3的普通PE接收机与MMSE接收机比较}
 \end{figure}
 
 \section{算子确定性等同替换}
@@ -1187,23 +1205,22 @@ $\mathcal{B}_N$是$\mathbf{B}_N$的确定性等同。并且有这样$\overline{\
 \end{equation}
 
 上面描述低复杂度PE接收机利用确定性等同进行计算，因为省略了计算多项式展开的系数的过程，那么用确定量计算的PE接收机计算复杂度将仅仅是Krylov域的计算，其计算复杂度为$\Theta(M^2)$，M为用户天线总数。
-\begin{figure}[htbp!]
-	\centering \includegraphics[width=0.6\textwidth]{img/3_5.jpg} \caption{L=3 普通PE接收机，低复杂度PE接收机与MMSE接收机比较}
-\end{figure}
 
-\section{仿真结果}
+\section{基于算子}
 上述给出的图形都是用户单天线的情况，可以看出在单天线条件下，L=3时，普通PE接收机和低复杂度PE接收机性能和MMSE接收机的性能是非常接近的。
 下面将给出不同阶数的PE接收机和低复杂度PE接收机的性能图
 
 用户天线为1，采样样本为4*10000
 \begin{figure}[htbp!]
+	\centering \includegraphics[width=0.6\textwidth]{img/3_5.jpg} \caption{单天线情况下 普通PE接收机，低复杂度PE接收机与MMSE接收机比较}
+\end{figure}
+
+\begin{figure}[htbp!]
 	\centering \includegraphics[width=0.6\textwidth]{img/3_7.jpg} \caption{单天线情况下 普通PE接收机，低复杂度PE接收机与MMSE接收机比较}
 \end{figure}
-由图3.5，可以明显的看见各个接收机的测试性能非常接近，本章提出的低复杂度PE接收机能够很好保证性能。
+从图4.3可以看出当阶数为4时，低复杂度PE接收机已经可以逼近MMSE接收机的性能。而在L<4的时候，低复杂度PE接收机的性能与一般的MMSE的接收机性能上还是有一些差距的。
 
 PE接收机的性能随着阶数的增高会随之提升，本文将不再论证，下面主要讨论不同天线情况下低复杂度PE接收机的性能。
-
-从图3.6，可以发现与普通PE接收机类似的，本章所提出的低复杂度的PE接收机的性能同样也是随着PE接收机的阶数增多而提高。但是在单天线的情况下，随着阶数提高而得到的性能提升并不是很高。但是与普通PE接收机不同的是，低复杂度的PE接收机提高阶数所增加的计算复杂度会比较小，高阶的krylov域的计算仍然属于复杂度$\Theta(M^2)$的范围内。
 
 
 

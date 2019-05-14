@@ -8,4 +8,5 @@ W_2 =(R'*R)\H_A';
 H_p=(R'*Q_1')';
 R_3=R*R'/sqrt(sigma2);
 R_2=Q_2*R*sqrt(sigma2);
-W_3 =pinv(R)*Q_1';
+Q_3=Q_2;
+W_3 =Q_3*Q_1';

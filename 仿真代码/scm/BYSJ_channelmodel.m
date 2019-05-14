@@ -36,26 +36,36 @@ Ur = eye(Nt);%dftmtx(Nr)/sqrt(Nr);
 
 [H delay out] = scm(scmpar,linkpar,antpar);  %  生成时域信道H
 delay_ts = delay/Ts;
-% R = zeros(Nr,Nr, Nu);   %  发送端信道协方差矩阵
-% Omega = zeros(Nt,Nr,Nu);  %   能量耦合矩阵
+R = zeros(Nr,Nr, Nu);   %  发送端信道协方差矩阵
+Omega = zeros(Nt,Nr,Nu);  %   能量耦合矩阵
 % h_freq = zeros(Nt,Nr,NoFreq,NoSamples,NumLinks);
-% for n_link=1:Nu
-%     for n_path=1:NoPath
-%         for n_sample=1:NoSamples
-%             B = Ur'*H(:,:,n_path,n_sample,n_link)*Ut;
-%             R(:,:,n_link) = R(:,:,n_link)+(B'*B)/NoSamples;
-%             Omega(:,:,n_link) = Omega(:,:,n_link)+B.*conj(B)/NoSamples;
+for n_link=1:Nu
+    for n_path=1:NoPath
+        for n_sample=1:NoSamples
+            B = Ur'*H(:,:,n_path,n_sample,n_link)*Ut;
+            R(:,:,n_link) = R(:,:,n_link)+(B'*B)/NoSamples;
+            Omega(:,:,n_link) = Omega(:,:,n_link)+B.*conj(B)/NoSamples;
 %             for freq_i=1:NoFreq
 %                 h_freq(:,:,freq_i,n_sample,n_link) = h_freq(:,:,freq_i,n_sample,n_link) + B*exp(-1i*2*pi*(freq_i - 1)*delay_ts(n_link,n_path)/NoFreq);
 %             end
-%         end
-%     end
-% end
-% % figure(1)
+        end
+    end
+end
+% figure(1)
 % mesh(abs(R(:,:,1)))
 % xlabel('接收波束')
 % ylabel('接收波束')
 % zlabel('能量')
 % figure(2)
-% mesh(abs(Omega(:,:,1)))
-% plot(abs(Omega))
+% mesh(abs(R(:,:,2)))
+% xlabel('接收波束')
+% ylabel('接收波束')
+% zlabel('能量')
+% figure(1)
+% plot(abs(Omega(:,:,1)),'red');
+% hold on;
+% plot(abs(Omega(:,:,2)),'blue');
+% hold on;
+% plot(abs(Omega(:,:,3)),'black');
+% hold on;
+% plot(abs(Omega(:,:,4)),'green');

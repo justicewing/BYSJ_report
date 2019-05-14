@@ -1,4 +1,4 @@
-run('BYSJ_channelmodel.m');
+% run('BYSJ_channelmodel.m');
 %%
 % 信号生成
 sample = rand(NoSamples,Nu);
@@ -20,7 +20,7 @@ for n_link=1:Nu
 end
 
 
-L=4; %PE阶数
+L=3; %PE阶数
 
 SNR =zeros(7,1);
 BER_MMSE =zeros(7,1);
@@ -61,7 +61,7 @@ for k = 1:7
     
     %%
     % PE检测    
-    signal_PE = zeros(length_sample,Nu);
+    signal_PE = zeros(NoSamples,Nu);
     H_k =sum(H,3);
     for n_sample=1:NoSamples
             H_A = H_k(:,:,1,n_sample,1);
@@ -89,8 +89,8 @@ for k = 1:7
     end
 
     % 判决
-    result_PE = ones(length_sample,Nu);
-    for i = 1:length_sample
+    result_PE = ones(NoSamples,Nu);
+    for i = 1:NoSamples
         for j = 1:Nu
             d_1 = abs(signal_PE(i,j)-1);
             d_2 = abs(signal_PE(i,j)+1);
@@ -140,7 +140,7 @@ for k = 1:7
     b_a = pinv(phi_a)*mu_a(1:L);
 
     % LPE检测
-    signal_LPE = zeros(length_sample,Nu);
+    signal_LPE = zeros(NoSamples,Nu);
     for n_sample=1:NoSamples
         H_A = H_k(:,:,1,n_sample,1);
         for n_link=2:Nu
@@ -155,8 +155,8 @@ for k = 1:7
     end
 
     % 判决
-    result_LPE = ones(length_sample,Nu);
-    for i = 1:length_sample
+    result_LPE = ones(NoSamples,Nu);
+    for i = 1:NoSamples
         for j = 1:Nu
             d_1 = abs(signal_LPE(i,j)-1);
             d_2 = abs(signal_LPE(i,j)+1);
@@ -175,8 +175,8 @@ save('BER_LPE_4.mat','BER_LPE');
 semilogy(SNR,BER_MMSE,'Color','blue','LineStyle','-','Marker','o');
 hold on;
 semilogy(SNR,BER_PE,'Color','red','LineStyle','-','Marker','+');
-hold on;
-semilogy(SNR,BER_LPE,'Color','black','LineStyle','-','Marker','*');
+% hold on;
+% semilogy(SNR,BER_LPE,'Color','black','LineStyle','-','Marker','*');
 xlabel('SNR');
 ylabel('BER');
 legend('MMSE detect','L=4 PE detect','L=4 LPE detect');
