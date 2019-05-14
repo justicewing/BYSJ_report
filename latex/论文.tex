@@ -972,7 +972,7 @@ x_{11} & \ldots & x_{1i} & \ldots & x_{1j} & \ldots & x_{1k} \\
 而由本文上面提到的波束域信道模型，当物理信道乘以信道矩阵的特征矩阵时，此时为波束域信道，信道矩阵为稀疏阵，此时使用Givens变换和householder变换的复杂度将会进一步的降低。但是在一般的信道矩阵，因为接收天线的数量不能逼近无穷大，按照一般公式无法计算出严格稀疏的信道矩阵，而讨论的降低复杂度需要稀疏矩阵。所以这里进行了近似处理，将相对较小的元素直接赋值为0。这必然会带来一定的误差，而接下来的部分，将利用仿真结果去判断。
 
 \section{基于波束特性的MMSE接收机}
-上部分提到了波束域信道相关阵是稀疏的，即某一个用户在基站接收侧时发射的信号能量在基站侧的某一些天线上得到了最大的能量，从而可以推知通过解耦
+上部分提到了波束域信道相关阵是稀疏的，并且根据信道模型部分提到的基站侧相关阵和能量耦合矩阵的分布，在基站侧的某一些天线上得到了某个用户的发送信号的大部分能量。而通过将信道矩阵处理为波束域信道矩阵，根据波束域信道的性质，将主要计算能量较高那部分的信号。
 
 
 
@@ -983,12 +983,23 @@ x_{11} & \ldots & x_{1i} & \ldots & x_{1j} & \ldots & x_{1k} \\
 通过上述计算过程，可以知道在用户数较多用户天线数较多的情况下，MMSE接收机的复杂度将会非常的高。所以基于MMSE接收机的基本原理有提出了多项式展开的方法对MMSE矩阵进行合理的化简，化简表达式如下
 \begin{gather}\label{key}
 \mathbf{W} = (\mathbf{H}\mathbf{H}^H + \sigma^2 \mathbf{I})^{-1}\mathbf{H}^H  \nonumber \\
-\mathbf{x}_{MMSE} = \mathbf{W} \mathbf{y}  \nonumber \\
-(\mathbf{H}^H\mathbf{H}+\sigma^2\mathbf{I})^{-1} \approx \sum_{i=1}^{L} b_{PE,i}^{(L)}(\mathbf{H}^H\mathbf{H})^{i-1}
+\mathbf{x}_{MMSE} = \mathbf{W} \mathbf{y}  
 \end{gather}
+利用Cayley hamilton理论，$(\mathbf{H}^H\mathbf{H}+\sigma_z^2\mathbf{I})^-1$可以表达为
+\begin{equation}\label{key}
+(\mathbf{H}^H\mathbf{H}+\sigma^2_z\mathbf{I})^{-1} = \sum_{i=1}^M c_i(\mathbf{H}^H \mathbf{H}+\sigma^2_z\mathbf{I})^i
+\end{equation}
+而等式根据多项式分解可以写为下式
+\begin{equation}\label{key}
+\sum_{i=1}^M c_i(\mathbf{H}^H \mathbf{H}+\sigma^2_z\mathbf{I})^i=\sum_{i=1}^M b_i(\mathbf{H}^H\mathbf{H})^i
+\end{equation}
+PE接收机可以通过约等式降低复杂度
+\begin{equation}\label{key}
+(\mathbf{H}^H\mathbf{H}+\sigma^2\mathbf{I})^{-1} \approx \sum_{i=1}^{L} b_{PE,i}^{(L)}(\mathbf{H}^H\mathbf{H})^{i-1}
+\end{equation}
 仍然利用MMSE接收机的判断准则
 \begin{equation}\label{key}
-\mathrm{arg} \min
+\mathrm{arg} \min_{b_{PE}^{(L)}} \mathbb{E}_x \left\lbrace \| \mathbf{x}-\sum_{i=1}^{L}b_{PE,i}^{(L)}(\mathbf{H}^H\mathbf{H})^{i-1}\mathbf{H}^Hy \| \right\rbrace
 \end{equation}
 并令$\mathbf{b}^{(L)}_{PE}$ 表示 $b_{PE,i}^{(L)}$的合集。这里考虑的$L \leq M$,$M$为发送端用户天线总数
 令
@@ -1010,6 +1021,9 @@ x_{11} & \ldots & x_{1i} & \ldots & x_{1j} & \ldots & x_{1k} \\
 \begin{figure}[htbp!]
 	\centering \includegraphics[width=0.6\textwidth]{img/3_2.jpg} \caption{L=3的普通PE接收机与MMSE接收机比较}
 \end{figure}
+
+插一张不同阶数的PE接收机图
+
 
 \section{算子确定性等同替换}
 上面为使用MMSE准则的多项式接收机，可以注意到当信道矩阵的维度较大的时候，利用经验矩计算每个信道同样会有较大的复杂度。但是在信道慢变的情况下，数据CSI变化得非常的慢，可以利用确定性等同$\overline{\mu}_k$代替$\mu_k$。此时，PE接收机只用计算$\sum_{i=1}^{L} b_{PE,i}^{(L)}(\mathbf{H}^H\mathbf{H})^{i-1}$ 即可。此式又可以被称为Krylov 域的计算，计算复杂度只有$\Theta(M^2)$。这里提出了利用算子自由度从而得到$\overline{\mu}_k$的方法。考虑本文是建立在大规模MIMO背景下的，所以本章开头提到的基站侧接收天线数量$N_R$可以看作是数量相当大。
@@ -1218,8 +1232,7 @@ $\mathcal{B}_N$是$\mathbf{B}_N$的确定性等同。并且有这样$\overline{\
 \begin{figure}[htbp!]
 	\centering \includegraphics[width=0.6\textwidth]{img/3_7.jpg} \caption{单天线情况下 普通PE接收机，低复杂度PE接收机与MMSE接收机比较}
 \end{figure}
-从图4.3可以看出当阶数为4时，低复杂度PE接收机已经可以逼近MMSE接收机的性能。而在L<4的时候，低复杂度PE接收机的性能与一般的MMSE的接收机性能上还是有一些差距的。
-
+从图4.3可以看出当阶数为4时，在单天线条件下，低复杂度PE接收机已经可以逼近MMSE接收机的性能。而在L<4的时候，低复杂度PE接收机的性能与一般的MMSE的接收机性能上还是有一些差距的。
 PE接收机的性能随着阶数的增高会随之提升，本文将不再论证，下面主要讨论不同天线情况下低复杂度PE接收机的性能。
 
 
