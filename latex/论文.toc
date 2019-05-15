@@ -23,6 +23,6 @@
 \contentsline {section}{\numberline {4.1}引言}{26}{section.4.1}
 \contentsline {section}{\numberline {4.2}PE接收机原理及仿真}{26}{section.4.2}
 \contentsline {section}{\numberline {4.3}算子自由度原理}{29}{section.4.3}
-\contentsline {section}{\numberline {4.4}低复杂度的PE接收机}{34}{section.4.4}
-\contentsline {chapter}{\numberline {5}结论}{35}{chapter.5}
+\contentsline {section}{\numberline {4.4}低复杂度的PE接收机}{33}{section.4.4}
+\contentsline {chapter}{\numberline {5}结论}{36}{chapter.5}
 \contentsfinish 

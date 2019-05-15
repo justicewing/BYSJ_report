@@ -978,7 +978,7 @@ x_{11} & \ldots & x_{1i} & \ldots & x_{1j} & \ldots & x_{1k} \\
 	\centering \includegraphics[width=0.45\textwidth]{img/3_9.jpg} \caption{QR分解MMSE}
 \end{figure}
 \section{低复杂度的MMSE接收机}
-上部分提到了波束域信道相关阵是稀疏的，并且根据信道模型部分提到的基站侧相关阵和能量耦合矩阵的分布，在基站侧的某一些天线上得到了某个用户的发送信号的大部分能量。而通过将信道矩阵处理为波束域信道矩阵，根据波束域信道的性质，将主要计算能量较高那部分的信号。同样利用MMSE判断准则对
+上部分提到了波束域信道相关阵是稀疏的，并且根据信道模型部分提到的基站侧相关阵和能量耦合矩阵的分布，在基站侧的某一些天线上得到了某个用户的发送信号的大部分能量。而通过将信道矩阵处理为波束域信道矩阵，根据波束域信道的性质，将主要计算能量较高那部分的信号。同样利用MMSE判断准则对接收信号进行判断，不同的是这里使用的信道是根据波束域性质推导的波束域信道。其信道矩阵是为稀疏阵。
 
 
 
@@ -1243,8 +1243,13 @@ $\mathcal{B}_N$是$\mathbf{B}_N$的确定性等同。并且有这样$\overline{\
 \end{gather}
 其中m是自然数，$\mathbb{E}[\mathcal{B}_N^0]=\mathbf{I}_N$和$\mathbf{S}_{0k}=\mathbf{I}_{M_k}$
 
-以上是基于算子自由度低复杂度，下面将简要介绍低复杂多项式展开(PE)接收机的算法。如上文所叙述的，本文考虑的是$\overline{\mathbf{X}} = 0_N$的情况，所以低复杂度PE接收机首先根据式(3.66) 
-和(3.67)计算$\mathbb{E}[\mathcal{B}_N^{m}]$和$\mathbf{S}_{(m)k}$。
+\section{低复杂度的PE接收机}
+以上是基于算子自由度理论，下面将叙述低复杂多项式展开(PE)接收机的算法。如上文所叙述的，本文考虑的是$\overline{\mathbf{X}} = 0_N$的情况，所以低复杂度PE接收机首先根据递推公式
+\begin{gather}\label{key}
+\mathbb{E}[\mathcal{B}^{m+1}_N] = \sum_{j=0}^{m}(\sum_{k=0}^{K}\tilde{\eta_k}(\mathbf{S}_{jk}))\mathbb{E}[\mathcal{B}_N^{m-j}] \\
+\mathbf{S}_{(m+1)k} =\sum_{j=0}^{m}\eta(\mathbb{E}(\mathcal{B}_N^j))\mathbf{S}_{m-j}k
+\end{gather}
+计算$\mathbb{E}[\mathcal{B}_N^{m}]$和$\mathbf{S}_{(m)k}$。
 \begin{equation}\label{key}
 \overline{\mu}_{m} = \frac{1}{N} \mathrm{tr}(\mathbb{E}[\mathcal{B}_N^{m}])
 \end{equation}
@@ -1266,15 +1271,34 @@ $\mathcal{B}_N$是$\mathbf{B}_N$的确定性等同。并且有这样$\overline{\
 \end{equation}
 
 上面描述低复杂度PE接收机利用确定性等同进行计算，因为省略了计算多项式展开的系数的过程，那么用确定量计算的PE接收机计算复杂度将仅仅是Krylov域的计算，其计算复杂度为$\Theta(M^2)$，M为用户天线总数。
-
-\section{低复杂度的PE接收机}
-上述给出的图形都是用户单天线的情况，可以看出在单天线条件下，L=3时，普通PE接收机和低复杂度PE接收机性能和MMSE接收机的性能是非常接近的。
-下面将给出不同阶数的PE接收机和低复杂度PE接收机的性能图
-
-用户天线为1，采样样本为4*10000
-
-从图4.3可以看出当阶数为4时，在单天线条件下，低复杂度PE接收机已经可以逼近MMSE接收机的性能。而在L<4的时候，低复杂度PE接收机的性能与一般的MMSE的接收机性能上还是有一些差距的。
-PE接收机的性能随着阶数的增高会随之提升，本文将不再论证，下面主要讨论不同天线情况下低复杂度PE接收机的性能。
+考虑的为BPSK调制，分别考虑用户单天线和用户多天线，多天线时设置为2和4，判决采用硬判决判决采用硬判决。多天线单流的多天线结果利用平均值进行判断。
+\begin{table}[htbp]
+	\centering
+	\caption{\label{tab:test}MMSE仿真参数设置}
+	\begin{tabular}{ll}
+		\toprule
+		参数 &  设置值 \\
+		\bottomrule
+		场景 &  郊区宏蜂窝 \\
+		\bottomrule
+		基站侧天线数 & 128 \\
+		\bottomrule
+		用户数天线	& 1 \quad or\quad2 or\quad4\\
+		\bottomrule
+		用户数	& 4 \\
+		\bottomrule
+		天线间距 & 0.5$\lambda$ \\
+		\bottomrule
+		路径数 & 6 \\
+		\bottomrule
+		用户采样数量 & 10000 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+首先，为了验证上述推导原理，本文先将不同阶数的PE接收机和低复杂度的PE接收机作对比，通过图。。。的说明，可以发现在不同天线情况都有阶数越低的情况下，低复杂度的PE接收机与普通PE接收机的性能要更加接近。而在用户单天线时，低复杂度的PE接收机与普通的PE接收机最为接近。
+上述给出的图形是用户单天线的情况，可以看出在单天线条件下，L=3时，普通PE接收机和低复杂度PE接收机性能和MMSE接收机的性能是非常接近的。
+从图4.5可以看出当阶数不同时，在单天线条件下，低复杂度PE接收机已经可以逼近MMSE接收机的性能。而在L<4的时候，低复杂度PE接收机的性能与一般的MMSE的接收机性能上还是有一些差距的。
+上文提到PE接收机的性能随着阶数的增高会随之提升，下面主要讨论不同天线情况下低复杂度PE接收机的性能。
 \begin{figure}[htbp!]
 	\centering \includegraphics[width=0.55\textwidth]{img/4_5.eps} \caption{用户单天线LPE接收机与MMSE接收机比较}
 \end{figure}

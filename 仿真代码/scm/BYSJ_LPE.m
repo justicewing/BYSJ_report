@@ -1,4 +1,4 @@
-% run('BYSJ_channelmodel.m')
+ run('BYSJ_channelmodel.m')
 %
 % ÐÅºÅÉú³É
 sample = rand(NoSamples,Nu);
@@ -22,7 +22,7 @@ end
 
 SNR =zeros(7,1);
 BER_LPE =zeros(7,1);
-L = 3;
+L = 1;
 
 for k = 1:7
     SNR(k) = -20+k*2;
@@ -43,11 +43,11 @@ for k = 1:7
         for j= 1:m-1
             sum_S = zeros(Nr,Nr);
             for n_link = 1:Nu
-                sum_S = sum_S + corrcoef(Ut'*H_k(:,:,1,1,n_link)'*S(:,:,j,n_link)*H_k(:,:,1,1,n_link)*Ut);
+                sum_S = sum_S + corrcoef(H_k(:,:,1,1,n_link)'*S(:,:,j,n_link)*H_k(:,:,1,1,n_link));
                 if(Nt>1)
-                    S(:,:,m,n_link)= S(:,:,m,n_link) + corrcoef(H_k(:,:,1,1,n_link)*Ut*E_B(:,:,j)*Ut'*H_k(:,:,1,1,n_link)')*S(:,:,m-j,n_link);
+                    S(:,:,m,n_link)= S(:,:,m,n_link) + corrcoef(H_k(:,:,1,1,n_link)*E_B(:,:,j)'*H_k(:,:,1,1,n_link)')*S(:,:,m-j,n_link);
                 else
-                    S(:,:,m,n_link)= S(:,:,m,n_link) + (H_k(:,:,1,1,n_link)*Ut*E_B(:,:,j)*Ut'*H_k(:,:,1,1,n_link)')*S(:,:,m-j,n_link);
+                    S(:,:,m,n_link)= S(:,:,m,n_link) + (H_k(:,:,1,1,n_link)*E_B(:,:,j)*H_k(:,:,1,1,n_link)')*S(:,:,m-j,n_link);
                 end
             end
             E_B(:,:,m) = E_B(:,:,m) + sum_S*E_B(:,:,m-j);
@@ -108,4 +108,4 @@ end
 semilogy(SNR,BER_LPE,'Color','red','LineStyle','-','Marker','+');
 xlabel('SNR');
 ylabel('BER');
-legend('LPEdetect');
+legend('L= 3 LPEdetect');
