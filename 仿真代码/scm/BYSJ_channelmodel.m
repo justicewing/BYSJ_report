@@ -7,7 +7,7 @@ clc;
 
 Scenario = 'suburban_macro';
 Nu = 4;        %   小区中用户数
-Nt = 1;         %   发送天线
+Nt = 2;         %   发送天线
 Nr = 128;        %   接收天线
 NoSamples = 10000;
 NoFreq = 256;

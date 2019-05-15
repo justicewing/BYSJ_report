@@ -1,10 +1,10 @@
 run('BYSJ_channelmodel.m');
 %%
 % 信号生成
-sample = rand(NoSamples,Nu);
+sample = rand(NoSamples,Nu,Nt);
 sample = round(sample);
 signal_t = sample;
-signal_t(signal_t(:,:)==0) = -1;
+signal_t(signal_t(:,:,:)==0) = -1;
 
 %%
 % 接收信号
@@ -14,7 +14,7 @@ for n_link=1:Nu
         for n_sample=1:NoSamples
             H_i = H(:,:,n_path,n_sample,n_link);
             H_i = H_i(:,:);
-            signal_c(:,n_sample) = signal_c(:,n_sample) + H_i'* repmat(signal_t(n_sample,n_link),Nt,1);
+            signal_c(:,n_sample) = signal_c(:,n_sample) + H_i'* squeeze(signal_t(n_sample,n_link,:));
         end
     end
 end
@@ -33,7 +33,8 @@ for k = 1:7
     signal_r =awgn(signal_c,SNR(k));
     %%
     % MMSE检测
-    signal_MMSE = zeros(NoSamples,Nu);
+
+    signal_MMSE = zeros(NoSamples,Nu*Nt);
     H_k =sum(H,3);
     for n_sample=1:NoSamples
             H_A = H_k(:,:,1,n_sample,1);
@@ -45,24 +46,36 @@ for k = 1:7
     end
     
     
-    %判决
-    result_MMSE = ones(NoSamples,Nu);
+    %多流判决
+     rece_MMSE = zeros(NoSamples,Nu,Nt);
+     for n_link = 1:Nu
+         for n_sample = 1:NoSamples
+              for n_trans = 1:Nt
+                  rece_MMSE(n_sample,n_link,n_trans) = signal_MMSE(n_sample,Nt*(n_link-1)+n_trans);
+              end
+          end
+      end
+    result_MMSE = ones(NoSamples,Nu,Nt);
     for i = 1:NoSamples
         for j = 1:Nu
-            d_1 = abs(signal_MMSE(i,j)-1);
-            d_2 = abs(signal_MMSE(i,j)+1);
-            if(d_1 > d_2)
-                result_MMSE(i,j) = 0;
+            for p = 1:Nt
+                d_1 = abs(rece_MMSE(i,j,p)-1);
+                d_2 = abs(rece_MMSE(i,j,p)+1);
+                if(d_1 > d_2)
+                    result_MMSE(i,j,p) = 0;
+                end
             end
         end
     end
-    errortimes = sum(abs(result_MMSE-sample));
-    BER_MMSE(k) = sum(errortimes)/(Nu*NoSamples);
+    errortimes = sum(abs(result_MMSE-sample),'all');
+    BER_MMSE(k) = sum(errortimes)/(Nu*Nt*NoSamples);
     
     %%
     for L = 1:3
-        % PE检测    
-        signal_PE = zeros(NoSamples,Nu);
+        
+        % PE检测
+
+        signal_PE = zeros(NoSamples,Nu*Nt);
         H_k =sum(H,3);
         for n_sample=1:NoSamples
                 H_A = H_k(:,:,1,n_sample,1);
@@ -89,19 +102,30 @@ for k = 1:7
                     signal_PE(n_sample,:) = W' *signal_r(:,n_sample);
         end
 
-        % 判决
-        result_PE = ones(NoSamples,Nu);
+
+        %多流判决
+         rece_PE = zeros(NoSamples,Nu,Nt);
+         for n_link = 1:Nu
+             for n_sample = 1:NoSamples
+                  for n_trans = 1:Nt
+                      rece_PE(n_sample,n_link,n_trans) = signal_PE(n_sample,Nt*(n_link-1)+n_trans);
+                  end
+              end
+          end
+        result_PE = ones(NoSamples,Nu,Nt);
         for i = 1:NoSamples
             for j = 1:Nu
-                d_1 = abs(signal_PE(i,j)-1);
-                d_2 = abs(signal_PE(i,j)+1);
-                if(d_1 > d_2)
-                    result_PE(i,j) = 0;
+                for p = 1:Nt
+                    d_1 = abs(rece_PE(i,j,p)-1);
+                    d_2 = abs(rece_PE(i,j,p)+1);
+                    if(d_1 > d_2)
+                        result_PE(i,j,p) = 0;
+                    end
                 end
             end
         end
-        errortimes = sum(abs(result_PE-sample));
-        BER_PE(k,L) = sum(errortimes)/(Nu*NoSamples);
+        errortimes = sum(abs(result_PE-sample),'all');
+        BER_PE(k,L) = sum(errortimes)/(Nu*Nt*NoSamples);
     end
 %    %%
 %     % LPE检测
@@ -177,5 +201,9 @@ semilogy(SNR,BER_MMSE,'Color','blue','LineStyle','-','Marker','o');
 hold on;
 semilogy(SNR,BER_PE(:,1),'Color','red','LineStyle','-','Marker','+');
 hold on;
+semilogy(SNR,BER_PE(:,2),'Color','red','LineStyle','--','Marker','+');
+hold on;
+semilogy(SNR,BER_PE(:,3),'Color','red','LineStyle',':','Marker','+');
 xlabel('SNR');
 ylabel('BER');
+legend('MMSEdetect','L=1 PEdetect','L=2 PEdetect','L=3 PEdetect');

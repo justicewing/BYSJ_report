@@ -43,11 +43,11 @@ for k = 1:7
         for j= 1:m-1
             sum_S = zeros(Nr,Nr);
             for n_link = 1:Nu
-                sum_S = sum_S + corrcoef(H_k(:,:,1,1,n_link)'*S(:,:,j,n_link)*H_k(:,:,1,1,n_link));
+                sum_S = sum_S + corrcoef(Ut'*H_k(:,:,1,1,n_link)'*S(:,:,j,n_link)*H_k(:,:,1,1,n_link)*Ut);
                 if(Nt>1)
-                    S(:,:,m,n_link)= S(:,:,m,n_link) + corrcoef(H_k(:,:,1,1,n_link)*E_B(:,:,j)*H_k(:,:,1,1,n_link)')*S(:,:,m-j,n_link);
+                    S(:,:,m,n_link)= S(:,:,m,n_link) + corrcoef(H_k(:,:,1,1,n_link)*Ut*E_B(:,:,j)*Ut'*H_k(:,:,1,1,n_link)')*S(:,:,m-j,n_link);
                 else
-                    S(:,:,m,n_link)= S(:,:,m,n_link) + (H_k(:,:,1,1,n_link)*E_B(:,:,j)*H_k(:,:,1,1,n_link)')*S(:,:,m-j,n_link);
+                    S(:,:,m,n_link)= S(:,:,m,n_link) + (H_k(:,:,1,1,n_link)*Ut*E_B(:,:,j)*Ut'*H_k(:,:,1,1,n_link)')*S(:,:,m-j,n_link);
                 end
             end
             E_B(:,:,m) = E_B(:,:,m) + sum_S*E_B(:,:,m-j);
@@ -64,31 +64,38 @@ for k = 1:7
             phi_a(p,q) = mu_a(p+q) + mu_a(p+q-1)/sigma2;
         end
     end
-    b_a = pinv(phi_a)*mu_a(1:L);
+    b_a = (phi_a)\mu_a(1:L);
 
     % LPE检测
-    signal_LPE = zeros(length_sample,Nu);
+    signal_LPE = zeros(NoSamples,Nu*Nt);
     for n_sample=1:NoSamples
         H_A = H_k(:,:,1,n_sample,1);
         for n_link=2:Nu
             H_A =[H_A;H_k(:,:,1,n_sample,n_link)];
         end
-        K=zeros(Nr,Nr);
+        W=zeros(Nr,Nr);
         for i=1:L
-            K = K + b_a(i)*(H_A'*H_A)^(i-1);
+            W = W + b_a(i)*(H_A'*H_A)^(i-1);
         end
-            W = K *H_A';
+        W = W *H_A';
         signal_LPE(n_sample,:) = W'* signal_r(:,n_sample);
     end
 
-
     %%
-    % 判决
-    result_LPE = ones(length_sample,Nu);
-    for i = 1:length_sample
+    %单流判决
+     mean_LPE = zeros(NoSamples,Nu);
+     for n_link = 1:Nu
+         for n_sample = 1:NoSamples
+              for n_trans = 1:Nt
+                  mean_LPE(n_sample,n_link) = mean_LPE(n_sample,n_link) + signal_LPE(n_sample,Nt*(n_link-1)+n_trans)/Nt;
+              end
+          end
+      end
+    result_LPE = ones(NoSamples,Nu);
+    for i = 1:NoSamples
         for j = 1:Nu
-            d_1 = abs(signal_LPE(i,j)-1);
-            d_2 = abs(signal_LPE(i,j)+1);
+            d_1 = abs(mean_LPE(i,j)-1);
+            d_2 = abs(mean_LPE(i,j)+1);
             if(d_1 > d_2)
                 result_LPE(i,j) = 0;
             end
@@ -98,7 +105,6 @@ for k = 1:7
     BER_LPE(k) = sum(errortimes)/(Nu*NoSamples);
 end
 
-save('BER_LPE_3.mat','BER_LPE');
 semilogy(SNR,BER_LPE,'Color','red','LineStyle','-','Marker','+');
 xlabel('SNR');
 ylabel('BER');
