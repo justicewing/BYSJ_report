@@ -45,21 +45,9 @@ for k = 1:7
         for n_link=2:Nu
             H_A =[H_A;H_k(:,:,1,n_sample,n_link)];
         end
-        if(n_sample == 1)
-            figure(1);
-            mesh(abs(H_A));
-        end
         H_A =H_A*Ut;
-        if(n_sample == 1)
-            figure(2);
-            mesh(abs(H_A));
-        end
         H_a =abs(H_A);
-        H_A(H_a(:,:)<0.5) =0;
-        if(n_sample == 1)
-            figure(3);
-            mesh(abs(H_A));
-        end
+        H_A(H_a(:,:)<0.5)==0;
          W = (H_A'*H_A + eye(Nr)/sigma2)\H_A';
          signal_BDMMSE(n_sample,:) = W' *Ut'*signal_r(:,n_sample);
          
@@ -91,7 +79,6 @@ for k = 1:7
 end
 % save('BER_MMSE.mat','BER_MMSE');
 % 
-figure(4);
 semilogy(SNR,BER_BDMMSE,'Color','green','LineStyle','-','Marker','^');
 xlabel('SNR');
 ylabel('BER');

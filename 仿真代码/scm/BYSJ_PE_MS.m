@@ -93,7 +93,7 @@ for k = 1:7
 end
 % save('BER_MMSE.mat','BER_MMSE');
 % 
-semilogy(SNR,BER_PE,'Color','blue','LineStyle','-','Marker','o');
-xlabel('SNR');
-ylabel('BER');
-legend('PEdetect');
+% semilogy(SNR,BER_PE,'Color','blue','LineStyle','-','Marker','o');
+% xlabel('SNR');
+% ylabel('BER');
+% legend('PEdetect');

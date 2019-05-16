@@ -13,16 +13,20 @@
 \contentsline {subsection}{\numberline {2.5.2}对应波束}{11}{subsection.2.5.2}
 \contentsline {subsection}{\numberline {2.5.3}特征矩阵稀疏性}{13}{subsection.2.5.3}
 \contentsline {section}{\numberline {2.6}本章小结}{15}{section.2.6}
-\contentsline {chapter}{\numberline {3}基于MMSE接收机的复杂度优化}{16}{chapter.3}
+\contentsline {chapter}{\numberline {3}基于MMSE接收机复杂度优化}{16}{chapter.3}
 \contentsline {section}{\numberline {3.1}引言}{16}{section.3.1}
 \contentsline {section}{\numberline {3.2}系统模型}{16}{section.3.2}
 \contentsline {section}{\numberline {3.3}MMSE接收机原理及仿真}{18}{section.3.3}
 \contentsline {section}{\numberline {3.4}QR分解方法}{20}{section.3.4}
 \contentsline {section}{\numberline {3.5}低复杂度的MMSE接收机}{25}{section.3.5}
-\contentsline {chapter}{\numberline {4}基于PE接收机及复杂度优化}{26}{chapter.4}
-\contentsline {section}{\numberline {4.1}引言}{26}{section.4.1}
-\contentsline {section}{\numberline {4.2}PE接收机原理及仿真}{26}{section.4.2}
-\contentsline {section}{\numberline {4.3}算子自由度原理}{29}{section.4.3}
-\contentsline {section}{\numberline {4.4}低复杂度的PE接收机}{33}{section.4.4}
-\contentsline {chapter}{\numberline {5}结论}{36}{chapter.5}
+\contentsline {section}{\numberline {3.6}本章小结}{27}{section.3.6}
+\contentsline {chapter}{\numberline {4}基于PE接收机及复杂度优化}{28}{chapter.4}
+\contentsline {section}{\numberline {4.1}引言}{28}{section.4.1}
+\contentsline {section}{\numberline {4.2}PE接收机原理及仿真}{28}{section.4.2}
+\contentsline {section}{\numberline {4.3}算子自由度原理}{31}{section.4.3}
+\contentsline {section}{\numberline {4.4}低复杂度的PE接收机}{35}{section.4.4}
+\contentsline {section}{\numberline {4.5}本章小结}{39}{section.4.5}
+\contentsline {chapter}{\numberline {5}总结与展望}{40}{chapter.5}
+\contentsline {section}{\numberline {5.1}全文总结}{40}{section.5.1}
+\contentsline {section}{\numberline {5.2}后续工作}{40}{section.5.2}
 \contentsfinish 

@@ -54,19 +54,49 @@
 % ylabel('BER');
 % legend('MMSEdetect');
 
-%%
-semilogy(SNR,BER_MMSE,'Color','blue','LineStyle','-','Marker','o');
-hold on;
-semilogy(SNR,BER_PE(:,1),'Color','red','LineStyle','-','Marker','+');
-hold on;
-semilogy(SNR,BER_PE(:,2),'Color','red','LineStyle','--','Marker','+');
-hold on;
-semilogy(SNR,BER_PE(:,3),'Color','red','LineStyle',':','Marker','+');
-xlabel('SNR');
-ylabel('BER');
-legend('MMSEdetect','L=1 LPEdetect','L=2 LPEdetect','L=3 LPEdetect');
-
-%%
+% %%
+% figure(1);
+% semilogy(SNR,BER_MMSE,'Color','blue','LineStyle','-','Marker','o');
+% hold on;
+% semilogy(SNR,BER_LPE(:,1),'Color','black','LineStyle','-','Marker','s');
+% hold on;
+% semilogy(SNR,BER_LPE(:,2),'Color','black','LineStyle','--','Marker','s');
+% hold on;
+% semilogy(SNR,BER_LPE(:,3),'Color','black','LineStyle',':','Marker','s');
+% xlabel('SNR');
+% ylabel('BER');
+% legend('MMSEdetect','L=1 LPEdetect','L=2 LPEdetect','L=3 LPEdetect');
+% 
+% %%
+% figure(2);
+% semilogy(SNR,BER_MMSE,'Color','blue','LineStyle','-','Marker','o');
+% hold on;
+% semilogy(SNR,BER_LPE(:,1),'Color','black','LineStyle','-','Marker','s');
+% hold on;
+% semilogy(SNR,BER_LPE(:,2),'Color','black','LineStyle','--','Marker','s');
+% hold on;
+% semilogy(SNR,BER_LPE(:,3),'Color','black','LineStyle',':','Marker','s');
+% hold on;
+% semilogy(SNR,BER_PE(:,1),'Color','red','LineStyle','-','Marker','+');
+% hold on;
+% semilogy(SNR,BER_PE(:,2),'Color','red','LineStyle','--','Marker','+');
+% hold on;
+% semilogy(SNR,BER_PE(:,3),'Color','red','LineStyle',':','Marker','+');
+% xlabel('SNR');
+% ylabel('BER');
+% legend('MMSEdetect','L=1 LPEdetect','L=2 LPEdetect','L=3 LPEdetect','L=1 PEdetect','L=2 PEdetect','L=3 PEdetect');
+% %%
+% figure(3);
+% semilogy(SNR,BER_MMSE,'Color','blue','LineStyle','-','Marker','o');
+% hold on;
+% semilogy(SNR,BER_LPE(:,1),'Color','black','LineStyle','-','Marker','s');
+% hold on;
+% semilogy(SNR,BER_LPE(:,2),'Color','black','LineStyle','--','Marker','s');
+% hold on;
+% semilogy(SNR,BER_LPE(:,3),'Color','black','LineStyle',':','Marker','s');
+% hold on;
+% semilogy(SNR,BER_LPE(:,4),'Color','black','LineStyle','-.','Marker','s');
+% hold on;
 % semilogy(SNR,BER_PE(:,1),'Color','red','LineStyle','-','Marker','+');
 % hold on;
 % semilogy(SNR,BER_PE(:,2),'Color','red','LineStyle','--','Marker','+');
@@ -74,14 +104,6 @@ legend('MMSEdetect','L=1 LPEdetect','L=2 LPEdetect','L=3 LPEdetect');
 % semilogy(SNR,BER_PE(:,3),'Color','red','LineStyle',':','Marker','+');
 % hold on;
 % semilogy(SNR,BER_PE(:,4),'Color','red','LineStyle','-.','Marker','+');
-% hold on;
-% semilogy(SNR,BER_LPE(:,1),'Color','black','LineStyle','-','Marker','+');
-% hold on;
-% semilogy(SNR,BER_LPE(:,2),'Color','black','LineStyle','--','Marker','+');
-% hold on;
-% semilogy(SNR,BER_LPE(:,3),'Color','black','LineStyle',':','Marker','+');
-% hold on;
-% semilogy(SNR,BER_LPE(:,4),'Color','black','LineStyle','-.','Marker','+');
 % xlabel('SNR');
 % ylabel('BER');
-% legend('L=1 PEdetect','L=2 PEdetect','L=3 PEdetect','L=4 PEdetect','L=1 LPEdetect','L=2 LPEdetect','L=3 LPEdetect','L=4 LPEdetect');
+% legend('MMSEdetect','L=1 LPEdetect','L=2 LPEdetect','L=3 LPEdetect','L=4 LPEdetect','L=1 PEdetect','L=2 PEdetect','L=3 PEdetect','L=4 PEdetect');

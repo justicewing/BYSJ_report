@@ -66,19 +66,19 @@
 
 \chapter{绪论}
 \section{研究背景}
-由于智能设备，移动设备广泛使用以及实现M2M通信的目标，全球移动通信网络所需要传输的数据量猛增。并且目前的设计受制于通信频谱的不足。为了解决通信的数据量猛增以及低损的频谱波段的不足的问题，所以考虑使用大规模多输入多输出传输技术（LS-MIMO）。并且第五代通信系统也致力于研究大规模MIMO的技术，所以5G相关的基础技术很多也是和大规模MIMO相关的。
+由于智能设备，移动设备广泛使用以及实现M2M通信的目标，全球移动通信网络所需要传输的数据量猛增。并且目前的设计受制于通信频谱的不足。为了解决通信的数据量猛增以及低损的频谱波段的不足的问题，所以考虑使用大规模多输入多输出传输技术(LS-MIMO large-scale Multiple Input Multiple output）。并且第五代通信系统也致力于研究大规模MIMO的技术，所以5G相关的基础技术很多也是和大规模MIMO相关的。
 
 并且目前的毫米波发展导致传输相同的距离需要更高的功率或者比3G/4G更多的基站，此时我们也需要大规模MIMO的发展来建立适合小蜂窝的网络结构。
 
-大规模MIMO检测是大规模MIMO技术的一部分，并且是基础功能。大规模MIMO检测目前主要使用的是最小均方误差估计（MMSE检测）技术，其很大的问题是MMSE检测的复杂度。一般MMSE对于大规模MIMO系统复杂度是相当大的，计算复杂度过大带来的问题是对于硬件的计算能力和计算时延有一定的要求。
+大规模MIMO检测是大规模MIMO技术的一部分，并且是基础功能。大规模MIMO检测目前主要使用的是最小均方误差估计(MMSE检测)技术，其很大的问题是MMSE检测的复杂度。一般MMSE对于大规模MIMO系统复杂度是相当大的，计算复杂度过大带来的问题是对于硬件的计算能力和计算时延有一定的要求。
 选题的研究方向主要就是研究低复杂度的检测算法，并且通过建立大规模MIMO空间信道模型验证其正确性。
 
 大规模MIMO系统影响接收信号强度主要的原因是多径传输，多普勒影响，空间特性的影响。多径的影响主要是发送端和接收端之间的有许多不同的传输路径，多普勒影响主要是移动的发送端或者接收端带来的频率偏移，大规模MIMO天线带来的波束指向性会带了空间特性。而与传统的MIMO不同的是大规模MIMO有一些特别的性质，包括更有利的发射状态，发射角特性，球形波阵面假设和空间不稳定特征。目前的大规模MIMO信道测量方式主要是利用宽带高同步率的收发机，进行大量的数据传输得到信道参数。并且针对不同情况进行不同的天线设置。目前的信道测试基本上以6GHz以下的频带进行测试，从而验证了大规模MIMO的特别性质。而信道建模的主要分为数据模型和确定性模型。数据模型主要分为基于相关的随机模型和基于几何的随机模型，对于大规模MIMO基于几何的随机模型要更适合一些。而未来大规模MIMO信道建模的研究方向要考虑之前提到的大规模MIMO相对于传统MIMO的特性，并且需要结合第五代移动通信采用的核心技术。
 
 \section{大规模MIMO检测与估计}
-在过去五十年对于MIMO系统的检测估计做过很多研究。大规模MIMO的主要影响传输效果的原因是共通道干扰（CCI），而共通道干扰在MIMO中主要体现在符号间干扰（ISI），通道间干扰（ICI），天线间干扰（IAI），多用户干扰（MUI），多接入干扰（MAI），多流干扰（MSI）等等。而需要大规模MIMO检测的主要原因是输入信道不是相互正交，输出就会有相互干扰的情况。而应用模型主要有三种，单用户多天线MIMO的模型（singer-user SDM-MIMO），多用户用户单天线的MIMO模型，多用户多天线的MIMO模型。同时目前考虑了多种不同的大规模MIMO系统模型，线性无记忆MIMO系统，离散保留记忆MIMO系统，实数MIMO系统，复数MIMO系统。前面两种模型都包含有时域和频域，后面两种系统讨论的主要是系统实现的优劣。实数MIMO系统具有实数阵规模小，操作自由，复数MIMO系统具有适应多种调制方式，硬件实现简单以及在某些情况下信道容量会比实数MIMO系统要大。
+在过去五十年对于MIMO系统的检测估计做过很多研究。大规模MIMO的主要影响传输效果的原因是共通道干扰(CCI），而共通道干扰在MIMO中主要体现在符号间干扰(ISI），通道间干扰(ICI），天线间干扰(IAI），多用户干扰(MUI），多接入干扰(MAI），多流干扰(MSI)等等。而需要大规模MIMO检测的主要原因是输入信道不是相互正交，输出就会有相互干扰的情况。而应用模型主要有三种，单用户多天线MIMO的模型(singer-user SDM-MIMO），多用户用户单天线的MIMO模型，多用户多天线的MIMO模型。同时目前考虑了多种不同的大规模MIMO系统模型，线性无记忆MIMO系统，离散保留记忆MIMO系统，实数MIMO系统，复数MIMO系统。前面两种模型都包含有时域和频域，后面两种系统讨论的主要是系统实现的优劣。实数MIMO系统具有实数阵规模小，操作自由，复数MIMO系统具有适应多种调制方式，硬件实现简单以及在某些情况下信道容量会比实数MIMO系统要大。
 
-目前用于大规模MIMO检测的算法有很多不同种，大部分都属于最小方差估计，其中包括最适MIMO检测，经典的线性MIMO检测，基于减少干扰的MIMO检测，基于树状搜索的MIMO检测，降维MIMO检测（LR），概率数据互联MIMO检测（PDA），基于半点松弛编程的MIMO检测。最适MIMO检测最先指的是ML接收机，之后几年的研究讨论了ML，MAP等估计算法的最优标准最终线性MMSE接收机确定为最优的接收机，从而也引出了关于MMSE的计算复杂度的问题。线性MIMO接收机又分为匹配滤波接收机，零干扰接收机，MMSE接收机，其他线性接收机。加性干扰去除MIMO接收机是一个非线性的接收机，效果会比线性MIMO接收机要好，而且根据不同的性质可以有很多种变种形式，性能较好的有successive interference cancellation（SIC）接收机，parallel interference cancellation（PIC）接收机，multistage interference cancellation（MIC）接收机，decision-feedback接收机（DFD）。这种接收机主要问题是如果接收信号较大，会出现错误传输的问题，更适合只需要较小信号的用户。基于树状搜索的MIMO接收机是目前研究多天线接收机的流行方向，其主要优势在于在降低接收机计算复杂度的时候可以逼近甚至达到ML接收机的效果。Lattice-Reduction（LR）接收机是基于经典的几何学和群论推导出的lattice定义的MIMO接收机。其一般被用来和其他MIMO算法结合，通过优化MIMO接收机的信道矩阵优化MIMO检测算法。概率数据互联MIMO检测（PDA）MIMO检测，PDA滤波技术是被Bar-Shalom在1975为了研究在干扰严重的环境下测量结果无法定标和结果错误时追踪和监控目标问题提出来的。此方法本来主要是用来研究雷达追踪目标的功能来实现的。SDM接收机同样是为了对抗复杂环境以及降低复杂度并且取得很好的效果而提出的MIMO接收机。
+目前用于大规模MIMO检测的算法有很多不同种，大部分都属于最小方差估计，其中包括最适MIMO检测，经典的线性MIMO检测，基于减少干扰的MIMO检测，基于树状搜索的MIMO检测，降维MIMO检测(LR），概率数据互联MIMO检测(PDA），基于半点松弛编程的MIMO检测。最适MIMO检测最先指的是ML接收机，之后几年的研究讨论了ML，MAP等估计算法的最优标准最终线性MMSE接收机确定为最优的接收机，从而也引出了关于MMSE的计算复杂度的问题。线性MIMO接收机又分为匹配滤波接收机，零干扰接收机，MMSE接收机，其他线性接收机。加性干扰去除MIMO接收机是一个非线性的接收机，效果会比线性MIMO接收机要好，而且根据不同的性质可以有很多种变种形式，性能较好的有successive interference cancellation(SIC)接收机，parallel interference cancellation(PIC)接收机，multistage interference cancellation(MIC)接收机，decision-feedback接收机(DFD）。这种接收机主要问题是如果接收信号较大，会出现错误传输的问题，更适合只需要较小信号的用户。基于树状搜索的MIMO接收机是目前研究多天线接收机的流行方向，其主要优势在于在降低接收机计算复杂度的时候可以逼近甚至达到ML接收机的效果。Lattice-Reduction(LR)接收机是基于经典的几何学和群论推导出的lattice定义的MIMO接收机。其一般被用来和其他MIMO算法结合，通过优化MIMO接收机的信道矩阵优化MIMO检测算法。概率数据互联MIMO检测(PDA)MIMO检测，PDA滤波技术是被Bar-Shalom在1975为了研究在干扰严重的环境下测量结果无法定标和结果错误时追踪和监控目标问题提出来的。此方法本来主要是用来研究雷达追踪目标的功能来实现的。SDM接收机同样是为了对抗复杂环境以及降低复杂度并且取得很好的效果而提出的MIMO接收机。
 
 大规模MIMO检测继Marzetta的开创性工作之后，LS-MIMO系统已经成为一个热门的研究课题。然而，在检测方面，一些早期的研究从大系统分析或渐进性能分析的角度探讨了这个问题。LS-MIMO系统的概念可以看作是无线通信和信号处理领域的一种范式转变。在这种大维背景下，MIMO检测问题变得更加具有挑战性和重要性。
 在相关文献调查中，在线性信道上低复杂度的影响缓解可以通过使用随机矩阵理论的收敛结果可以解决优化问题。可以使用自由概率理论对MMSE检测器进行优化，使计算复杂度降低。可以用预先算好的信道矩阵和多项式等式对上行接收机进行优化，并且可以获得相近的检测效果。可以利用牛顿迭代法对大规模MIMO接收机进行优化。同时可以利用基于坐标下降的算法对上行大规模MIMO接收机进行优化。
@@ -529,7 +529,7 @@ n_r - N_R \quad \frac{n_r-1}{N_R} \geq \frac{1}{2}
 \section{本章小结}
 本章主要研究了MIMO信道物理模型，统计模型和波束域信道模型。其中物理模型主要是研究了影响信道情况的各种参数，并为后续各种模型的基础。统计信道模型主要研究了联合相关模型，作为实际相关仿真模型的基础模型。波束域信道模型主要体现的是大规模MIMO信道的特性和研究方式，通过波束域信道模型的特征，提供了减少计算复杂度切入点。
 
-\chapter{基于MMSE接收机的复杂度优化}
+\chapter{基于MMSE接收机复杂度优化}
 \section{引言}
 信号在通过上述复杂信道之后，信号会发生改变，此时需要利用一些判决方法将接收信号恢复为发送信号。但是因为通过信道后信号同样会收到随机干扰，所以完全恢复为初始信号某种意义上是不存在的，但是通过一些方法，可以尽可能地或者说最大概率的接近发送信号。这些根据接收信号恢复发送信号的方法在通信系统中称为检测，目前针对MIMO系统最佳的检测方法为MMSE估计。但是MMSE估计的计算复杂度随着天线的增多，信道矩阵维度的扩大，会变得非常高，实际系统实现会非常占用资源。而其主要复杂度主要来自于矩阵的求逆运算，而通过QR分解，可以将矩阵求逆运算化简为QR分解。QR分解的复杂度会比原始MMSE的复杂度大大降低。并且本文在信道模型重点描述了波束域信道，此时可以注意到波束域信道的信道是稀疏的，同样一定程度上减少了计算复杂度，本章的后续部分还会讨论空间域的MMSE以及复杂度优化
 \section{系统模型}
@@ -978,9 +978,37 @@ x_{11} & \ldots & x_{1i} & \ldots & x_{1j} & \ldots & x_{1k} \\
 	\centering \includegraphics[width=0.45\textwidth]{img/3_9.jpg} \caption{QR分解MMSE}
 \end{figure}
 \section{低复杂度的MMSE接收机}
-上部分提到了波束域信道相关阵是稀疏的，并且根据信道模型部分提到的基站侧相关阵和能量耦合矩阵的分布，在基站侧的某一些天线上得到了某个用户的发送信号的大部分能量。而通过将信道矩阵处理为波束域信道矩阵，根据波束域信道的性质，将主要计算能量较高那部分的信号。同样利用MMSE判断准则对接收信号进行判断，不同的是这里使用的信道是根据波束域性质推导的波束域信道。其信道矩阵是为稀疏阵。
+本文第二章论证的波束域信道矩阵有这样的性质，波束域信道矩阵的不同列代表着不同的接收角，又称为波束。而通过第二章基站侧信道矩阵得到的相关阵和能量耦合矩阵，可以得到对于单个用户来说，其所使用的波束数量是有限且比较少的，所以使用波束域信道矩阵时可以发现波束域信道矩阵是稀疏的。而稀疏的信道矩阵在进行计算时可以利用很多种方法进行优化复杂度。这里本文考虑的是严格的数学推导得到QR分解，对于稀疏阵的计算可以通过更多方式进行化简。
+根据第二章，本文有
+\begin{equation}\label{key}
+\mathbf{H}_{F} = \mathbf{F} \mathbf{H}
+\end{equation}
+可以得到波束域信道，假定信号传播在波束域，那么信号通过的应是波束域信道，但是真实情况是信号传输在物理信道中，所以需要在判决时的接收信号前乘上DFT矩阵使其同样处于波束域。即
+\begin{equation}\label{key}
+\mathbf{y}_F =\mathbf{F} \mathbf{y}
+\end{equation}
+从而得到波束域信道下MMSE矩阵
+\begin{equation}\label{key}
+\hat{\mathbf{x}}_{MMSE} = (\mathbf{H}_F\mathbf{H}_F^H + \sigma^2 \mathbf{I})^{-1}\mathbf{H}_F^H \mathbf{y}_F
+\end{equation}
+其中$\mathbf{H}_F$代表$[\mathbf{F}\mathbf{H}_1,\mathbf{F}\mathbf{H}_2,...,\mathbf{F}\mathbf{H}_K]$，令$\mathbf{x}$代表$[\mathbf{x}_1^T,\mathbf{x}_2^T,...,\mathbf{x}_K^T]$
+通过第二章的理论推导，可以知道严格稀疏是建立在基站天线数量趋近于$\infty$，但是本文所使用的模型基站天线存在数量限制，所以需要一些近似处理，将信道矩阵处理为严格稀疏，从而适应低复杂度的算法，此处可能会出现一些误差，本文主要分析利用这样的近似处理是否会影响检测结果。
+由图3.5，可知原始信道矩阵并不是稀疏的。所以本文提出波束域的降低复杂度方法在原始信道矩阵并不起作用，同时经过式(3.60)的处理后，可以发现波束域信道矩阵此时是有稀疏矩阵的趋势，但是由于天线数的限制，所以本文做了近似处理，即设置门限值，将低于门限值的波束域信道矩阵
+\begin{equation}\label{key}
+if\quad [\mathbf{H}_F]_{ij} <\lambda \quad then \quad [\mathbf{H}_F]_{ij}=0;
+\end{equation}
+本文采用的门限值为0.5，通过不同的门限值选择可能会影响矩阵的稀疏程度，同样的也会影响准确度和计算复杂度。经过近似处理后的信道如图3.7，可以看出严格稀疏波束域信道与原始信道区别并不大。
+\begin{figure}[htbp!]
+	\centering \includegraphics[width=0.45\textwidth]{img/3_1.eps} \caption{原始信道矩阵}
+\end{figure}
+\begin{figure}[htbp!]
+	\centering \includegraphics[width=0.45\textwidth]{img/3_2.eps} \caption{原始波束域信道矩阵}
+\end{figure}
+\begin{figure}[htbp!]
+	\centering \includegraphics[width=0.45\textwidth]{img/3_3.eps} \caption{近似处理波束域信道矩阵}
+\end{figure}
 
-
+\section{本章小结}
 
 \chapter{基于PE接收机及复杂度优化}
 \section{引言}
@@ -1061,16 +1089,16 @@ PE接收机可以通过约等式降低复杂度
 可以发现PE接收机在阶数比较小的情况下，仍然可以很好的处理不同用户之间带来的干扰。当然从波束域信道上，如果可以很好的分配用户的波束域资源的话，那么针对用户间干扰的所需要的PE接收机的阶数将会进一步的降低，相对应的该系统的带宽可能会收到影响。当用户多天线单流的情况下，PE接收机的性能更加接近MMSE接收机。从图4.4来看PE接收机在处理用户多天线多流的情况，根据用户天线数还是有一些区别，随着用户天线数的增多，用户天线之间的互相干扰同样会增大，实际情况中特别是当用户数天线大于2，用户天线数间隔会超出波长时，处于波长整数倍情况下会接受到更多来自另外天线的干扰。从仿真结果来看，当双天线时，阶数为3的PE的接收机尚能逼近MMSE性能，而在用户四天线的情况下，阶数为3的PE接收机已经和MMSE的结果产生了差距，需要更高的阶数来应对用户多天线的情况。PE接收机在降低复杂度情况下能保持很好的接收检测性能。
 
 \begin{figure}[htbp!]
-	\centering \includegraphics[width=0.55\textwidth]{img/4_1.eps} \caption{用户单天线PE接收机与MMSE接收机比较}
+	\centering \includegraphics[width=0.55\textwidth]{img/4_1.eps} \caption{4用户单天线PE接收机与MMSE接收机比较}
 \end{figure}
 \begin{figure}[htbp!]
-	\centering \includegraphics[width=0.55\textwidth]{img/4_2.eps} \caption{用户双天线单流PE接收机与MMSE接收机比较}
+	\centering \includegraphics[width=0.55\textwidth]{img/4_2.eps} \caption{4用户2天线单流PE接收机与MMSE接收机比较}
 \end{figure}
 \begin{figure}[htbp!]
-	\centering \includegraphics[width=0.55\textwidth]{img/4_3.eps} \caption{用户双天线多流PE接收机与MMSE接收机比较}
+	\centering \includegraphics[width=0.55\textwidth]{img/4_3.eps} \caption{4用户2天线多流PE接收机与MMSE接收机比较}
 \end{figure}
 \begin{figure}[htbp!]
-	\centering \includegraphics[width=0.55\textwidth]{img/4_4.eps} \caption{用户四天线多流PE接收机与MMSE接收机比较}
+	\centering \includegraphics[width=0.55\textwidth]{img/4_4.eps} \caption{4用户4天线多流PE接收机与MMSE接收机比较}
 \end{figure}
 \section{算子自由度原理}
 上面为使用MMSE准则的多项式接收机，可以注意到当信道矩阵的维度较大的时候，利用经验矩计算每个信道同样会有较大的复杂度。但是在信道慢变的情况下，数据CSI变化得非常的慢，可以利用确定性等同$\overline{\mu}_k$代替$\mu_k$，进一步降低复杂度。此时，PE接收机只用计算$\sum_{i=1}^{L} b_{PE,i}^{(L)}(\mathbf{H}^H\mathbf{H})^{i-1}$ 即可。计算复杂度只有$\Theta(M^2)$。这里提出了利用算子自由度从而得到$\overline{\mu}_k$的方法。考虑本文是建立在大规模MIMO背景下的，所以本章开头提到的基站侧接收天线数量$N_R$可以看作是数量相当大。
@@ -1285,7 +1313,7 @@ $\mathcal{B}_N$是$\mathbf{B}_N$的确定性等同。并且有这样$\overline{\
 		\bottomrule
 		用户数天线	& 1 \quad or\quad2 or\quad4\\
 		\bottomrule
-		用户数	& 4 \\
+		用户数	& 4 \quad or\quad 16 \\
 		\bottomrule
 		天线间距 & 0.5$\lambda$ \\
 		\bottomrule
@@ -1295,19 +1323,45 @@ $\mathcal{B}_N$是$\mathbf{B}_N$的确定性等同。并且有这样$\overline{\
 		\bottomrule
 	\end{tabular}
 \end{table}
-首先，为了验证上述推导原理，本文先将不同阶数的PE接收机和低复杂度的PE接收机作对比，通过图。。。的说明，可以发现在不同天线情况都有阶数越低的情况下，低复杂度的PE接收机与普通PE接收机的性能要更加接近。而在用户单天线时，低复杂度的PE接收机与普通的PE接收机最为接近。
-上述给出的图形是用户单天线的情况，可以看出在单天线条件下，L=3时，普通PE接收机和低复杂度PE接收机性能和MMSE接收机的性能是非常接近的。
-从图4.5可以看出当阶数不同时，在单天线条件下，低复杂度PE接收机已经可以逼近MMSE接收机的性能。而在L<4的时候，低复杂度PE接收机的性能与一般的MMSE的接收机性能上还是有一些差距的。
-上文提到PE接收机的性能随着阶数的增高会随之提升，下面主要讨论不同天线情况下低复杂度PE接收机的性能。
+
+首先，为了验证上述推导原理，本文先将不同阶数的PE接收机和低复杂度的PE接收机作对比，通过图4.5的说明，可以发现在不同天线情况都有阶数越低的情况下，低复杂度的PE接收机与普通PE接收机的性能要更加接近。在用户单天线时，低复杂度的PE接收机与普通的PE接收机最为接近。同时低复杂度PE接收机与普通PE接收机在单天线或者天线较少，或者单流的情况下有相同的性能，所以LPE接收机同样具有阶数越高，检测准确度越高的性质。虽然随着天线数的增多，相同阶数下其相较普通的PE接收机性能有所下降，但低复杂度PE接收机所需要的计算复杂度将减少许多，利用这部分计算去提高低复杂度PE接收机的阶数，同样可以获得更好的性能。由此，降低计算复杂度的方法可以认为保持了计算准确度。下面本文以MMSE与低复杂度PE接收机的表现作对比分析。
 \begin{figure}[htbp!]
-	\centering \includegraphics[width=0.55\textwidth]{img/4_5.eps} \caption{用户单天线LPE接收机与MMSE接收机比较}
+	\centering \includegraphics[width=0.45\textwidth]{img/4_5.eps} \caption{4用户单天线LPE接收机与PE接收机比较}
+\end{figure}
+\begin{figure}[htbp!]
+	\centering \includegraphics[width=0.55\textwidth]{img/4_6.eps} \caption{4用户2天线单流LPE接收机与PE接收机比较}
 \end{figure}
 
-\begin{figure}[htbp!]
-	\centering \includegraphics[width=0.55\textwidth]{img/4_6.eps} \caption{用户单天线LPE接收机与PE接收机比较}
-\end{figure}
+从图4.7,4.9来看，在用户天线数为2，用户数为4时，PE接收机在阶数为4的情况下低复杂度PE接收机能够逼近MMSE接收机的性能，而从图4.10来看在面对用户发送天线数量更多的情况，阶数更高的低复杂度PE接收机会有更好的表现。从图4.8可以看出，可以发现PE接收机与低复杂度PE接收机在阶数比较小的情况下，仍然可以很好的处理不同用户之间带来的干扰。同样的如果考虑的是当用户多天线单流的情况下，低复杂度PE接收机的性能更加接近MMSE接收机。但是低复杂度的PE接收机很难保证多天线多流时的性能。从仿真结果来看，当双天线时，阶数为3的PE的接收机尚能逼近MMSE性能，而低复杂度的PE接收机只能接近阶数为2的PE接收机，而在用户四天线的情况下，阶数为3的PE接收机已经和MMSE的结果产生了差距，需要更高的阶数来应对用户多天线的情况。而低复杂度的PE接收机已经不能很好的接近普通PE接收机，需要更高的阶数去获得更好的性能，由此也可以得到结论，PE接收机与低复杂度PE接收机在处理用户之间的干扰能力性能仍和MMSE持平，但是处理用户天线间干扰尚有优化判断准则的空间，或者需要更高阶数的PE接收机。
 
-\chapter{结论}
+\begin{figure}[htbp!]
+	\centering \includegraphics[width=0.55\textwidth]{img/4_8.eps} \caption{4用户单天线LPE接收机与MMSE接收机比较}
+\end{figure}
+\begin{figure}[htbp!]
+	\centering \includegraphics[width=0.55\textwidth]{img/4_12.eps} \caption{16用户单天线LPE接收机与MMSE接收机比较}
+\end{figure}
+\begin{figure}[htbp!]
+	\centering \includegraphics[width=0.55\textwidth]{img/4_9.eps} \caption{4用户2天线单流LPE接收机与MMSE接收机比较}
+\end{figure}
+\begin{figure}[htbp!]
+	\centering \includegraphics[width=0.55\textwidth]{img/4_10.eps} \caption{4用户2天线多流LPE接收机与MMSE接收机比较}
+\end{figure}
+\begin{figure}[htbp!]
+	\centering \includegraphics[width=0.55\textwidth]{img/4_11.eps} \caption{4用户4天线多流LPE接收机与MMSE接收机比较}
+\end{figure}
+\section{本章小结}
+本章节主要介绍了利用Cayley hamilton理论推导的PE接收机，并研究将其与MMSE检测的对比复杂度和准确度。本文发现PE接收机在降低复杂度的同时能够很好的在阶数较低的情况保持准确度，特别是处理用户间干扰。根据PE接收机系数可以利用算子自由度理论进行确定性等同替换，从而进一步降低PE接收机复杂度，得到低复杂度的PE接收机。
+
+\chapter{总结与展望}
+\section{全文总结}
+\section{后续工作}
+
+
+
+
+
+
+
 
 \end{Main} % 结束正文
 

@@ -7,9 +7,9 @@ clc;
 
 Scenario = 'suburban_macro';
 Nu = 4;        %   小区中用户数
-Nt = 1;         %   发送天线
+Nt = 2;         %   发送天线
 Nr = 128;        %   接收天线
-NoSamples = 1000;
+NoSamples = 10000;
 NoFreq = 256;
 NoPath = 6;
 Ts = 1/(16*3.84e6);
@@ -51,11 +51,11 @@ for n_link=1:Nu
         end
     end
 end
-% figure(1)
-% mesh(abs(R(:,:,1)))
-% xlabel('接收波束')
-% ylabel('接收波束')
-% zlabel('能量')
+figure(1)
+mesh(abs(R(:,:,1)))
+xlabel('接收波束')
+ylabel('接收波束')
+zlabel('能量')
 % figure(2)
 % mesh(abs(R(:,:,2)))
 % xlabel('接收波束')

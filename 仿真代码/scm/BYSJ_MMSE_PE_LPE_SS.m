@@ -134,11 +134,11 @@ for k = 1:7
             for j= 1:m-1
                 sum_S = zeros(Nr,Nr);
                 for n_link = 1:Nu
-                    sum_S = sum_S + corrcoef(Ut'*H_k(:,:,1,1,n_link)'*S(:,:,j,n_link)*H_k(:,:,1,1,n_link)*Ut);
+                    sum_S = sum_S + (H_k(:,:,1,1,n_link)'*S(:,:,j,n_link)*H_k(:,:,1,1,n_link));
                     if(Nt>1)
-                        S(:,:,m,n_link)= S(:,:,m,n_link) + corrcoef(H_k(:,:,1,1,n_link)*Ut*E_B(:,:,j)*Ut'*H_k(:,:,1,1,n_link)')*S(:,:,m-j,n_link);
+                        S(:,:,m,n_link)= S(:,:,m,n_link) + (H_k(:,:,1,1,n_link)*E_B(:,:,j)*H_k(:,:,1,1,n_link)')*S(:,:,m-j,n_link);
                     else
-                        S(:,:,m,n_link)= S(:,:,m,n_link) + (H_k(:,:,1,1,n_link)*Ut*E_B(:,:,j)*Ut'*H_k(:,:,1,1,n_link)')*S(:,:,m-j,n_link);
+                        S(:,:,m,n_link)= S(:,:,m,n_link) + (H_k(:,:,1,1,n_link)*E_B(:,:,j)*H_k(:,:,1,1,n_link)')*S(:,:,m-j,n_link);
                     end
                 end
                 E_B(:,:,m) = E_B(:,:,m) + sum_S*E_B(:,:,m-j);
@@ -213,11 +213,11 @@ end
 
 semilogy(SNR,BER_MMSE,'Color','blue','LineStyle','-','Marker','o');
 hold on;
-semilogy(SNR,BER_LPE(:,1),'Color','red','LineStyle','-','Marker','+');
+semilogy(SNR,BER_LPE(:,1),'Color','black','LineStyle','-','Marker','+');
 hold on;
-semilogy(SNR,BER_LPE(:,2),'Color','red','LineStyle','--','Marker','+');
+semilogy(SNR,BER_LPE(:,2),'Color','black','LineStyle','--','Marker','+');
 hold on;
-semilogy(SNR,BER_LPE(:,3),'Color','red','LineStyle',':','Marker','+');
+semilogy(SNR,BER_LPE(:,3),'Color','black','LineStyle',':','Marker','+');
 xlabel('SNR');
 ylabel('BER');
 legend('MMSEdetect','L=1 LPEdetect','L=2 LPEdetect','L=3 LPEdetect');
