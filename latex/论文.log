@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (MiKTeX 2.9.6840 64-bit) (preloaded format=xelatex 2018.11.8)  16 MAY 2019 21:35
+This is XeTeX, Version 3.14159265-2.6-0.99999 (MiKTeX 2.9.6840 64-bit) (preloaded format=xelatex 2018.11.8)  17 MAY 2019 17:01
 entering extended mode
 **./论文.tex
 (论文.tex
@@ -1634,6 +1634,15 @@ LaTeX Warning: Label `key' multiply defined.
 LaTeX Warning: Label `key' multiply defined.
 
 
+LaTeX Warning: Label `tab:test' multiply defined.
+
+
+LaTeX Warning: Label `key' multiply defined.
+
+
+LaTeX Warning: Label `key' multiply defined.
+
+
 LaTeX Warning: Label `key' multiply defined.
 
 
@@ -2109,7 +2118,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 4.
 Package tocbasic Info: Using my definition of `\numberline' on input line 5.
-Package tocbasic Info: Using my definition of `\numberline' on input line 7.
+Package tocbasic Info: Using my definition of `\numberline' on input line 6.
 Package tocbasic Info: Using my definition of `\numberline' on input line 8.
 Package tocbasic Info: Using my definition of `\numberline' on input line 9.
 Package tocbasic Info: Using my definition of `\numberline' on input line 10.
@@ -2118,19 +2127,20 @@ Package tocbasic Info: Using my definition of `\numberline' on input line 12.
 Package tocbasic Info: Using my definition of `\numberline' on input line 13.
 Package tocbasic Info: Using my definition of `\numberline' on input line 14.
 Package tocbasic Info: Using my definition of `\numberline' on input line 15.
-Package tocbasic Info: Using my definition of `\numberline' on input line 17.
+Package tocbasic Info: Using my definition of `\numberline' on input line 16.
 Package tocbasic Info: Using my definition of `\numberline' on input line 18.
 Package tocbasic Info: Using my definition of `\numberline' on input line 19.
 Package tocbasic Info: Using my definition of `\numberline' on input line 20.
 Package tocbasic Info: Using my definition of `\numberline' on input line 21.
 Package tocbasic Info: Using my definition of `\numberline' on input line 22.
-Package tocbasic Info: Using my definition of `\numberline' on input line 24.
+Package tocbasic Info: Using my definition of `\numberline' on input line 23.
 Package tocbasic Info: Using my definition of `\numberline' on input line 25.
 Package tocbasic Info: Using my definition of `\numberline' on input line 26.
 Package tocbasic Info: Using my definition of `\numberline' on input line 27.
 Package tocbasic Info: Using my definition of `\numberline' on input line 28.
-Package tocbasic Info: Using my definition of `\numberline' on input line 30.
+Package tocbasic Info: Using my definition of `\numberline' on input line 29.
 Package tocbasic Info: Using my definition of `\numberline' on input line 31.
+Package tocbasic Info: Using my definition of `\numberline' on input line 32.
 )
 \tf@toc=\write5
 \openout5 = `论文.toc'.
@@ -2175,9 +2185,9 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 ]
 [4] [5] [6]
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <8> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 227.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 229.
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <6> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 227.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 229.
  [7] [8] [9] [10] [11]
 File: img/2_2.jpg Graphic file (type bmp)
 <img/2_2.jpg>
@@ -2207,7 +2217,7 @@ File: img/3_8.jpg Graphic file (type bmp)
 Underfull \vbox (badness 1253) has occurred while \output is active []
 
  [20]
-Underfull \hbox (badness 10000) in paragraph at lines 781--783
+Underfull \hbox (badness 10000) in paragraph at lines 783--785
 
  []
 
@@ -2215,7 +2225,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 781--783
 Underfull \vbox (badness 1365) has occurred while \output is active []
 
  [22]
-Underfull \hbox (badness 10000) in paragraph at lines 883--885
+Underfull \hbox (badness 10000) in paragraph at lines 885--887
 
  []
 
@@ -2229,11 +2239,20 @@ File: img/3_2.eps Graphic file (type eps)
 <img/3_2.eps>
 File: img/3_3.eps Graphic file (type eps)
 <img/3_3.eps>
- [26] [27]
+ [26]
+File: img/3_4.eps Graphic file (type eps)
+<img/3_4.eps>
+File: img/3_5.eps Graphic file (type eps)
+<img/3_5.eps>
+File: img/3_6.eps Graphic file (type eps)
+<img/3_6.eps>
+File: img/3_7.eps Graphic file (type eps)
+<img/3_7.eps>
+ [27] [28] [29]
 chapter 4.
-[28
+[30
 
-] [29]
+] [31]
 File: img/4_1.eps Graphic file (type eps)
 <img/4_1.eps>
 File: img/4_2.eps Graphic file (type eps)
@@ -2242,23 +2261,23 @@ File: img/4_3.eps Graphic file (type eps)
 <img/4_3.eps>
 File: img/4_4.eps Graphic file (type eps)
 <img/4_4.eps>
- [30]
+ [32]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [31]
-[32]
+ [33]
+[34]
 File: img/3_6.jpg Graphic file (type bmp)
 <img/3_6.jpg>
- [33]
+ [35]
 Underfull \vbox (badness 1924) has occurred while \output is active []
 
- [34]
-[35]
+ [36]
+[37]
 File: img/4_5.eps Graphic file (type eps)
 <img/4_5.eps>
 File: img/4_6.eps Graphic file (type eps)
 <img/4_6.eps>
- [36]
+ [38]
 File: img/4_8.eps Graphic file (type eps)
 <img/4_8.eps>
 File: img/4_12.eps Graphic file (type eps)
@@ -2269,17 +2288,17 @@ File: img/4_10.eps Graphic file (type eps)
 <img/4_10.eps>
 File: img/4_11.eps Graphic file (type eps)
 <img/4_11.eps>
- [37] [38] [39]
+ [39] [40] [41]
 chapter 5.
-[40
+[42
 
 ]
 No file 论文.ind.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1387.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1387.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1443.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1443.
 (论文.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1387.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1387.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1443.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1443.
 
 Package rerunfilecheck Info: File `论文.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E.
@@ -2287,15 +2306,15 @@ Package rerunfilecheck Info: File `论文.out' has not changed.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1387.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1443.
  ) 
 Here is how much of TeX's memory you used:
- 31445 strings out of 427792
- 599110 string characters out of 3151724
+ 31457 strings out of 427792
+ 599281 string characters out of 3151724
  829188 words of memory out of 3000000
- 35005 multiletter control sequences out of 15000+200000
+ 35014 multiletter control sequences out of 15000+200000
  649278 words of font info for 213 fonts, out of 3000000 for 9000
  1328 hyphenation exceptions out of 8191
- 62i,18n,83p,9120b,872s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 62i,18n,83p,9120b,880s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on 论文.pdf (45 pages).
+Output written on 论文.pdf (47 pages).

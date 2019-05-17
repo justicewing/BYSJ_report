@@ -1,10 +1,9 @@
 run('BYSJ_channelmodel.m');
-%%
 % 信号生成
-sample = rand(NoSamples,Nu);
+sample = rand(NoSamples,Nu,Nt);
 sample = round(sample);
 signal_t = sample;
-signal_t(signal_t(:,:)==0) = -1;
+signal_t(signal_t(:,:,:)==0) = -1;
 % signal_t = ones(NoSamples,Nu);
 % for i = 1:NoSamples
 %     for j = 1:Nu
@@ -13,7 +12,6 @@ signal_t(signal_t(:,:)==0) = -1;
 %         end
 %     end
 % end
-
 %%
 % 接收信号
 signal_c = zeros(Nr,NoSamples);
@@ -22,14 +20,14 @@ for n_link=1:Nu
         for n_sample=1:NoSamples
             H_i = H(:,:,n_path,n_sample,n_link);
             H_i = H_i(:,:);
-            signal_c(:,n_sample) = signal_c(:,n_sample) + H_i'* repmat(signal_t(n_sample,n_link),Nt,1);
+            signal_c(:,n_sample) = signal_c(:,n_sample) + H_i'* squeeze(signal_t(n_sample,n_link,:));
         end
     end
 end
     
 SNR =zeros(7,1);
-BER_BDMMSE =zeros(7,1);
 BER_MMSE =zeros(7,1);
+BER_BDMMSE =zeros(7,1);
 for k = 1:7
     SNR(k) = -20+k*2;
     sigma2 = 10^(SNR(k)/10);
@@ -50,27 +48,29 @@ for k = 1:7
     end
     
     
-    %单流判决
-     mean_MMSE = zeros(NoSamples,Nu);
+    %多流判决
+     rece_MMSE = zeros(NoSamples,Nu,Nt);
      for n_link = 1:Nu
          for n_sample = 1:NoSamples
               for n_trans = 1:Nt
-                  mean_MMSE(n_sample,n_link) = mean_MMSE(n_sample,n_link) + signal_MMSE(n_sample,Nt*(n_link-1)+n_trans)/Nt;
+                  rece_MMSE(n_sample,n_link,n_trans) = signal_MMSE(n_sample,Nt*(n_link-1)+n_trans);
               end
           end
       end
-    result_MMSE = ones(NoSamples,Nu);
+    result_MMSE = ones(NoSamples,Nu,Nt);
     for i = 1:NoSamples
         for j = 1:Nu
-            d_1 = abs(mean_MMSE(i,j)-1);
-            d_2 = abs(mean_MMSE(i,j)+1);
-            if(d_1 > d_2)
-                result_MMSE(i,j) = 0;
+            for p = 1:Nt
+                d_1 = abs(rece_MMSE(i,j,p)-1);
+                d_2 = abs(rece_MMSE(i,j,p)+1);
+                if(d_1 > d_2)
+                    result_MMSE(i,j,p) = 0;
+                end
             end
         end
     end
-    errortimes = sum(abs(result_MMSE-sample));
-    BER_MMSE(k) = sum(errortimes)/(Nu*NoSamples);
+    errortimes = sum(abs(result_MMSE-sample),'all');
+    BER_MMSE(k) = sum(errortimes)/(Nu*Nt*NoSamples);
     % BDMMSE检测
 
     signal_BDMMSE = zeros(NoSamples,Nu*Nt);
@@ -88,27 +88,29 @@ for k = 1:7
          
     end
     
-    %单流判决
-     mean_BDMMSE = zeros(NoSamples,Nu);
+    %多流判决
+     rece_BDMMSE = zeros(NoSamples,Nu,Nt);
      for n_link = 1:Nu
          for n_sample = 1:NoSamples
               for n_trans = 1:Nt
-                  mean_BDMMSE(n_sample,n_link) = mean_BDMMSE(n_sample,n_link) + signal_BDMMSE(n_sample,Nt*(n_link-1)+n_trans)/Nt;
+                  rece_BDMMSE(n_sample,n_link,n_trans) = signal_BDMMSE(n_sample,Nt*(n_link-1)+n_trans);
               end
           end
       end
-    result_BDMMSE = ones(NoSamples,Nu);
+    result_BDMMSE = ones(NoSamples,Nu,Nt);
     for i = 1:NoSamples
         for j = 1:Nu
-            d_1 = abs(mean_BDMMSE(i,j)-1);
-            d_2 = abs(mean_BDMMSE(i,j)+1);
-            if(d_1 > d_2)
-                result_BDMMSE(i,j) = 0;
+            for p = 1:Nt
+                d_1 = abs(rece_BDMMSE(i,j,p)-1);
+                d_2 = abs(rece_BDMMSE(i,j,p)+1);
+                if(d_1 > d_2)
+                    result_BDMMSE(i,j,p) = 0;
+                end
             end
         end
     end
-    errortimes = sum(abs(result_BDMMSE-sample));
-    BER_BDMMSE(k) = sum(errortimes)/(Nu*NoSamples);
+    errortimes = sum(abs(result_BDMMSE-sample),'all');
+    BER_BDMMSE(k) = sum(errortimes)/(Nu*Nt*NoSamples);
     
     
 end
