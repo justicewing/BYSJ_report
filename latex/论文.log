@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (MiKTeX 2.9.6840 64-bit) (preloaded format=xelatex 2019.3.30)  18 MAY 2019 23:16
+This is XeTeX, Version 3.14159265-2.6-0.99999 (MiKTeX 2.9.6840 64-bit) (preloaded format=xelatex 2019.3.30)  19 MAY 2019 17:44
 entering extended mode
 **./论文.tex
 (论文.tex
@@ -2090,7 +2090,7 @@ ng=tex-text;"
 
 ] [2
 
-] (论文.toc
+] [3] (论文.toc
 Package tocbasic Info: Using my definition of `\numberline' on input line 4.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10.53937> on input line 4.
@@ -2127,10 +2127,14 @@ Package tocbasic Info: Using my definition of `\numberline' on input line 33.
 \tf@toc=\write5
 \openout5 = `论文.toc'.
 
- [3
+
+Underfull \vbox (badness 3240) has occurred while \output is active []
+
+ [4
 
 
 ]
+[5]
 chapter 1.
 
 Class scrbook Warning: \float@addtolists detected!
@@ -2173,9 +2177,9 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 ]
 [6] [7] [8]
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <8> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 268.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 286.
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <6> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 268.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 286.
  [9] [10] [11] [12] [13]
 File: img/2_2.jpg Graphic file (type bmp)
 <img/2_2.jpg>
@@ -2205,7 +2209,7 @@ File: img/3_8.jpg Graphic file (type bmp)
 Underfull \vbox (badness 1253) has occurred while \output is active []
 
  [22]
-Underfull \hbox (badness 10000) in paragraph at lines 822--824
+Underfull \hbox (badness 10000) in paragraph at lines 840--842
 
  []
 
@@ -2213,7 +2217,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 822--824
 Underfull \vbox (badness 1365) has occurred while \output is active []
 
  [24]
-Underfull \hbox (badness 10000) in paragraph at lines 924--926
+Underfull \hbox (badness 10000) in paragraph at lines 942--944
 
  []
 
@@ -2284,13 +2288,17 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [44
 
 ]
-[45]
+[45] [46
+
+
+
+]
 No file 论文.ind.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1496.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1496.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1526.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1526.
 (论文.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1496.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1496.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1526.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1526.
 
 Package rerunfilecheck Info: File `论文.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E.
@@ -2298,15 +2306,15 @@ Package rerunfilecheck Info: File `论文.out' has not changed.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1496.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1526.
  ) 
 Here is how much of TeX's memory you used:
- 31697 strings out of 427796
- 601965 string characters out of 3155360
+ 31701 strings out of 427796
+ 602060 string characters out of 3155360
  830707 words of memory out of 3000000
- 35250 multiletter control sequences out of 15000+200000
- 649278 words of font info for 213 fonts, out of 3000000 for 9000
+ 35253 multiletter control sequences out of 15000+200000
+ 649286 words of font info for 214 fonts, out of 3000000 for 9000
  1328 hyphenation exceptions out of 8191
- 63i,18n,82p,9120b,890s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 63i,18n,82p,9120b,892s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on 论文.pdf (50 pages).
+Output written on 论文.pdf (53 pages).

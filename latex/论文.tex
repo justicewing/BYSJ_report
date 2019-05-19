@@ -40,7 +40,7 @@
 \title{大规模MIMO的检测与估计}{}{Detection and Estimation of Massive MIMO System}{subtitle}
 \author{郑奕飞}{Yifei Zheng}
 \advisor{孙晨}{讲师}{Chen Sun}{Prof.}
-\coadvisor{王闻今}{教授}{Wenjin Wang}{Associate Prof.} % 没有
+\coadvisor{王闻今}{副教授}{Wenjin Wang}{Associate Prof.} % 没有
 
 % \degree{工学硕士} % 详细学位名称
 \major[12em]{信息工程}
@@ -51,12 +51,30 @@
 \address{无线谷1405室}
 \maketitle
 
-\begin{abstract}{关键词}
-待定
+\begin{abstract}{大规模MIMO， 波束域信道模型， MMSE检测， 低复杂度检测， QR分解， PE接收机， 算子自由度}
+目前人们的生活中已经离不开移动通信，而时代发展一定程度上以移动通信基础，而目前流行的物联网，智能互联，车联网等新兴技术需要大吞吐，低时延，低功耗，硬件要求低的通信系统，所以第五代移动通信系统(5th Generation)将在第四代移动通信系统上进一步提高这些指标。本论文以大规模MIMO技术为背景，主要研究了大规模MIMO系统中信号检测方法，并利用其信道性质和检测数学表达化简得到几种低复杂度的MMSE检测方法。
+
+首先，从MIMO的物理多径信道模型出发，得到每根接收天线的接收信号信道数学表达式，取其集合即为MIMO信道的物理模型，根据MIMO信道采用的多径模型，本文也写出了MIMO信道的统计模型，统计模型是实际上研究与仿真的主要使用的系统模型。然后从MIMO信号，本文过渡到大规模MIMO信道，并且提出了大规模MIMO的波束域信道。然后分析了大规模MIMO波束域信道的三个特征：DFT矩阵解相关，对应波束，特征矩阵稀疏性。提出了本论文使用的仿真模型SCM模型，设置了具体参数以及给出了仿真结果图像验证了波束域信道的特性。得到了信道模型以及信道性质，为后续章节的研究打下了基础。
+
+然后，提出了大规模MIMO的系统模型，作为本论文所有研究和仿真的基础。然后本章提出了MMSE检测方法，具体阐述了数学原理和表达式。并利用第二章所介绍的信道仿真SCM模型，进行仿真得到为后续章节作为性能基准的MMSE检测结果。接着，分析MMSE检测数学表达式中复杂度最高的矩阵求逆计算，阐述了利用QR分解的降低复杂度方式。而利用QR分解的Givens变换在稀疏矩阵复杂度降低，以及第二章提到的波束域信道矩阵在经过DFT变换后矩阵稀疏的性质，提出了基于MMSE的低复杂度接收机。利用本章得到的MMSE检测结果与低复杂度的作对比，得出此低复杂度接收机在降低复杂度的同时很好的保持了性能的结论。
+
+最后，本文利用Cayley hamilton理论得出了相较MMSE接收机拥有更低复杂度的PE接收机。并利用系统模型和MMSE检测结果，分析了PE接收机的性能。此时，可以发现PE接收机的系数在利用确定性等同时，在降低复杂度的同时可以保持性能。接着基于算子自由概率理论的具体推导，通过论证得到了确定性等同确实能够很好地代替原来系数。接着，给出了确定性等同的PE接收机表达式，并分析了其复杂度，可以知道低复杂度的PE接收机具有本论文提出的几个低复杂度算法的最好的复杂度。最后利用仿真结果分析了低复杂度PE接收机的性能，以及分析其的不足。
 \end{abstract}
 
-\begin{englishabstract}{KEY Word}
-待定
+\begin{englishabstract}{Massive MIMO, Beamwave Domain Channel Model, MMSE Detector, Low Complexity Detector Alogrithm, QR Expansion, PE detector, Operator-Valued Free Probability}
+At present, people's life is inseparable from mobile communication, and the development of the times is based on mobile communication to a certain extent. The popular emerging technologies such as Internet of Things, Intelligent Interconnection and Vehicle Networking need communication systems with high throughput, low latency, low power consumption and low hardware requirements. Therefore, the fifth generation mobile communication system (5th Generation) will be further promoted on the fourth generation mobile communication system to higher these indicators. Based on the background of large-scale MIMO technology, this paper mainly studies the signal detection methods in large-scale MIMO systems. Several low-complexity MMSE detection methods are obtained by simplifying the channel properties and detection mathematical expressions.
+
+
+
+Firstly, based on the physical multipath channel model of MIMO, the mathematical expression of the received signal channel of each receiving antenna is obtained. The set is the physical model of MIMO channel. According to the multipath model adopted by MIMO channel, this paper also writes the statistical model of MIMO channel. The statistical model is the main system model used in actual research and simulation. Then from MIMO signal, this paper transits to large-scale MIMO channel, and proposes a large-scale MIMO beam-domain channel. Then, three characteristics of large-scale MIMO beam-domain channel are analyzed: DFT matrix decorrelation, corresponding beam and sparse characteristic matrix. The simulation model SCM model used in this paper is proposed. The specific parameters are set and the simulation results are given to verify the characteristics of the beam-domain channel. The channel model and channel properties are obtained, which lays a foundation for the following chapters.
+
+
+
+Then, a large-scale MIMO system model is proposed as the basis of all the research and Simulation in this paper. Then this chapter puts forward the MMSE detection method, and expounds the mathematical principle and expression in detail. The channel simulation SCM model introduced in Chapter 2 is used to simulate the results of performance benchmark for subsequent chapters. Then, the matrix inversion calculation with the highest complexity in MMSE detection mathematical expression is analyzed, and the method of reducing complexity by using QR decomposition is expounded. The Givens transform based on QR decomposition reduces the complexity of the sparse matrix, and the sparse property of the channel matrix in the beam domain mentioned in Chapter 2 after DFT transformation. A low complexity receiver based on MMSE is proposed. By comparing the results of MMSE detection obtained in this chapter with those of low complexity, it is concluded that the low complexity receiver can reduce the complexity while maintaining the performance well.
+
+
+
+Finally, we use Cayley Hamilton theory to get PE receiver with lower complexity than MMSE receiver. The system model and MMSE test results are used to analyze the performance of PE receiver. At this time, it can be found that the coefficients of PE receiver can utilize determinacy and other factors, while reducing complexity and maintaining performance. Then, based on the concrete deduction of operator free probability theory, it is proved that deterministic equivalence can really replace the original coefficients. Then, the deterministic equivalent PE receiver expression is given and its complexity is analyzed. It can be seen that the low complexity PE receiver has the best complexity of several low complexity algorithms proposed in this paper. Finally, the performance of low complexity PE receiver is analyzed by simulation results, and its shortcomings are analyzed.
 \end{englishabstract}
 
 \tableofcontents
@@ -1460,23 +1478,35 @@ $\mathcal{B}_N$是$\mathbf{B}_N$的确定性等同。并且有这样$\overline{\
 
 最后，在第四章里具体阐述了另一种低复杂度接收机PE接收机及其更低复杂度的确定性等同替换PE接收机。首先，本文利用Cayley hamilton理论得出了相较MMSE接收机拥有更低复杂度的PE接收机。并利用第三章的系统模型和MMSE检测结果，分析了PE接收机的性能。此时，可以发现PE接收机的系数在利用确定性等同时，在降低复杂度的同时可以保持性能。接着基于算子自由概率理论的具体推导，通过论证得到了确定性等同确实能够很好地代替原来系数。接着，给出了确定性等同的PE接收机表达式，并分析了其复杂度，可以知道低复杂度的PE接收机具有本论文提出的几个低复杂度算法的最好的复杂度。最后利用仿真结果分析了低复杂度PE接收机的性能，以及分析其的不足。
 
-
-
-
 \section{后续工作}
+本文对大规模MIMO的检测算法进行研究，检测算法在一定程度降低了计算复杂度，并且分析了很多算法的优势与不足，以及提供了系统模型可以对检测算法进行了分析。进一步的工作包括：
+\begin{itemize}
+\item[1.]本文并没有在PE接收机上很好的利用波束域信道的特征，并且PE接收机机同样拥有利用波束域信道进行进一步化简的空间，可以在接下来的研究中进一步化简低复杂度的PE接收机。
 
+\item[2.]本文研究的PE接收机的确定等同的算法不是很完善，可以进一步的逼近MMSE估计，后续研究中将进一步完善低复杂度的PE接收机。
 
-
-
-
-
-
+\item[3.]本文研究的低复杂度的接收机都有实现在硬件上的潜力，后续可以尝试在硬件上固化这些低复杂度的算法。
+\end{itemize}
 
 \end{Main} % 结束正文
 
-%\begin{Acknowledgement}{}
+\begin{Acknowledgement}
+在东南大学一眨眼度过了四年紧张的学习生活，系统地学习了信息科学的各方面的知识，也领略了各位专业老师的风采。在这四年的学习生活中，我收获到的不仅仅是知识上的积累，同时还收获了很多做人、做事、做学问的道理。因此在这毕业论文即将完成之际，借由这篇致谢向所有给予我培养教育以及关怀的老师、朋友、同学和家人致以最诚挚的感谢。
 
-%\end{Acknowledgement}
+首先我要感谢王闻今老师。最先开始考虑进入实验室的时候，我向班主任表达了我研究生方向想做偏工程一些的诉求，所以推荐了我去找王老师，一开始进入课题组因为不习惯科研研究，并且处于大三事情比较忙碌的时候，科研学习对我来说非常困难。在多次和王老师交流与参与组会时，我慢慢培养起对科研的兴趣和做科研的一些要求和习惯。在课题组学习科研的一年，也给了我很多去接触课题之外许多不同单位实验室的机会，从和他们的沟通交流，我同样收益匪浅。
+
+特别感谢孙晨老师的悉心指导。孙老师主要指导我毕设方向的事情，耐心地指导我，让我了解到课题组一些前沿研究，并一步步从入门带领我到掌握的程度，为我指出了很多论文写作中的错误和不足。孙老师非常细致的指导使得我的毕设研究能够进行非常顺利，为我论文写作提供了巨大的帮助。
+
+衷心感谢尤力老师在我学习生活提供的帮助。作为课题组的老师和班级的班主任，尤力老师给我提供的便利和支持，让我在实验时的科研学习非常的轻松和愉快。组织的各种课题组活动，让我在实验室枯燥的学习生活中还能感受一些轻松愉快的氛围。
+
+特别感谢徐振、吴体昊、石丁、孙榛、李灵瑄、徐益师兄师姐在科研和项目上的帮助，带领我这个科研小白逐渐融入课题组，并且提供了很多科研的经验，让我可以快速上手。感谢师姐杨晓鹤提供的资料，让我熟悉项目更加的快速。感谢同学何思然、杨济源、王一彪、陈婷婷、黄雨菲在实验室的一起科研，让我的科研学习生活非常丰富。感谢我的舍友，在枯燥忙碌的科研学习中总能给我很多愉快，舒适的生活环境和刻骨铭心的记忆。让我在科研之余，能够好好享受大学生活。感谢我的父母，是他们一直在背后默默的支持我，使我能够心无旁骛的学习，科研。是他们的支持、监督和鼓励，让我顺利的完成了学业，并且给我提供了一切可能，是他们的奉献，我才能更好地攀登学业的高峰。
+
+最后感谢东南大学提供的一流的学习、生活和科研环境，使我在东南大学受益匪浅。
+
+
+
+
+\end{Acknowledgement}
 
 % 参考文献
 %\bibliography{seuthesis}
