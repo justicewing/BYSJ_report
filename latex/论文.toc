@@ -22,7 +22,7 @@
 \contentsline {section}{\numberline {3.4}QR分解方法}{22}{section.3.4}
 \contentsline {section}{\numberline {3.5}低复杂度的MMSE接收机}{27}{section.3.5}
 \contentsline {section}{\numberline {3.6}本章小结}{31}{section.3.6}
-\contentsline {chapter}{\numberline {4}基于PE接收机及复杂度优化}{32}{chapter.4}
+\contentsline {chapter}{\numberline {4}基于多项式展开接收机及复杂度优化}{32}{chapter.4}
 \contentsline {section}{\numberline {4.1}引言}{32}{section.4.1}
 \contentsline {section}{\numberline {4.2}PE接收机原理及仿真}{32}{section.4.2}
 \contentsline {section}{\numberline {4.3}算子自由度原理}{35}{section.4.3}
@@ -31,5 +31,6 @@
 \contentsline {chapter}{\numberline {5}总结与展望}{44}{chapter.5}
 \contentsline {section}{\numberline {5.1}全文总结}{44}{section.5.1}
 \contentsline {section}{\numberline {5.2}后续工作}{45}{section.5.2}
-\contentsline {chapter}{致谢}{46}{section*.41}
+\contentsline {chapter}{致谢}{46}{section*.45}
+\contentsline {chapter}{参考文献}{47}{chapter*.47}
 \contentsfinish 
