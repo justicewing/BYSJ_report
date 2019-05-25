@@ -118,7 +118,7 @@ end
 % 
 semilogy(SNR,BER_MMSE,'Color','blue','LineStyle','-','Marker','o');
 hold on;
-semilogy(SNR,BER_BDMMSE,'Color','green','LineStyle','-','Marker','^');
-xlabel('SNR');
+semilogy(SNR,BER_BDMMSE,'Color','red','LineStyle','-','Marker','^');
+xlabel('SNR(in dB)');
 ylabel('BER');
 legend('MMSEdetect','BDMMSEdetect');

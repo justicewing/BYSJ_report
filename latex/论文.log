@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (MiKTeX 2.9.6840 64-bit) (preloaded format=xelatex 2018.11.8)  22 MAY 2019 19:54
+This is XeTeX, Version 3.14159265-2.6-0.99999 (MiKTeX 2.9.6840 64-bit) (preloaded format=xelatex 2018.11.8)  25 MAY 2019 14:51
 entering extended mode
 **./论文.tex
 (论文.tex
@@ -1412,24 +1412,6 @@ LaTeX Warning: Label `key' multiply defined.
 LaTeX Warning: Label `key' multiply defined.
 
 
-LaTeX Warning: Label `key' multiply defined.
-
-
-LaTeX Warning: Label `key' multiply defined.
-
-
-LaTeX Warning: Label `key' multiply defined.
-
-
-LaTeX Warning: Label `key' multiply defined.
-
-
-LaTeX Warning: Label `key' multiply defined.
-
-
-LaTeX Warning: Label `key' multiply defined.
-
-
 LaTeX Warning: Label `tab:test' multiply defined.
 
 
@@ -1440,6 +1422,15 @@ LaTeX Warning: Label `key' multiply defined.
 
 
 LaTeX Warning: Label `tab:test' multiply defined.
+
+
+LaTeX Warning: Label `key' multiply defined.
+
+
+LaTeX Warning: Label `key' multiply defined.
+
+
+LaTeX Warning: Label `key' multiply defined.
 
 
 LaTeX Warning: Label `key' multiply defined.
@@ -2179,7 +2170,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 ]
 
-Package natbib Warning: Citation `PIC' on page 2 undefined on input line 100.
+Package natbib Warning: Citation `PIC' on page 2 undefined on input line 101.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -2190,84 +2181,83 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [3]
 [4]
 chapter 2.
-File: img/2_1.png Graphic file (type bmp)
-<img/2_1.png>
+File: img/2_1.jpg Graphic file (type bmp)
+<img/2_1.jpg>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [5
 
 ]
-[6] [7] [8]
+[6] [7]
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <8> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 282.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 264.
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <6> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 282.
- [9] [10] [11] [12] [13]
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 264.
+ [8] [9] [10] [11] [12]
 File: img/2_2.jpg Graphic file (type bmp)
 <img/2_2.jpg>
 File: img/2_5.jpg Graphic file (type bmp)
 <img/2_5.jpg>
- [14]
 File: img/2_3.jpg Graphic file (type bmp)
 <img/2_3.jpg>
+
+Underfull \vbox (badness 2753) has occurred while \output is active []
+
+ [13]
+[14]
 File: img/2_4.jpg Graphic file (type bmp)
 <img/2_4.jpg>
- [15] [16] [17]
+ [15] [16]
 chapter 3.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 1383) has occurred while \output is active []
 
- [18
+ [17
 
 ]
-[19] [20]
-File: img/3_1.jpg Graphic file (type bmp)
-<img/3_1.jpg>
-File: img/3_3.jpg Graphic file (type bmp)
-<img/3_3.jpg>
-File: img/3_8.jpg Graphic file (type bmp)
-<img/3_8.jpg>
- [21]
-Underfull \vbox (badness 1253) has occurred while \output is active []
+[18] [19]
+File: img/3_8.eps Graphic file (type eps)
+<img/3_8.eps>
+ [20] [21]
+Underfull \hbox (badness 10000) in paragraph at lines 815--817
 
- [22]
-Underfull \hbox (badness 10000) in paragraph at lines 838--840
+ []
+
+[22]
+Underfull \hbox (badness 10000) in paragraph at lines 917--919
 
  []
 
 [23]
-Underfull \vbox (badness 1365) has occurred while \output is active []
+Underfull \vbox (badness 1867) has occurred while \output is active []
 
  [24]
-Underfull \hbox (badness 10000) in paragraph at lines 940--942
+File: img/3_9.eps Graphic file (type eps)
+<img/3_9.eps>
 
- []
-
-[25]
-File: img/3_9.jpg Graphic file (type bmp)
-<img/3_9.jpg>
- [26] [27]
+[25] [26]
 File: img/3_1.eps Graphic file (type eps)
 <img/3_1.eps>
 File: img/3_2.eps Graphic file (type eps)
 <img/3_2.eps>
 File: img/3_3.eps Graphic file (type eps)
 <img/3_3.eps>
- [28]
+ [27]
 File: img/3_4.eps Graphic file (type eps)
 <img/3_4.eps>
 File: img/3_5.eps Graphic file (type eps)
 <img/3_5.eps>
+ [28]
 File: img/3_6.eps Graphic file (type eps)
 <img/3_6.eps>
 File: img/3_7.eps Graphic file (type eps)
 <img/3_7.eps>
- [29] [30] [31]
+ [29] [30]
 chapter 4.
-[32
+[31
 
-] [33]
+] [32]
 File: img/4_1.eps Graphic file (type eps)
 <img/4_1.eps>
 File: img/4_2.eps Graphic file (type eps)
@@ -2276,16 +2266,16 @@ File: img/4_3.eps Graphic file (type eps)
 <img/4_3.eps>
 File: img/4_4.eps Graphic file (type eps)
 <img/4_4.eps>
- [34]
+ [33]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [35]
-[36] [37] [38] [39]
+ [34]
+[35] [36] [37] [38]
 File: img/4_5.eps Graphic file (type eps)
 <img/4_5.eps>
 File: img/4_6.eps Graphic file (type eps)
 <img/4_6.eps>
- [40]
+ [39]
 File: img/4_8.eps Graphic file (type eps)
 <img/4_8.eps>
 File: img/4_12.eps Graphic file (type eps)
@@ -2296,30 +2286,30 @@ File: img/4_10.eps Graphic file (type eps)
 <img/4_10.eps>
 File: img/4_11.eps Graphic file (type eps)
 <img/4_11.eps>
- [41] [42] [43]
+ [40] [41] [42]
 chapter 5.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [44
+ [43
 
 ]
-[45] (论文.bbl [46
+[44] (论文.bbl [45
 
 
 
-] [47
+] [46
 
-]) [48]
+]) [47]
 No file 论文.ind.
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1600.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1600.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1578.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1578.
 (论文.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1600.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1600.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1578.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1578.
 
 Package rerunfilecheck Info: File `论文.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E.
@@ -2327,15 +2317,15 @@ Package rerunfilecheck Info: File `论文.out' has not changed.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1600.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1578.
  ) 
 Here is how much of TeX's memory you used:
- 31525 strings out of 427792
- 600297 string characters out of 3151724
- 829188 words of memory out of 3000000
- 35076 multiletter control sequences out of 15000+200000
+ 31517 strings out of 427792
+ 600175 string characters out of 3151724
+ 828188 words of memory out of 3000000
+ 35068 multiletter control sequences out of 15000+200000
  649302 words of font info for 216 fonts, out of 3000000 for 9000
  1328 hyphenation exceptions out of 8191
  62i,18n,83p,9120b,924s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on 论文.pdf (55 pages).
+Output written on 论文.pdf (54 pages).

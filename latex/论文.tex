@@ -54,27 +54,28 @@
 \begin{abstract}{大规模MIMO， 波束域信道模型， MMSE检测， 低复杂度检测， QR分解， PE接收机， 算子自由度}
 目前人们的生活中已经离不开移动通信，时代发展一定程度上以移动通信基础。目前流行的物联网，智能互联，车联网，天地融合等新兴技术需要大吞吐，低时延，低功耗，硬件要求低的通信系统，所以第五代移动通信系统(5G,5th Generation)将在第四代移动通信系统上进一步提高这些指标。大规模MIMO技术可以显著提升系统的频谱效率和功率效率，是5G移动通信的关键技术。而实现大规模MIMO技术需要将大量接收天线接收到的接收信号恢复为发送端的发送信号，这一过程即称为大规模MIMO的检测与估计。大规模MIMO技术因为天线数量多，信道复杂，一般的检测方法的复杂度将会非常高。本论文将以此为研究背景，推导适用大规模MIMO的低复杂检测算法。
 
-首先，大规模MIMO系统模型需要建立恰当的信道模型，并且可以通过研究该信道的特点可以有针对的进行复杂度优化。所以本文从物理多径信道模型出发，分析了物理信道模型的参数含义，并建立物理信道模型与统计信道模型的关系。进而，提出了大规模MIMO波束域信道模型，分析了大规模MIMO波束域信道的特性，包括：DFT矩阵渐近解相关、波束与方向对应性以及波束域信道稀疏性。利用3GPP空间信道模型(SCM)，生成波束域信道样本，验证波束域信道的特性，为后续章节的研究打下了基础。
+首先，大规模MIMO系统模型需要建立恰当的信道模型，并且可以通过研究该信道的特点可以有针对的进行复杂度优化。所以本文从物理多径信道模型出发，分析了物理信道模型的参数含义，并建立物理信道模型与统计信道模型的关系。进而，提出了大规模MIMO波束域信道模型，分析了大规模MIMO波束域信道的特性，包括：DFT矩阵渐近解相关、波束与方向对应性以及波束域信道稀疏性。利用3GPP空间信道模型(SCM
+)，生成波束域信道样本，验证波束域信道的特性，为后续章节的研究打下了基础。
 
-然后，检测算法的正确性需要使用合适的系统模型，本文根据信道模型加入发送接收部分建立完整的系统模型。并基于大规模MIMO无线传输的系统模型，阐述了上行传输中MMSE检测方法。分析MMSE检测数学表达式中复杂度最高的矩阵求逆运算，利用QR分解降低MMSE检测的计算复杂度。而利用QR分解的Givens变换在稀疏矩阵复杂度降低，以及波束域信道矩阵在经过DFT变换后信道矩阵稀疏的性质，提出了基于MMSE的低复杂度接收机。其将原始MMSE的计算复杂度$\Theta(M^3)$(M为基站接收天线数)化简至。将基于MMSE的低复杂度接收机性能与MMSE检测结果的作对比，得出此低复杂度接收机在降低复杂度的同时很好的保持了性能的结论。
+然后，检测算法的正确性需要使用合适的系统模型，本文根据信道模型加入发送接收部分建立完整的系统模型。并基于大规模MIMO无线传输的系统模型，阐述了上行传输中MMSE检测方法。分析MMSE检测数学表达式中复杂度最高的矩阵求逆运算，利用QR分解降低MMSE检测的计算复杂度。而利用QR分解的Givens变换在稀疏矩阵复杂度降低，以及波束域信道矩阵在经过DFT变换后信道矩阵稀疏的性质，提出了基于MMSE的低复杂度接收机。其将原始MMSE的计算复杂度$\Theta(M^3)$(M为基站接收天线数)化简至$\Theta(N_u*N_{beam})$($N_u$为用户数，$N_{beam}$为用户所占波束)。将基于MMSE的低复杂度接收机性能与MMSE检测结果的作对比，得出此低复杂度接收机在降低复杂度的同时很好的保持了性能的结论。
 
-最后，利用Cayley Hamilton理论得出了相较MMSE接收机拥有更低复杂度的PE接收机。针对MMSE检测中矩阵求逆复杂度高的问题，根据Cayley Hamilton理论，利用矩阵多项式逼近矩阵求逆结果。进而，在大规模MIMO系统中，利用算子自由概率推导了在矩阵维度较大时的确定性等同PE接收机，并分析了其复杂度，低复杂度的PE接收机具有本论文提出的几个低复杂度算法的最好的复杂度。最后利用仿真结果分析了低复杂度PE接收机的性能，以及分析其的不足。
+最后，利用Cayley Hamilton理论得出了相较MMSE接收机拥有更低复杂度的PE接收机。针对MMSE检测中矩阵求逆复杂度高的问题，根据Cayley Hamilton理论，利用矩阵多项式逼近矩阵求逆结果，提出了。进而，在大规模MIMO系统中，利用算子自由概率推导了在矩阵维度较大时的确定性等同PE接收机，低复杂度的PE接收机具有本论文提出的几个低复杂度算法的最好的复杂度。利用仿真结果分析了低复杂度PE接收机的性能及复杂度$\Theta(M^2)$，以及提出了其的不足之处。
 \end{abstract}
 
 \begin{englishabstract}{Massive MIMO, Beam Domain Channel Model, MMSE Detector, Low Complexity Detector Alogrithm, QR Expansion, PE detector, Operator-Valued Free Probability}
-At present, people's life is inseparable from mobile communication, and the development of the times is based on mobile communication to a certain extent. The popular emerging technologies such as Internet of Things, Intelligent Interconnection and Vehicle Networking need communication systems with high throughput, low latency, low power consumption and low hardware requirements. Therefore, the fifth generation mobile communication system (5th Generation) will be further promoted on the fourth generation mobile communication system to higher these indicators. Based on the background of Large-Scale MIMO technology, this paper mainly studies the signal detection methods in large-scale MIMO systems. Several low-complexity MMSE detection methods are obtained by simplifying the channel properties and detection mathematical expressions.
+At present, people's life has been inseparable from mobile communications, the development of the times to a certain extent based on mobile communications. Nowadays, the popular new technologies such as Internet of Things, Intelligent Interconnection, Vehicle Networking, Space-Earth Integration need communication systems with high throughput, low delay, low power consumption and low hardware requirements. Therefore, the fifth generation mobile communication system (5G, 5th Generation) will further improve these indicators in the fourth generation mobile communication system. Large-Scale MIMO technology can significantly improve the spectral efficiency and power efficiency of the system, which is the key technology of 5G mobile communication. In order to realize Large-Scale MIMO technology, a large number of received antenna signals need to be restored to the sending signal of the transmitter. This process is called detection and estimation of Large-Scale MIMO. Because of the large number of antennas and the complex channel, the complexity of general detection methods will be very high. In this paper, a low complexity detection algorithm for Large-Scale MIMO is deduced.
 
 
 
-Firstly, based on the physical multipath channel model of MIMO, the mathematical expression of the received signal channel of each receiving antenna is obtained. The set is the physical model of MIMO channel. According to the multipath model adopted by MIMO channel, this paper also writes the statistical model of MIMO channel. The statistical model is the main system model used in actual research and simulation. Then from MIMO signal, this paper transits to large-scale MIMO channel, and proposes a large-scale MIMO beam-domain channel. Then, three characteristics of large-scale MIMO beam-domain channel are analyzed: DFT matrix decorrelation, corresponding beam and sparse characteristic matrix. The simulation model SCM model used in this paper is proposed. The specific parameters are set and the simulation results are given to verify the characteristics of the beam-domain channel. The channel model and channel properties are obtained, which lays a foundation for the following chapters.
+Firstly, the Large-Scale MIMO system model needs to establish an appropriate channel model, and the complexity can be optimized by studying the characteristics of the channel. Therefore, starting from the physical multipath channel model, this paper analyses the parameters of the physical channel model, and establishes the relationship between the physical channel model and the statistical channel model. Furthermore, a Large-Scale MIMO beam-domain channel model is proposed, and the characteristics of Large-Scale MIMO beam-domain channel are analyzed, including asymptotic decorrelation of DFT matrix, beam-to-direction correspondence and channel sparsity in beam-domain. Using the space channel model of 3GPP (SCM), the channel samples in the beam domain are generated to verify the characteristics of the channel in the beam domain, which lays the foundation for the following chapters.
 
 
 
-Then, a Large-Scale MIMO system model is proposed as the basis of all the research and Simulation in this paper. Then this chapter puts forward the MMSE detection method, and expounds the mathematical principle and expression in detail. The channel simulation SCM model introduced is used to simulate the results of performance benchmark for subsequent chapters. Then, the matrix inversion calculation with the highest complexity in MMSE detection mathematical expression is analyzed, and the method of reducing complexity by using QR decomposition is expounded. The Givens transform based on QR decomposition reduces the complexity of the sparse matrix, and the sparse property of the channel matrix in the beam domain mentioned after DFT transformation. A low complexity receiver based on MMSE is proposed. By comparing the results of MMSE detection obtained in this chapter with those of low complexity, it is concluded that the low complexity receiver can reduce the complexity while maintaining the performance well.
+Then, the correctness of the detection algorithm needs to use the appropriate system model. This paper builds a complete system model by adding the channel model to the sending and receiving part. Based on the system model of Large-Scale MIMO wireless transmission, the MMSE detection method in upstream transmission is described. The matrix inversion operation with the highest complexity in MMSE detection mathematical expression is analyzed, and the QR decomposition is used to reduce the computational complexity of MMSE detection. The Givens transform based on QR decomposition can reduce the complexity due to sparse matrix and the sparse property of channel matrix in beam domain after DFT transformation. As, A low complexity receiver based on MMSE is proposed. It simplifies the computational complexity of the original MMSE from $\ Theta (M ^ 3) $(M is the number of base station receiving antennas) to $\Theta(N_u*N_{beam})$($N_u$ donates the number of users and $N_{beam} $ donates the number of beam which single user consume). By comparing the performance of the low complexity receiver based on MMSE with the results of MMSE detection, it is concluded that the low complexity receiver can reduce the complexity while maintaining the performance well.
 
 
 
-Finally, we use Cayley Hamilton theory to get PE receiver with lower complexity than MMSE receiver. The system model and MMSE test results are used to analyze the performance of PE receiver. At this time, it can be found that the coefficients of PE receiver can utilize determinacy and other factors, while reducing complexity and maintaining performance. Then, based on the concrete deduction of operator free probability theory, it is proved that deterministic equivalence can really replace the original coefficients. Then, the deterministic equivalent PE receiver expression is given and its complexity is analyzed. It can be seen that the low complexity PE receiver has the best complexity of several low complexity algorithms proposed in this paper. Finally, the performance of low complexity PE receiver is analyzed by simulation results, and its shortcomings are analyzed.
+Finally, the PE receiver with lower complexity than MMSE receiver is obtained by Cayley Hamilton theory. According to Cayley Hamilton's theory, matrix polynomials are used to approximate the matrix inversion results in MMSE detection because of the high complexity of matrix inversion. Furthermore, in large-scale MIMO systems, the deterministic equivalent PE receiver with larger matrix dimension is deduced by using operator freedom probability, and its complexity is analyzed as $ Theta (M ^ 2L ^ 2)$. Low complexity PE receiver has the best complexity of several low complexity algorithms proposed in this paper. The performance and complexity ($\ Theta (M ^ 2)$) of low complexity PE receiver are analyzed by simulation results, and its shortcomings are pointed out.
 \end{englishabstract}
 
 \tableofcontents
@@ -84,7 +85,7 @@ Finally, we use Cayley Hamilton theory to get PE receiver with lower complexity 
 
 \chapter{绪论}
 \section{研究背景}
-目前人们的生活中已经离不开移动通信，而时代发展一定程度上以移动通信为基础。最近30年，信息时代的技术飞速发展，移动通信技术也依托20世纪的理论基础和21世纪的硬件发展得到了长足的进步。从第一代移动通信技术(1G, 1th Generation)的模拟通信和频分多址(FDMA, Frequency Division Multiple Access)技术，到第二代移动通信技术(2G, 2th Generation)的数字通信和时分多址的(TDMA, Time Division Multiple Access)技术，到第三代移动通信技术(3G, 3th Generation)的蜂窝移动网络以及宽带码分多址(CDMA, Code Division Multiple Access)技术，到现在的第四代移动通信技术(4G, 4th Generation)的多天线技术和正交频分复用(OFDM, Orthogonal Frequecy Division Multiple)技术。目前流行的物联网，智能互联，车联网等新兴技术需要大吞吐，低时延，低功耗，硬件要求低的通信系统，所以第五代移动通信系统(5G, 5th Generation)将在第四代移动通信系统上进一步提高这些指标。
+目前人们的生活中已经离不开移动通信，而时代发展一定程度上以移动通信为基础。最近30年，信息时代的技术飞速发展，移动通信技术也依托20世纪的理论基础和21世纪的硬件发展得到了长足的进步。从第一代移动通信技术(1G, 1th Generation)的模拟通信和频分多址(FDMA, Frequency Division Multiple Access)技术，到第二代移动通信技术(2G, 2th Generation)的数字通信和时分多址(TDMA, Time Division Multiple Access)技术，到第三代移动通信技术(3G, 3th Generation)的蜂窝移动网络以及宽带码分多址(CDMA, Code Division Multiple Access)技术，到现在的第四代移动通信技术(4G, 4th Generation)的多天线技术和正交频分复用(OFDM, Orthogonal Frequecy Division Multiple)技术。目前流行的物联网，智能互联，车联网等新兴技术需要大吞吐，低时延，低功耗，硬件要求低的通信系统，所以第五代移动通信系统(5G, 5th Generation)将在第四代移动通信系统上进一步提高这些指标。
 
 由于智能设备，移动设备广泛使用以及实现M2M通信的目标，全球移动通信网络所需要传输的数据量猛增。并且目前的设计受制于通信频谱的不足。为了解决通信的数据量猛增以及低损的频谱波段的不足的问题，所以考虑使用大规模多输入多输出传输技术(LS-MIMO Large-Scale Multiple Input Multiple Output）。并且第五代通信系统也致力于研究大规模MIMO的技术，所以5G相关的基础技术很多也是和大规模MIMO相关的。并且目前的毫米波发展导致传输相同的距离需要更高的功率或者比3G/4G更多的基站，此时也需要大规模MIMO的发展来建立适合小蜂窝的网络结构。\cite{zhang2018recent}
 
@@ -107,13 +108,13 @@ Finally, we use Cayley Hamilton theory to get PE receiver with lower complexity 
 
 第一章：简要介绍移动通信系统的发展流程，以及大规模MIMO技术。首先阐述了本文的研究背景，对大规模MIMO技术的发展和要求，以及大规模MIMO检测的发展和一些现有的低复杂度方式，然后介绍了本文的研究方向，最后给出了论文的具体安排以及使用到的数学符号约定说明。
 
-第二章：针对检测算法所需要的系统模型，由MIMO系统出发，对大规模MIMO的信道进行了理论分析以及数学建模。具体阐述了大规模MIMO的空间物理信道和波束域信道，作为后续检测算法的信道模型。并且详细分析了波束域信道模型的三个特点，作为大规模MIMO技术与普通MIMO技术的不同，作为后续对检测算法化简的理论基础。最后给出了信道一些参数的仿真图像。
+第二章：本章叙述了大规模MIMO系统模型所需要建立的信道模型，并且研究了可以进行复杂度优化的信道特性。本章从物理多径信道模型出发，分析了物理信道模型的参数含义以及统计特性，并以此阐述了统计信道。进而提出了大规模MIMO的空间物理信道和波束域信道，分析了大规模MIMO波束域信道的特性，包括：DFT矩阵渐近解相关、波束与方向对应性以及波束域信道稀疏性。利用3GPP空间信道模型(SCM)，生成波束域信道样本，验证波束域信道的特性，为后续章节的研究打下了基础。
 
-第三章：研究了最为广泛使用的MMSE检测算法，并依据第二章的波束域模型提出了低复杂度算法。首先具体阐述了本文所使用的系统模型，作为MMSE检测和本文提出的低复杂度检测算法的测试系统模型。然后具体介绍MMSE检测的原理，以及仿真结果。根据MMSE原理可以利用QR分解降低复杂度以及波束域信道的特性，提出了基于MMSE检测以及波束域信道特性的低复杂度MMSE接收机，并且基于仿真结果对该接收机性能进行了分析。
+第三章：本章叙述了检测算法的正确性所使用的系统模型，并基于此系统模型具体阐述了MMSE检测和低复杂度MMSE算法。首先，据信道模型加入发送接收部分建立完整的系统模型。然后，基于大规模MIMO无线传输的系统模型，阐述了上行传输中MMSE检测方法。分析MMSE检测数学表达式中复杂度最高的矩阵求逆运算，利用QR分解降低MMSE检测的计算复杂度。而利用QR分解的Givens变换在稀疏矩阵复杂度降低，以及波束域信道矩阵在经过DFT变换后信道矩阵稀疏的性质，提出了基于MMSE的低复杂度接收机。其将原始MMSE的计算复杂度$\Theta(M^3)$(M为基站接收天线数)化简至$\Theta(M^2)$。将基于MMSE的低复杂度接收机性能与MMSE检测结果的作对比，得出此低复杂度接收机在降低复杂度的同时很好的保持了性能的结论。
 
-第四章：研究了在MMSE基础上的低复杂度接收机多项式展开接收机(PE,polynomial expansion)，具体阐述了多项式展开接收机的原理并给出了复杂度分析，并且利用第三章提出的系统模型进行仿真，并与第三章的MMSE接收机作为基准进行了性能分析。然后依据PE接收机的原理，提出了基于算子自由概率的低复杂度PE接收机。然后本文首先介绍了算子自由度的概念，并给出了低复杂度PE接收机的检测公式，并根据检测数学公式给出了复杂度分析。最后同样利用第三章提出的系统模型对低复杂度PE接收机进行了性能分析。
+第四章：利用Cayley Hamilton理论得出了相较MMSE接收机拥有更低复杂度的PE接收机，并根据其表达式特点推导出更低复杂度检测算法。首先，针对MMSE检测中矩阵求逆复杂度高的问题，根据Cayley Hamilton理论，利用矩阵多项式逼近矩阵求逆结果，并研究其复杂度。在大规模MIMO系统中，提出利用算子自由概率推导在矩阵维度较大时的确定性等同PE接收机，低复杂度的PE接收机具有本论文提出的几个低复杂度算法的最好的复杂度。利用仿真结果分析了低复杂度PE接收机的性能及复杂度，以及分析了其的不足之处。
 
-第五章：总结了本文所做的大规模MIMO检测的工作，然后总体分析了所提出的几种算法的低复杂度和性能，通过分析提出了这几个低复杂度算法的不足，并总结了未来的展望。
+第五章：总结了本文所做的大规模MIMO检测的工作，然后总体分析了所提出的几种算法的低复杂度和性能，通过分析提出了这几个低复杂度算法的优势与不足，并总结了未来的展望。
 
 \section{数学符号约定}
 本文在没有特殊说明的情况下，约定小写斜体表示标量，小写粗体表示向量，大写粗体表示矩阵，其他数学符号如\ref{tab:symbol}所述
@@ -140,13 +141,13 @@ Finally, we use Cayley Hamilton theory to get PE receiver with lower complexity 
 
 \chapter{大规模MIMO信道模型}
 \section{引言}
-无线通信系统的性能取决于无线信道环境，无线信道系统学习与研究都需要合适的无线信道作为基础。无线通信信道主要描述的是无线电波从发送端传播到接收端的过程。无线通信的主要问题在于无线电波传播的过程中，无线电波会收到传播路径中物体的反射、衍射、绕射和散射。反射是指无线电波遇到相对于波长来说很大的物体表面时传播方向发生改变的物理现象，衍射是指无线电波遇到狭缝、小孔时偏离原来直线传播的物理现象，绕射是指无线电波绕过障碍物向前传播的物理现象，散射是指无线电波遇到不光滑表面时扩散传播的物理现象。为便于表述，常把对无线电波传播产生反射、衍射、绕射和散射的各类物体，统称为散射体。相应地，各非直射传播路径均称为散射路径。而对这部分传输过程以及其他原因所对信号产生的影响对其进行数学建模，具有其特征的数学模型就可以称为是无线信道。
+无线通信系统的性能取决于无线信道环境。无线通信信道主要描述的是无线电波从发送端传播到接收端的过程。无线通信的主要问题在于无线电波传播的过程中，无线电波会收到传播路径中物体的反射、衍射、绕射和散射。反射是指无线电波遇到相对于波长来说很大的物体表面时传播方向发生改变的物理现象，衍射是指无线电波遇到狭缝、小孔时偏离原来直线传播的物理现象，绕射是指无线电波绕过障碍物向前传播的物理现象，散射是指无线电波遇到不光滑表面时扩散传播的物理现象。为便于表述，常把对无线电波传播产生反射、衍射、绕射和散射的各类物体，统称为散射体。相应地，各非直射传播路径均称为散射路径。而对这部分传输过程以及其他原因所对信号产生的影响对其进行数学建模，具有其特征的数学模型就可以称为是无线信道。
 
 无线信道的一个特有的特征是衰落，同样也是信道讨论的关键。经过无线信道传播的信号，其幅度随时间和频率变化。信号的衰落分为大尺度衰落和小尺度衰落。大尺度衰落包括与传播距离有关的路径损耗和大障碍物引起的阴影衰落，小尺度衰落是多径信号叠加和移动台移动引起的信号快速起伏变化。一般会将这两个特征分别进行数学建模，根据研究目标不同，对两种衰落的建模细致程度也会不一样。而本文讨论的大规模MIMO信道还会涉及到MIMO天线阵列对信号传输造成的影响和大规模阵列与普通MIMO信道的不同。
 
 
 \begin{figure}[htbp!]
-	\centering \includegraphics[width=0.45\textwidth]{img/2_1.png} \caption{MIMO场景示意图}
+	\centering \includegraphics[width=0.45\textwidth]{img/2_1.jpg} \caption{MIMO场景示意图}
 \end{figure}
 
 \section{MIMO信道物理模型}
@@ -154,7 +155,7 @@ Finally, we use Cayley Hamilton theory to get PE receiver with lower complexity 
 \begin{equation}\label{key}
 h_{n_{R},n_{T},p}(t) = \sum_{q=1}^{Q_{p}}u_{n_{R},p,q}h_{p,q}(t)w_{n_{T},p,q}
 \end{equation}
-其中，式(2.2)意义是信道多径带来的信道响应，式(2.3)(2.4)意义是天线阵列带来的信道响应
+其中，$Q_p$代表的是单个径所拥有的子径数量，$p$指的是第p径，式(2.2)意义是信道多径带来的信道响应，式(2.3)(2.4)意义是天线阵列带来的信道响应
 \begin{eqnarray}\label{key}
 h_{p,q}(t) = \alpha_{LNA}\beta\alpha_{PA}a_{p,q}e^{j(2\pi 
 	(v_{p,q}t-f_{c}\tau_{p,q}-v_{p,q}\tau_{p,q})+\phi_{p,q}
@@ -175,7 +176,7 @@ u_{n_{R},p,q} = \mathrm{exp}(-j2\pi \frac{d_{n_{R}}}{\lambda}\sin \theta_{p,q,AO
 	}
 }
 \end{equation}
-其中，
+其中，$\tau_p$指的是各个子径的平均时延，$P(\tau_{p})$指的是子径时延所占比例，$\overline{\tau}$可以用下式定义
 \begin{equation}\label{key}
 \overline{\tau}=\frac
 {\sum^{P}_{p=1}\tau_{p}P(\tau_{p})}
@@ -233,25 +234,6 @@ h_{N_{R},1,p}(t) & h_{N_{R},2,p}(t) & \ldots & h_{N_{R},N_{T},p}(t)
 \end{equation}
 
 \section{MIMO信道统计模型}
-以上是信道的物理模型，在处理信道时，为了方便处理，一般会使用物理模型特性推导的统计模型\cite{LixiaoS}，在使用统计模型时需要明确以下概念。
-
-信道信息分为发送端得到的信道信息(CSIT)，接收端得到的信道信息(CSIR)。一般考虑的是接收端得到的信道信息，通过发送导频序列进行信道估计能很容易的得到信道增益信息。在有反馈路径的时候，CSIT由接收端将接收端估计出的信道信息(CSIR)发送回去得到。或者在没有反馈路径的双向通信的系统中，CSIT也可以利用传播的倒数特性得到。当系统收发两端都无法得到信道信息时，需要利用一些特殊的数学模型，例如零平均空间白(ZMSW)模型，ZMSW模型中信道矩阵$\mathbf{H}$中的元素被认为是独立同分布的零均值单位方差循环对称的复高斯变量。或者，其中的元素可以是均值非零或者协方差矩阵。关于CSI的不同假设和$\mathbf{H}$中元素的分布主要反映的是不同的信道容量或者是空时响应的不同方式。
-
-考虑带宽为B，零均值，协方差矩阵为$\sigma^{2}\mathbf{I}_{M_{r}}$的噪声，$\sigma^{2} \triangleq \mathbf{E}[n^{2}_{i}]= N_{0}/2$。并有发射信号
-\begin{equation}\label{key}
-\sum_{i=1}^{M_{t}}\mathbf{E}[x_{i}x_{i}^{*}] = P
-\end{equation}
-或者可以写为
-\begin{equation}\label{key}
-\mathbb{E}[\mathrm{tr}(\mathbf{x}\mathbf{x}^{H})] = P
-\end{equation}
-则信道矩阵有
-\begin{equation}\label{key}
-\mathbb{E}[\mathrm{tr}(\mathbf{H}\mathbf{H}^{H})] = N_{R}N_{T}
-\end{equation}
-
-发射功率约束$P$将根据$P/\sigma^{2} = \rho$得到SNR$\rho$，同时如果考虑天线能量均匀分布的话有$\mathbb{E}[(\mathbf{x}\mathbf{x}^{H})] = (P/N_{t})I_{N_{t}} $，$\rho$可以用来表示在单通道增益下单根接收天线的平均信噪比SNR。为了简化模型，有时会将噪声功率归一化，此时$\rho$也可以用来表示发射功率。
-
 本论文讨论的是双向通信背景下的基站侧的检测估计，所以认为发送接收双方都有信道信息。从式(2.10)可以得到$\mathbf{H}$是一个$N_{R} \times N_{T}$矩阵。考虑该情况下的联合相关信道
 \begin{equation}\label{key}
 \mathbf{H} = \mathbf{U}_{r}\tilde{\mathbf{H}}\mathbf{U}_{t}^{H} = \mathbf{U}_{r}(\mathbf{D}+\mathbf{M}\odot \mathbf{H}_{idd})\mathbf{U}_{t}^{H}
@@ -416,7 +398,7 @@ $\mathbf{H}$满秩，称为全散射环境。其他环境都会导致非满秩�
 & = & \mathbf{U}^{H}(\mathbf{U}\Sigma\mathbf{V}^{H}\mathbf{V}\tilde{x}+\mathbf{n}) \nonumber \\
 & = & \Sigma\tilde{\mathbf{x}} + \tilde{\mathbf{n}}
 \end{eqnarray}
-其中$\tilde{mathbf{n}}=\mathbf{U}^{H}\mathbf{n}$。其中$\Sigma$是矩阵$ \mathbf{H}$第i条对角线的单值组成的矩阵，其余为零的矩阵。虽然该单值都与矩阵$ \mathbf{H}$相关，但是我们认为不同信道并不相干，所以认为不同信道都是独立的。由此转化为SISO模型进行处理，本文不再讨论其作用。
+其中$\tilde{\mathbf{n}}=\mathbf{U}^{H}\mathbf{n}$。其中$\Sigma$是矩阵$ \mathbf{H}$第i条对角线的单值组成的矩阵，其余为零的矩阵。虽然该单值都与矩阵$ \mathbf{H}$相关，但是我们认为不同信道并不相干，所以认为不同信道都是独立的。由此转化为SISO模型进行处理，本文不再讨论其作用。
 
 
 
@@ -434,25 +416,13 @@ DFT等同于连续时间傅里叶变换的离散表达，所以$X[i]$代表的�
 \end{equation}
 利用快速傅里叶变换以及快速傅里叶反变换在硬件上可以很容易得得到DFT和反DFT的结果。
 
-使用DFT的时候，通常需要注意在一个线性时变离散时间信道中，得到的接收信号是发送信号和信道冲击响应的离散时域的卷积结果
-\begin{equation}\label{key}
-y[n] = h[n]*x[n] = x[n] * h[n] = \sum_{k} h[k]x[n-k]
-\end{equation}
-$x[n]$和$h[n]$N位的循环卷积为
-\begin{equation}\label{key}
-y[n] = h[n] \circledast x[n] = x[n] \circledast h[n] = \sum_{k} h[k]x[n-k]_N
-\end{equation}
-其中$[n-k]_N$代表的是$[n-k]$对N取模。即$x[n-k]_N$是周期为N的周期数列。由此易得$y[n]$同样也是周期数列。同时根据DFT的定义，时域的循环卷积代表的是频域相乘
-\begin{equation}\label{key}
-\mathrm{DFT} \lbrace y[n]=x[n] \circledast h[n] \rbrace = X[i]H[i], \quad 0 \leq i \leq N-1
-\end{equation}
-$H[i]$是一个N点的$\lbrace h[n] \rbrace$ 。一般在时域离散信道冲击响应序列长度不满足N时，通常会补零至满足N长度。如果与本文类似的，接收端可以获得信道信息，根据反DFT可以通过接收到的时域信号DFT结果$Y[i]$和公式$Y[i]/H[i],\quad 0 \leq i \leq N-1$得到。
-
 由波束域信道推导过程，基站侧相关阵的特征矩阵为DFT矩阵，DFT矩阵易得，所以可以通过DFT矩阵，参考式(2.38)可以利用DFT矩阵得出信道的相关阵，表达形式即式(2.39)
 \begin{eqnarray}\label{key}
 [ \mathbf{R}_{F,r} ]_{i,j} & = &\mathbb{E} \lbrace \mathbf{h}_{F} (\mathbf{h}_{F})^{H} \rbrace  \nonumber \\
 & = & \sum_{p=1}^{P} \sigma_{\beta_p}^{2} \mathbf{w}_{t}(\theta_{AOD}) \mathbf{w}_{t}^{H}(\theta_{AOD}) N_R \delta \left( 0.5\sin \theta_{AOA} - \frac{\tilde{i}-1}{N_R} , 0.5\sin \theta_{AOA} - \frac{\tilde{j}-1}{N_R} \right) \nonumber
 \end{eqnarray}
+
+而波束域DFT解相关有接收矩阵与用户无关，即任意天线的接收矩阵，任意用户都可以利用同一个DFT矩阵变换到波束域，利用波束域的性质。
 
 \subsection{对应波束}
 根据上面提到的信道矩阵左乘DFT矩阵，得到信道DFT之后的矩阵
@@ -574,12 +544,14 @@ n_r - N_R \quad \frac{n_r-1}{N_R} \geq \frac{1}{2}
 		\bottomrule
 	\end{tabular}
 \end{table}
+
+由上图，可以看出本文生成的信道模型的基站侧相关阵为对角阵，并且很多对角阵上的值为0或者很小可以不做考虑，所以利用特征矩阵计算MMSE检测算法将大大减少
+检测时的计算复杂度。
+
 \begin{figure}[htbp!]
 	\centering \includegraphics[width=0.6\textwidth]{img/2_4.jpg} \caption{用户多天线波束域信道基站侧相关阵}
 \end{figure}
 
-由上图，可以看出本文生成的信道模型的基站侧相关阵为对角阵，并且很多对角阵上的值为0或者很小可以不做考虑，所以利用特征矩阵计算MMSE检测算法将大大减少
-检测时的计算复杂度。
 
 \section{本章小结}
 本章主要研究了MIMO信道物理模型，统计模型和波束域信道模型。其中物理模型主要是研究了影响信道情况的各种参数，并为后续各种模型的基础。统计信道模型主要研究了联合相关模型，作为实际相关仿真模型的基础模型。波束域信道模型主要体现的是大规模MIMO信道的特性和研究方式，通过波束域信道模型的特征，提供了减少计算复杂度切入点。
@@ -588,9 +560,9 @@ n_r - N_R \quad \frac{n_r-1}{N_R} \geq \frac{1}{2}
 \section{引言}
 信号在通过上述复杂信道之后，信号会发生改变，此时需要利用一些判决方法将接收信号恢复为发送信号。但是因为通过信道后信号同样会收到随机干扰，所以完全恢复为初始信号某种意义上是不存在的，但是通过一些方法，可以尽可能地或者说最大概率的接近发送信号。这些根据接收信号恢复发送信号的方法在通信系统中称为检测，目前针对MIMO系统最佳的检测方法为MMSE估计。但是MMSE估计的计算复杂度随着天线的增多，信道矩阵维度的扩大，会变得非常高，实际系统实现会非常占用资源。而其主要复杂度主要来自于矩阵的求逆运算，而通过QR分解，可以将矩阵求逆运算化简为QR分解。QR分解的复杂度会比原始MMSE的复杂度大大降低。并且本文在信道模型重点描述了波束域信道，此时可以注意到波束域信道的信道是稀疏的，同样一定程度上减少了计算复杂度，本章的后续部分还会讨论空间域的MMSE以及复杂度优化
 \section{系统模型}
-在一个大规模MIMO系统中，一个基站将使用数以百计的天线来提供巨大的用户容量提高。在用户端，一般认为用户只有一根天线。但是，由于目前用户多天线的技术已经运用，将用户多天线应用到大规模MIMO系统中具有理论与实践的双重意义。所以在建立系统模型时，可以考虑用户多天线的情况。本文后续仿真将同时考虑用户单天线，用户多天线单流，用户多天线多流的情况。系统模型如下
+在一个大规模MIMO系统中，一个基站将使用数以百计的天线来提供巨大的用户容量提高。在用户端，一般认为用户只有一根天线。但是，由于目前用户多天线的技术已经运用，将用户多天线应用到大规模MIMO系统中具有理论与实践的双重意义。所以在建立系统模型时，可以考虑用户多天线的情况。本文后续仿真将同时考虑用户单天线，用户多天线单流，用户多天线多流的情况。
 
-考虑一个由一个基站(BS)和K个用户终端组成的系统，其中K个用户分别讨论其拥有单天线和多天线的情况。基站(BS)配有$N_R$根天线，第$k$个用户终端拥有$M_k$根天线，并且$\sum_{k=1}^K M_k = M$。根据上面的推导，可以得到基站第n根接收第i个用户的第r根的信号为
+考虑一个由一个基站(BS)和K个用户终端组成的系统，其中K个用户分别讨论其拥有单天线和多天线的情况。基站(BS)配有$N_R$根天线，第$k$个用户终端拥有$M_k$根天线，并且$\sum_{k=1}^K M_k = M$。考虑天线阵列为相隔为半波长$0.5\lambda$的线阵天线。根据上面的推导，可以得到基站第n根接收第i个用户的第r根的信号为
 \begin{equation}\label{key}
 r_{n,r} = \sum^{M_i}_{i=1} \sum_{p=1}^{P} \sum_{q=1}^{Q_p} \mathrm{Re} \left \lbrace u_{i,p,q} h_{p,q} (t) w_{i,p,q} s_b(t) e^{j 2\pi f_c t} \right \rbrace + n_{n,r}(t)
 \end{equation}
@@ -604,10 +576,10 @@ u_{n_{R},p,q} = \mathrm{exp}(-j2\pi \frac{d_{n_{R}}}{\lambda}\sin \theta_{p,q,AO
 \end{eqnarray}
 矩阵表达如下
 \begin{eqnarray}\label{key}
-\mathbf{r}_{i}(t) = [r_{1,i}(t) \quad r_{2,i}(t) \quad\dots\quad r_{N_{R},i}(t)]^{T} \\
-\mathbf{s}_{i}(t) = [s_{1,i}(t) \quad s_{2,i}(t) \quad\dots\quad s_{N_{T},i}(t)]^{T} \\
-\mathbf{n}_{i}(t) = [n_{1,i}(t) \quad n_{2,i}(t) \quad\dots\quad n_{N_{R},i}(t)]^{T} \\
-\mathbf{H}_{i,p}(t) = \left[ \begin{array}{cccc}
+\mathbf{r}_{i}(t) & = &[r_{1,i}(t) \quad r_{2,i}(t) \quad\dots\quad r_{N_{R},i}(t)]^{T} \\
+\mathbf{x}_{i}(t)& = &[s_{1,i}(t) \quad s_{2,i}(t) \quad\dots\quad s_{N_{T},i}(t)]^{T} \\
+\mathbf{n}_{i}(t)& = &[n_{1,i}(t) \quad n_{2,i}(t) \quad\dots\quad n_{N_{R},i}(t)]^{T} \\
+\mathbf{H}_{i,p}(t)& = &\left[ \begin{array}{cccc}
 h_{1,1,p}(t) & h_{1,2,p}(t) & \ldots & h_{1,M_{i},p}(t) \\
 h_{2,1,p}(t) & h_{2,2,p}(t) & \ldots & h_{2,M_{i},p}(t) \\
 \vdots & \vdots & \ddots & \vdots \\
@@ -616,13 +588,26 @@ h_{N_{R},1,p}(t) & h_{N_{R},2,p}(t) & \ldots & h_{N_{R},M_{i},p}(t)
 \end{eqnarray}
 由上面的矩阵表达和信号的物理表达式，可以将基带信号建模为
 \begin{equation}\label{key}
-\mathbf{r}_{i}(t) = \sum_{p=1}^{P}\mathbf{H}_{i,p}(t)s_{i}(t) + n_{i}(t)
+\mathbf{r}_{i}(t) = \sum_{p=1}^{P}\mathbf{H}_{i,p}(t)\mathbf{x}_{i}(t) + \mathbf{n}_{i}(t)
 \end{equation}
 本文在这里将信道模型简写为
 \begin{equation}\label{key}
 \mathbf{y} = \sum_{i=1}^{K} \mathbf{H}_i \mathbf{x}_i + \mathbf{Z}
 \end{equation}
-有这样的性质
+考虑带宽为B，零均值，协方差矩阵为$\sigma^{2}\mathbf{I}_{M_{r}}$的噪声，$\sigma^{2} \triangleq \mathbf{E}[n^{2}_{i}]= N_{0}/2$。并有发射信号
+\begin{equation}\label{key}
+\sum_{i=1}^{M_{t}}\mathbf{E}[x_{i}x_{i}^{*}] = P
+\end{equation}
+或者可以写为
+\begin{equation}\label{key}
+\mathbb{E}[\mathrm{tr}(\mathbf{x}\mathbf{x}^{H})] = P
+\end{equation}
+则信道矩阵有
+\begin{equation}\label{key}
+\mathbb{E}[\mathrm{tr}(\mathbf{H}\mathbf{H}^{H})] = N_{R}N_{T}
+\end{equation}
+发射功率约束$P$将根据$P/\sigma^{2} = \rho$得到SNR$\rho$，同时如果考虑天线能量均匀分布的话有$\mathbb{E}[(\mathbf{x}\mathbf{x}^{H})] = (P/N_{t})I_{N_{t}} $，$\rho$可以用来表示在单通道增益下单根接收天线的平均信噪比SNR。为了简化模型，有时会将噪声功率归一化，此时$\rho$也可以用来表示发射功率。
+同样可以改写性质为下
 \begin{equation}\label{key}
 \mathbb{E} \lbrace \mathrm{tr} (\mathbf{H}_i \mathbf{H}_i^H ) \rbrace = \frac{N M_i}{M}
 \end{equation}
@@ -762,19 +747,11 @@ C_{x|y} = (H C_n^{-1} H^H + C_x^{-1})^{-1}
 \end{table}
 
 \begin{figure}[htbp!]
-	\centering \includegraphics[width=0.45\textwidth]{img/3_1.jpg} \caption{单天线MMSE检测BER}
+	\centering \includegraphics[width=0.7\textwidth]{img/3_8.eps} \caption{MMSE检测BER}
 \end{figure}
 
-\begin{figure}[htbp!]
-	\centering \includegraphics[width=0.45\textwidth]{img/3_3.jpg} \caption{多天线单流MMSE检测BER}
-\end{figure}
+从图3.1，可以看出对于不同的情况即用户单天线，用户多天线单流，用户多天线多流的情况各不相同。其中多天线单流应是判断准确度最高，其次为用户单天线，其次用户多天线多流。其中多天线单流，因为多天线传输的相同的数据能够通过综合所得到的数据得出最好的结果，而用户单天线与用户多天线多流的不同在于多天线多流带来了天线与天线之间的干扰，导致判断准确度下降。本文将主要从这三种情况对本文提出的低复杂度算法进行分析研究。而上述的MMSE模型将作为判断低复杂度算法是否达标的基准。
 
-\begin{figure}[htbp!]
-	\centering \includegraphics[width=0.45\textwidth]{img/3_8.jpg} \caption{多天线多流MMSE检测BER}
-\end{figure}
-
-
-从图3.1,3.2，3.3，可以看出对于不同的情况即用户单天线，用户多天线单流，用户多天线多流的情况各不相同。其中多天线单流应是判断准确度最高，其次为用户单天线，其次用户多天线多流。其中多天线单流，因为多天线传输的相同的数据能够通过综合所得到的数据得出最好的结果，而用户单天线与用户多天线多流的不同在于多天线多流带来了天线与天线之间的干扰，导致判断准确度下降。本文将主要从这三种情况对本文提出的低复杂度算法进行分析研究。而上述的MMSE模型将作为判断低复杂度算法是否达标的基准。
 
 \section{QR分解方法}
 虽然可以通过上式，很容易得到MMSE的检测矩阵的表达式，但需要注意的是信道矩阵$\mathbf{H}$是一个维度相对较大的矩阵，所以上式计算是非常困难的。并且在FPGA等硬件上实现矩阵求逆转置是比较繁琐的，所以通常MMSE矩阵硬件上实现是以QR分解为基础进行计算，其复杂度一定程度上得到简化。
@@ -1032,7 +1009,7 @@ x_{11} & \ldots & x_{1i} & \ldots & x_{1j} & \ldots & x_{1k} \\
 其下半部分属于单位阵，所以在并行计算的同时，Givens变换的复杂度同样降低了n次操作，所以此时的Givens变换的计算复杂度同样为$\Theta(M^2)$，但是考虑到这里的矩阵是被扩充过的，所以先对与原始MMSE并不会有很大程度的降低。
 而由本文上面提到的波束域信道模型，当物理信道乘以信道矩阵的特征矩阵时，此时为波束域信道，不仅扩充部分稀疏，信道矩阵也为稀疏阵，此时使用Givens变换和householder变换的复杂度将会进一步的降低。但是在一般的信道矩阵，因为接收天线的数量不能逼近无穷大，按照一般公式无法计算出严格稀疏的信道矩阵，而讨论的降低复杂度需要稀疏矩阵。所以这里进行了近似处理，将相对较小的元素直接赋值为0。这必然会带来一定的误差，而接下来的部分，将利用仿真结果去判断。
 \begin{figure}[htbp!]
-	\centering \includegraphics[width=0.45\textwidth]{img/3_9.jpg} \caption{QR分解MMSE}
+	\centering \includegraphics[width=0.5\textwidth]{img/3_9.eps} \caption{QR分解MMSE}
 \end{figure}
 
 \section{低复杂度的MMSE接收机}
@@ -1064,7 +1041,7 @@ if\quad [\mathbf{H}_F]_{ij} <\lambda \quad then \quad [\mathbf{H}_F]_{ij}=0;
 \begin{equation}\label{key}
 \hat{\mathbf{x}}_{approx\quad MMSE} = (\mathbf{H}_{approx}\mathbf{H}_{approx}^H + \sigma^2 \mathbf{I})^{-1}\mathbf{H}_{approx}^H \mathbf{y}_F
 \end{equation}
-此时上式利用QR分解计算MMSE的复杂度，因为矩阵稀疏所以复杂度会降低很多，不过因为并不能知道矩阵具体稀疏程度，所以并不能量化其计算复杂度
+此时上式利用QR分解计算MMSE的复杂度，上文提到了使用Givens变换的QR分解需要对目标矩阵下三角区每一个非零元素进行QR变换，而此时的信道矩阵严格稀疏，则需要进行的Givens变换将会减少，由此可以推知复杂度与用户的所占波束相关，复杂度为$\Theta((N_u*N_{beam})^2)$。
 
 \begin{figure}[htbp!]
 	\centering \includegraphics[width=0.45\textwidth]{img/3_1.eps} \caption{原始信道矩阵}
@@ -1228,7 +1205,7 @@ PE接收机可以通过约等式降低复杂度
 \section{算子自由度原理}
 上面为使用MMSE准则的多项式接收机，可以注意到当信道矩阵的维度较大的时候，利用经验矩计算每个信道同样会有较大的复杂度。但是在信道慢变的情况下，数据CSI变化得非常的慢，可以利用确定性等同$\overline{\mu}_k$代替$\mu_k$，进一步降低复杂度。此时，PE接收机只用计算$\sum_{i=1}^{L} b_{PE,i}^{(L)}(\mathbf{H}^H\mathbf{H})^{i-1}$ 即可。计算复杂度只有$\Theta(M^2)$。这里提出了利用算子自由度从而得到$\overline{\mu}_k$的方法。考虑本文是建立在大规模MIMO背景下的，所以本章开头提到的基站侧接收天线数量$N_R$可以看作是数量相当大。
 
-所以参考文献，当$N \rightarrow \infty$，有$\mu - \mathbb{E}[\mu] \rightarrow 0$。写成公式
+当$N \rightarrow \infty$，有$\mu - \mathbb{E}[\mu] \rightarrow 0$。即
 \begin{equation}\label{key}
 \lim_{N \rightarrow \infty} \mathbb{E}[\mu_k] -\mu_k =0
 \end{equation}
@@ -1439,12 +1416,13 @@ $\mathcal{B}_N$是$\mathbf{B}_N$的确定性等同。并且有这样$\overline{\
 \begin{equation}\label{key}
 \mathbf{H} = \mathbf{U}_{r}\tilde{\mathbf{H}}\mathbf{U}_{t}^{H} = \mathbf{U}_{r}(\mathbf{D}+\mathbf{M}\odot \mathbf{H}_{idd})\mathbf{U}_{t}^{H}
 \end{equation}
-考虑其中的$\mathbf{D}$为0，在此算子自由度模型中即$\overline{\mathbf{X}} = 0_N$。即又可以得到下式的递推结论。
+考虑其中的$\mathbf{D}$为0，在此算子自由度模型中即$\overline{\mathbf{X}} = 0_N$。则可以得到下面的递推公式。
 \begin{gather}\label{key}
 \mathbb{E}[\mathcal{B}^{m+1}_N] = \sum_{j=0}^{m}(\sum_{k=0}^{K}\tilde{\eta_k}(\mathbf{S}_{jk}))\mathbb{E}[\mathcal{B}_N^{m-j}] \\
 \mathbf{S}_{(m+1)k} =\sum_{j=0}^{m}\eta(\mathbb{E}(\mathcal{B}_N^j))\mathbf{S}_{m-j}k
 \end{gather}
-其中m是自然数，$\mathbb{E}[\mathcal{B}_N^0]=\mathbf{I}_N$和$\mathbf{S}_{0k}=\mathbf{I}_{M_k}$
+其中m是自然数，$\mathbb{E}[\mathcal{B}_N^0]=\mathbf{I}_N$和$\mathbf{S}_{0k}=\mathbf{I}_{M_k}$。
+利用此递推公式，可以进一步进行低复杂度PE接收机的推导。
 
 \section{低复杂度的PE接收机}
 以上是基于算子自由度理论，下面将叙述低复杂多项式展开(PE)接收机的算法。如上文所叙述的，本文考虑的是$\overline{\mathbf{X}} = 0_N$的情况，所以低复杂度PE接收机首先根据递推公式
@@ -1533,7 +1511,7 @@ $\mathcal{B}_N$是$\mathbf{B}_N$的确定性等同。并且有这样$\overline{\
 		方法 & 复杂度 \\
 		\bottomrule
 		普通MMSE & $\Theta(N_r^3)$ \\
-		PE接收机 & $\Theta(N_r^2*L)$ \\
+		PE接收机 & $\Theta(N_r^2*L^2)$ \\
 		低复杂度PE接收机 & $\Theta(N_r^2)$(与L无关因为只有计算一次确定性等同)\\
 		\bottomrule
 	\end{tabular}
@@ -1547,12 +1525,12 @@ $\mathcal{B}_N$是$\mathbf{B}_N$的确定性等同。并且有这样$\overline{\
 \section{全文总结}
 本论文以大规模MIMO技术为背景，主要研究了大规模MIMO系统中信号检测方法，并利用其信道性质和检测数学表达化简得到几种低复杂度的MMSE检测方法。本论文的主要工作总结如下：
 
-首先，在第二章具体阐述了大规模MIMO的系统模型。从MIMO的物理多径信道模型出发，得到每根接收天线的接收信号信道数学表达式，取其集合即为MIMO信道的物理模型，根据MIMO信道采用的多径模型，本文也写出了MIMO信道的统计模型，统计模型是实际上研究与仿真的主要使用的系统模型。然后从MIMO信号，本文过渡到大规模MIMO信道，并且提出了大规模MIMO的波束域信道。然后分析了大规模MIMO波束域信道的三个特征：DFT矩阵解相关，对应波束，特征矩阵稀疏性。本章提出了本论文使用的仿真模型SCM模型，设置了具体参数以及给出了仿真结果图像验证了波束域信道的特性。得到了信道模型以及信道性质，为后续章节的研究打下了基础。
+首先，在第二章具体阐述了大规模MIMO的系统模型。从物理多径信道模型出发，得到每根接收天线的信道数学表达式，取其集合即为MIMO信道的物理模型，根据MIMO信道采用的多径模型，本文也分析了空间物理信道和统计模型的关系，统计模型是实际上研究与仿真的主要使用的系统模型。然后从MIMO信号，本文过渡到大规模MIMO信道，并且提出了大规模MIMO的波束域信道。然后分析了大规模MIMO波束域信道的三个特征：DFT矩阵解相关，对应波束，特征矩阵稀疏性。本论文使用的3GPP空间信道模型(SCM)，设置了具体参数以及得到了波束域仿真信道样本验证了波束域信道的特性。得到了信道模型以及信道性质，为后续章节的研究打下了基础。
 
 其次，在第三章里具体阐述了所使用的系统模型，研究了MMSE接收机和其低复杂度形式。首先根据第二章研究的大规模MIMO的信道模型，提出了大规模MIMO的系统模型，作为本论文所有研究和仿真的基础。
 然后本章提出了MMSE检测方法，具体阐述了数学原理和表达式。并利用第二章所介绍的信道仿真SCM模型，进行仿真得到为后续章节作为性能基准的MMSE检测结果。接着，分析MMSE检测数学表达式中复杂度最高的矩阵求逆计算，阐述了利用QR分解的降低复杂度方式。而利用QR分解的Givens变换在稀疏矩阵复杂度降低，以及第二章提到的波束域信道矩阵在经过DFT变换后矩阵稀疏的性质，提出了基于MMSE的低复杂度接收机。利用本章得到的MMSE检测结果与低复杂度的作对比，得出此低复杂度接收机在降低复杂度的同时很好的保持了性能的结论。
 
-最后，在第四章里具体阐述了另一种低复杂度接收机PE接收机及其更低复杂度的确定性等同替换PE接收机。首先，本文利用Cayley hamilton理论得出了相较MMSE接收机拥有更低复杂度的PE接收机。并利用第三章的系统模型和MMSE检测结果，分析了PE接收机的性能。此时，可以发现PE接收机的系数在利用确定性等同时，在降低复杂度的同时可以保持性能。接着基于算子自由概率理论的具体推导，通过论证得到了确定性等同确实能够很好地代替原来系数。接着，给出了确定性等同的PE接收机表达式，并分析了其复杂度，可以知道低复杂度的PE接收机具有本论文提出的几个低复杂度算法的最好的复杂度。最后利用仿真结果分析了低复杂度PE接收机的性能，以及分析其的不足。
+最后，在第四章里具体阐述了另一种低复杂度接收机PE接收机及其更低复杂度的确定性等同替换PE接收机。首先，本文利用Cayley Hamilton理论得出了相较MMSE接收机拥有更低复杂度的PE接收机。并利用第三章的系统模型和MMSE检测结果，分析了PE接收机的性能。此时，可以发现PE接收机的系数在利用确定性等同时，在降低复杂度的同时可以保持性能。接着基于算子自由概率理论的具体推导，通过论证得到了确定性等同确实能够很好地代替原来系数。接着，给出了确定性等同的PE接收机表达式，并分析了其复杂度，可以知道低复杂度的PE接收机具有本论文提出的几个低复杂度算法的最好的复杂度。最后利用仿真结果分析了低复杂度PE接收机的性能，以及分析其的不足。
 
 \section{后续工作}
 本文对大规模MIMO的检测算法进行研究，检测算法在一定程度降低了计算复杂度，并且分析了很多算法的优势与不足，以及提供了系统模型可以对检测算法进行了分析。进一步的工作包括：

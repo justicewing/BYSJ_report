@@ -75,7 +75,7 @@ for k = 1:7
     
     
 end
-% save('BER_MMSE.mat','BER_MMSE');
+save('BER_MMSE3.mat','BER_MMSE');
 % 
 semilogy(SNR,BER_MMSE,'Color','blue','LineStyle','-','Marker','o');
 xlabel('SNR');

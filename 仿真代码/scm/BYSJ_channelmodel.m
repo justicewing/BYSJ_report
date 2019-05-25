@@ -6,8 +6,8 @@ clc;
 %   参数设置
 
 Scenario = 'suburban_macro';
-Nu = 4;        %   小区中用户数
-Nt = 4;         %   发送天线
+Nu = 16;        %   小区中用户数
+Nt = 1;         %   发送天线
 Nr = 128;        %   接收天线
 NoSamples = 10000;
 NoFreq = 256;
