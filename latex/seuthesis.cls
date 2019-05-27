@@ -727,6 +727,7 @@ BoldItalicFont=timesbi.ttf
 {
   \mainmatter % 开始正文部分
   \song\xiaosihao % 小四号宋体
+  \linespacing{1.57}% 主行距1.57即22pt
 }{
   \par
   \backmatter % 开始正文之后的部分

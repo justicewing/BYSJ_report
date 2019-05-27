@@ -47,23 +47,23 @@
 \defenddate{答辩日期}
 \authorizedate{学位授予日期}
 \department{信息科学与工程学院}{department name}
-\duration{2019年1月—2019年6月}
+\duration{2019年1月1日—2019年6月5日}
 \address{无线谷1405室}
 \maketitle
 
-\begin{abstract}{大规模MIMO， 波束域信道模型， MMSE检测， 低复杂度检测， QR分解， PE接收机， 算子自由度}
+\begin{abstract}{大规模MIMO， 波束域信道模型， MMSE检测， 低复杂度检测，PE接收机}
 目前人们的生活中已经离不开移动通信，时代发展一定程度上以移动通信基础。目前流行的物联网，智能互联，车联网，天地融合等新兴技术需要大吞吐，低时延，低功耗，硬件要求低的通信系统，所以第五代移动通信系统(5G,5th Generation)将在第四代移动通信系统上进一步提高这些指标。大规模MIMO技术可以显著提升系统的频谱效率和功率效率，是5G移动通信的关键技术。而实现大规模MIMO技术需要将大量接收天线接收到的接收信号恢复为发送端的发送信号，这一过程即称为大规模MIMO的检测与估计。大规模MIMO技术因为天线数量多，信道复杂，一般的检测方法的复杂度将会非常高。本论文将以此为研究背景，推导适用大规模MIMO的低复杂检测算法。
 
 首先，大规模MIMO系统模型需要建立恰当的信道模型，并且可以通过研究该信道的特点可以有针对的进行复杂度优化。所以本文从物理多径信道模型出发，分析了物理信道模型的参数含义，并建立物理信道模型与统计信道模型的关系。进而，提出了大规模MIMO波束域信道模型，分析了大规模MIMO波束域信道的特性，包括：DFT矩阵渐近解相关、波束与方向对应性以及波束域信道稀疏性。利用3GPP空间信道模型(SCM
 )，生成波束域信道样本，验证波束域信道的特性，为后续章节的研究打下了基础。
 
-然后，检测算法的正确性需要使用合适的系统模型，本文根据信道模型加入发送接收部分建立完整的系统模型。并基于大规模MIMO无线传输的系统模型，阐述了上行传输中MMSE检测方法。分析MMSE检测数学表达式中复杂度最高的矩阵求逆运算，利用QR分解降低MMSE检测的计算复杂度。而利用QR分解的Givens变换在稀疏矩阵复杂度降低，以及波束域信道矩阵在经过DFT变换后信道矩阵稀疏的性质，提出了基于MMSE的低复杂度接收机。其将原始MMSE的计算复杂度$\Theta(M^3)$(M为基站接收天线数)化简至$\Theta(N_u*N_{beam})$($N_u$为用户数，$N_{beam}$为用户所占波束)。将基于MMSE的低复杂度接收机性能与MMSE检测结果的作对比，得出此低复杂度接收机在降低复杂度的同时很好的保持了性能的结论。
+然后，检测算法的正确性需要使用合适的系统模型，本文根据信道模型加入发送接收部分建立完整的系统模型。基于大规模MIMO无线传输的系统模型，阐述了上行传输中MMSE检测方法。分析MMSE检测数学表达式中复杂度最高的矩阵求逆运算，利用QR分解降低MMSE检测的计算复杂度。而利用QR分解的Givens变换在稀疏矩阵复杂度降低，以及波束域信道矩阵在经过DFT变换后信道矩阵稀疏的性质，提出了基于MMSE的低复杂度接收机。其将原始MMSE的计算复杂度$\Theta(M^3)$(M为基站接收天线数)化简至$\Theta(N_u*N_{beam})$($N_u$为用户数，$N_{beam}$为用户所占波束)。将基于MMSE的低复杂度接收机性能与MMSE检测结果的作对比，得出此低复杂度接收机在降低复杂度的同时很好的保持了性能的结论。
 
-最后，利用Cayley Hamilton理论得出了相较MMSE接收机拥有更低复杂度的PE接收机。针对MMSE检测中矩阵求逆复杂度高的问题，根据Cayley Hamilton理论，利用矩阵多项式逼近矩阵求逆结果，提出了。进而，在大规模MIMO系统中，利用算子自由概率推导了在矩阵维度较大时的确定性等同PE接收机，低复杂度的PE接收机具有本论文提出的几个低复杂度算法的最好的复杂度。利用仿真结果分析了低复杂度PE接收机的性能及复杂度$\Theta(M^2)$，以及提出了其的不足之处。
+最后，利用Cayley Hamilton理论得出了相较MMSE接收机拥有更低复杂度的多项式展开(PE,polynomial expansion)接收机。针对MMSE检测中矩阵求逆复杂度高的问题，根据Cayley Hamilton理论，利用矩阵多项式逼近矩阵求逆结果，可以在保证一定性能的情况下将复杂度降低至$\Theta(M^2L^2)$。进而，在大规模MIMO系统中，利用算子自由概率推导了在矩阵维度较大时的确定性等同PE接收机，低复杂度的PE接收机具有本论文提出的几个低复杂度算法的最好的复杂度。利用仿真结果分析了低复杂度PE接收机的性能及复杂度$\Theta(M^2)$，以及提出了其的不足之处。
 \end{abstract}
 
-\begin{englishabstract}{Massive MIMO, Beam Domain Channel Model, MMSE Detector, Low Complexity Detector Alogrithm, QR Expansion, PE detector, Operator-Valued Free Probability}
-At present, people's life has been inseparable from mobile communications, the development of the times to a certain extent based on mobile communications. Nowadays, the popular new technologies such as Internet of Things, Intelligent Interconnection, Vehicle Networking, Space-Earth Integration need communication systems with high throughput, low delay, low power consumption and low hardware requirements. Therefore, the fifth generation mobile communication system (5G, 5th Generation) will further improve these indicators in the fourth generation mobile communication system. Large-Scale MIMO technology can significantly improve the spectral efficiency and power efficiency of the system, which is the key technology of 5G mobile communication. In order to realize Large-Scale MIMO technology, a large number of received antenna signals need to be restored to the sending signal of the transmitter. This process is called detection and estimation of Large-Scale MIMO. Because of the large number of antennas and the complex channel, the complexity of general detection methods will be very high. In this paper, a low complexity detection algorithm for Large-Scale MIMO is deduced.
+\begin{englishabstract}{Massive MIMO, Beam Domain Channel Model, MMSE Detector, Low Complexity Detector Alogrithm, PE detector}
+At present, people's life has been inseparable from mobile communications, the development of the times to a certain extent based on mobile communications. Nowadays, the popular new technologies such as Internet of Things, Intelligent Interconnection, Vehicle Networking, Space-Earth Integration need communication systems with high throughput, low delay, low power consumption and low hardware requirements. Therefore, the fifth generation mobile communication system will further improve these indicators in the fourth generation mobile communication system. Large-Scale MIMO technology can significantly improve the spectral efficiency and power efficiency of the system, which is the key technology of 5G mobile communication. In order to realize Large-Scale MIMO technology, a large number of received antenna signals need to be restored to the sending signal of the transmitter. This process is called detection and estimation of Large-Scale MIMO. Because of the large number of antennas and the complex channel, the complexity of general detection methods will be very high. In this paper, a low complexity detection algorithm for Large-Scale MIMO is deduced.
 
 
 
@@ -71,11 +71,11 @@ Firstly, the Large-Scale MIMO system model needs to establish an appropriate cha
 
 
 
-Then, the correctness of the detection algorithm needs to use the appropriate system model. This paper builds a complete system model by adding the channel model to the sending and receiving part. Based on the system model of Large-Scale MIMO wireless transmission, the MMSE detection method in upstream transmission is described. The matrix inversion operation with the highest complexity in MMSE detection mathematical expression is analyzed, and the QR decomposition is used to reduce the computational complexity of MMSE detection. The Givens transform based on QR decomposition can reduce the complexity due to sparse matrix and the sparse property of channel matrix in beam domain after DFT transformation. As, A low complexity receiver based on MMSE is proposed. It simplifies the computational complexity of the original MMSE from $\ Theta (M ^ 3) $(M is the number of base station receiving antennas) to $\Theta(N_u*N_{beam})$($N_u$ donates the number of users and $N_{beam} $ donates the number of beam which single user consume). By comparing the performance of the low complexity receiver based on MMSE with the results of MMSE detection, it is concluded that the low complexity receiver can reduce the complexity while maintaining the performance well.
+Then, the correctness of the detection algorithm needs to use the appropriate system model. This paper builds a complete system model by adding the channel model to the sending and receiving part. Based on the system model of Large-Scale MIMO wireless transmission, the MMSE detection method in upstream transmission is described. The matrix inversion operation with the highest complexity in MMSE detection mathematical expression is analyzed, and the QR decomposition is used to reduce the computational complexity of MMSE detection. The Givens transform based on QR decomposition can reduce the complexity due to sparse matrix and the sparse property of channel matrix in beam domain after DFT transformation. As, A low complexity receiver based on MMSE is proposed. It simplifies the computational complexity of the original MMSE from $\Theta (M ^ 3) $(M is the number of base station receiving antennas) to $\Theta(N_u*N_{beam})$($N_u$ donates the number of users and $N_{beam} $ donates the number of beam which single user consume). By comparing the performance of the low complexity receiver based on MMSE with the results of MMSE detection, it is concluded that the low complexity receiver can reduce the complexity while maintaining the performance well.
 
 
 
-Finally, the PE receiver with lower complexity than MMSE receiver is obtained by Cayley Hamilton theory. According to Cayley Hamilton's theory, matrix polynomials are used to approximate the matrix inversion results in MMSE detection because of the high complexity of matrix inversion. Furthermore, in large-scale MIMO systems, the deterministic equivalent PE receiver with larger matrix dimension is deduced by using operator freedom probability, and its complexity is analyzed as $ Theta (M ^ 2L ^ 2)$. Low complexity PE receiver has the best complexity of several low complexity algorithms proposed in this paper. The performance and complexity ($\ Theta (M ^ 2)$) of low complexity PE receiver are analyzed by simulation results, and its shortcomings are pointed out.
+Finally, the polynomial expansion receiver with lower complexity than MMSE receiver is obtained by Cayley Hamilton theory. According to Cayley Hamilton's theory, matrix polynomials are used to approximate the matrix inversion results in MMSE detection because of the high complexity of matrix inversion, then we can achieve a lower complexity of $\Theta(M^2L^2)$ while getting the same detecting quality. Furthermore, in large-scale MIMO systems, the deterministic equivalent PE receiver with larger matrix dimension is deduced by using operator freedom probability. Low complexity PE receiver has the best complexity of several low complexity algorithms proposed in this paper. The performance and complexity ($\Theta (M ^ 2)$) of low complexity PE receiver are analyzed by simulation results, and its shortcomings are pointed out.
 \end{englishabstract}
 
 \tableofcontents
@@ -85,9 +85,9 @@ Finally, the PE receiver with lower complexity than MMSE receiver is obtained by
 
 \chapter{绪论}
 \section{研究背景}
-目前人们的生活中已经离不开移动通信，而时代发展一定程度上以移动通信为基础。最近30年，信息时代的技术飞速发展，移动通信技术也依托20世纪的理论基础和21世纪的硬件发展得到了长足的进步。从第一代移动通信技术(1G, 1th Generation)的模拟通信和频分多址(FDMA, Frequency Division Multiple Access)技术，到第二代移动通信技术(2G, 2th Generation)的数字通信和时分多址(TDMA, Time Division Multiple Access)技术，到第三代移动通信技术(3G, 3th Generation)的蜂窝移动网络以及宽带码分多址(CDMA, Code Division Multiple Access)技术，到现在的第四代移动通信技术(4G, 4th Generation)的多天线技术和正交频分复用(OFDM, Orthogonal Frequecy Division Multiple)技术。目前流行的物联网，智能互联，车联网等新兴技术需要大吞吐，低时延，低功耗，硬件要求低的通信系统，所以第五代移动通信系统(5G, 5th Generation)将在第四代移动通信系统上进一步提高这些指标。
+目前人们的生活中已经离不开移动通信，时代发展一定程度上以移动通信为基础。最近30年，信息时代的技术飞速发展，移动通信技术也依托20世纪的理论基础和21世纪的硬件发展得到了长足的进步。从第一代移动通信技术(1G, 1th Generation)的模拟通信和频分多址(FDMA, Frequency Division Multiple Access)技术，到第二代移动通信技术(2G, 2th Generation)的数字通信和时分多址(TDMA, Time Division Multiple Access)技术，到第三代移动通信技术(3G, 3th Generation)的蜂窝移动网络以及宽带码分多址(CDMA, Code Division Multiple Access)技术，到现在中国已经大面积覆盖使用的第四代移动通信技术(4G, 4th Generation)的多天线技术和正交频分复用(OFDM, Orthogonal Frequecy Division Multiple)技术。目前新兴产业如物联网，智能互联，车联网等新兴技术对大吞吐，低时延，低功耗，硬件要求低的通信系统的需求日益增高，所以第五代移动通信系统(5G, 5th Generation)将在第四代移动通信系统上进一步提高这些指标。
 
-由于智能设备，移动设备广泛使用以及实现M2M通信的目标，全球移动通信网络所需要传输的数据量猛增。并且目前的设计受制于通信频谱的不足。为了解决通信的数据量猛增以及低损的频谱波段的不足的问题，所以考虑使用大规模多输入多输出传输技术(LS-MIMO Large-Scale Multiple Input Multiple Output）。并且第五代通信系统也致力于研究大规模MIMO的技术，所以5G相关的基础技术很多也是和大规模MIMO相关的。并且目前的毫米波发展导致传输相同的距离需要更高的功率或者比3G/4G更多的基站，此时也需要大规模MIMO的发展来建立适合小蜂窝的网络结构。\cite{zhang2018recent}
+由于智能设备，移动设备广泛使用以及实现M2M通信的目标，全球移动通信网络所需要传输的数据量猛增。同时目前的设计受制于通信频谱的不足的问题发展到达了瓶颈。为了解决通信的数据量猛增以及低损的频谱波段的不足的问题，所以考虑使用大规模多输入多输出传输技术(LS-MIMO Large-Scale Multiple Input Multiple Output）。第五代通信系统也致力于研究大规模MIMO的技术，所以5G相关的基础技术很多也是和大规模MIMO相关的。目前的毫米波发展导致传输相同的距离需要更高的功率或者比3G/4G更多的基站，此时也需要大规模MIMO的发展来建立适合小蜂窝的网络结构。\cite{zhang2018recent}
 
 大规模MIMO系统影响接收信号强度主要的原因是多径传输，多普勒影响，空间特性的影响。多径的影响主要是发送端和接收端之间的有许多不同的传输路径，多普勒影响主要是移动的发送端或者接收端带来的频率偏移，大规模MIMO天线带来的波束指向性会带了空间特性。而与传统的MIMO不同的是大规模MIMO有一些特别的性质，包括更有利的发射状态，发射角特性，球形波阵面假设和空间不稳定特征。目前的大规模MIMO信道测量方式主要是利用宽带高同步率的收发机，进行大量的数据传输得到信道参数。并且针对不同情况进行不同的天线设置。目前的信道测试基本上以6GHz以下的频带进行测试，从而验证了大规模MIMO的特别性质。而信道建模的主要分为数据模型和确定性模型。数据模型主要分为基于相关的随机模型和基于几何的随机模型，对于大规模MIMO基于几何的随机模型要更适合一些。而未来大规模MIMO信道建模的研究方向要考虑之前提到的大规模MIMO相对于传统MIMO的特性，并且需要结合第五代移动通信采用的核心技术。
 
@@ -1544,26 +1544,24 @@ $\mathcal{B}_N$是$\mathbf{B}_N$的确定性等同。并且有这样$\overline{\
 
 \end{Main} % 结束正文
 
-\begin{Acknowledgement}
-在东南学习的四年里，我对信息学科的学习更加深入，对科研产生了浓厚的兴趣，对项目积累了丰富的经验。自己德智体美各方面都得到了长足的进步，也收获很多宝贵的经历。掌握了通信方向的各方面知识，体验了实验研究的各方面工作，这些收获离不开四年里引导我，帮助我的老师同学，离不开背后默默支持我的父母。而现在已经步入毕业阶段，想利用毕设论文的致谢部分对我的父母，老师，同学表达自己最衷心的感谢。
-
-首先我要感谢王闻今老师。最先开始考虑进入实验室的时候，我向班主任表达了我研究生方向想做偏工程一些的诉求，所以推荐了我去找王老师，一开始进入课题组因为不习惯科研研究，并且处于大三事情比较忙碌的时候，科研学习对我来说非常困难。在多次和王老师交流与参与组会时，我慢慢培养起对科研的兴趣和做科研的一些要求和习惯。在课题组学习科研的一年，也给了我很多去接触课题之外许多不同单位实验室的机会，从和他们的沟通交流，我同样收益匪浅。
-
-特别感谢孙晨老师的悉心指导。孙老师主要指导我毕设方向的事情，耐心地指导我，让我了解到课题组一些前沿研究，并一步步从入门带领我到掌握的程度，为我指出了很多论文写作中的错误和不足。孙老师非常细致的指导使得我的毕设研究能够进行非常顺利，为我论文写作提供了巨大的帮助。
-
-衷心感谢尤力老师在我学习生活提供的帮助。作为课题组的老师和班级的班主任，尤力老师给我提供的便利和支持，让我在实验时的科研学习非常的轻松和愉快。组织的各种课题组活动，让我在实验室枯燥的学习生活中还能感受一些轻松愉快的氛围。
-
-特别感谢徐振、吴体昊、石丁、孙榛、李灵瑄、徐益师兄师姐在科研和项目上的帮助，带领我这个科研小白逐渐融入课题组，并且提供了很多科研的经验，让我可以快速上手。感谢师姐杨晓鹤提供的资料，让我更加快速的熟悉项目。感谢同学何思然、杨济源、王一彪、陈婷婷、黄雨菲在实验室的一起科研，让我的科研学习生活非常丰富。感谢我的舍友，在枯燥忙碌的科研学习中总能给我很多愉快，舒适的生活环境和刻骨铭心的记忆。让我在科研之余，能够好好享受大学生活。感谢我的父母，是他们一直在背后默默的支持我，使我能够心无旁骛的学习，科研。是他们的支持、监督和鼓励，让我顺利的完成了学业，并且给我提供了一切可能，是他们的奉献，我才能更好地攀登学业的高峰。
-
-最后感谢东南大学一流的学习、生活和科研环境，使我在东南大学受益匪浅。
-
-\end{Acknowledgement}
-
 % 参考文献
 %\bibliographystyle{plain}
 \bibliography{seuthesis}
 
-
+\begin{Acknowledgement}
+	在东南学习的四年里，我对信息学科的学习更加深入，对科研产生了浓厚的兴趣，对项目积累了丰富的经验。自己德智体美各方面都得到了长足的进步，也收获很多宝贵的经历。掌握了通信方向的各方面知识，体验了实验研究的各方面工作，这些收获离不开四年里引导我，帮助我的老师同学，离不开背后默默支持我的父母。而现在已经步入毕业阶段，想利用毕设论文的致谢部分对我的父母，老师，同学表达自己最衷心的感谢。
+	
+	首先我要感谢王闻今老师。最先开始考虑进入实验室的时候，我向班主任表达了我研究生方向想做偏工程一些的诉求，所以推荐了我去找王老师，一开始进入课题组因为不习惯科研研究，并且处于大三事情比较忙碌的时候，科研学习对我来说非常困难。在多次和王老师交流与参与组会时，我慢慢培养起对科研的兴趣和做科研的一些要求和习惯。在课题组学习科研的一年，也给了我很多去接触课题之外许多不同单位实验室的机会，从和他们的沟通交流，我同样收益匪浅。
+	
+	特别感谢孙晨老师的悉心指导。孙老师主要指导我毕设方向的事情，耐心地指导我，让我了解到课题组一些前沿研究，并一步步从入门带领我到掌握的程度，为我指出了很多论文写作中的错误和不足。孙老师非常细致的指导使得我的毕设研究能够进行非常顺利，为我论文写作提供了巨大的帮助。
+	
+	衷心感谢尤力老师在我学习生活提供的帮助。作为课题组的老师和班级的班主任，尤力老师给我提供的便利和支持，让我在实验时的科研学习非常的轻松和愉快。组织的各种课题组活动，让我在实验室枯燥的学习生活中还能感受一些轻松愉快的氛围。
+	
+	特别感谢徐振、吴体昊、石丁、孙榛、李灵瑄、徐益师兄师姐在科研和项目上的帮助，带领我这个科研小白逐渐融入课题组，并且提供了很多科研的经验，让我可以快速上手。感谢师姐杨晓鹤提供的资料，让我更加快速的熟悉项目。感谢同学何思然、杨济源、王一彪、陈婷婷、黄雨菲在实验室的一起科研，让我的科研学习生活非常丰富。感谢我的舍友张皓辰，陈佳伟，严旭阳，在枯燥忙碌的科研学习中总能给我很多愉快，舒适的生活环境和刻骨铭心的记忆。让我在科研之余，能够好好享受大学生活。感谢我的父母，是他们一直在背后默默的支持我，使我能够心无旁骛的学习，科研。是他们的支持、监督和鼓励，让我顺利的完成了学业，并且给我提供了一切可能，是他们的奉献，我才能更好地攀登学业的高峰。
+	
+	最后感谢东南大学一流的学习、生活和科研环境，使我在东南大学受益匪浅。
+	
+\end{Acknowledgement}
 
 \newpage
 \printindex % 索引
