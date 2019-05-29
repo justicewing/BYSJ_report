@@ -21,16 +21,16 @@
 \contentsline {section}{\numberline {3.3}MMSE接收机原理及仿真}{21}{section.3.3}
 \contentsline {section}{\numberline {3.4}QR分解方法}{24}{section.3.4}
 \contentsline {section}{\numberline {3.5}低复杂度的MMSE接收机}{29}{section.3.5}
-\contentsline {section}{\numberline {3.6}本章小结}{34}{section.3.6}
-\contentsline {chapter}{\numberline {4}基于多项式展开接收机及复杂度优化}{35}{chapter.4}
-\contentsline {section}{\numberline {4.1}引言}{35}{section.4.1}
-\contentsline {section}{\numberline {4.2}PE接收机原理及仿真}{35}{section.4.2}
-\contentsline {section}{\numberline {4.3}算子自由度原理}{39}{section.4.3}
-\contentsline {section}{\numberline {4.4}低复杂度的PE接收机}{43}{section.4.4}
-\contentsline {section}{\numberline {4.5}本章小结}{47}{section.4.5}
-\contentsline {chapter}{\numberline {5}总结与展望}{48}{chapter.5}
-\contentsline {section}{\numberline {5.1}全文总结}{48}{section.5.1}
-\contentsline {section}{\numberline {5.2}后续工作}{49}{section.5.2}
-\contentsline {chapter}{参考文献}{50}{chapter*.43}
-\contentsline {chapter}{致谢}{52}{section*.44}
+\contentsline {section}{\numberline {3.6}本章小结}{33}{section.3.6}
+\contentsline {chapter}{\numberline {4}基于多项式展开接收机及复杂度优化}{34}{chapter.4}
+\contentsline {section}{\numberline {4.1}引言}{34}{section.4.1}
+\contentsline {section}{\numberline {4.2}PE接收机原理及仿真}{34}{section.4.2}
+\contentsline {section}{\numberline {4.3}算子自由度原理}{38}{section.4.3}
+\contentsline {section}{\numberline {4.4}低复杂度的PE接收机}{42}{section.4.4}
+\contentsline {section}{\numberline {4.5}本章小结}{46}{section.4.5}
+\contentsline {chapter}{\numberline {5}总结与展望}{47}{chapter.5}
+\contentsline {section}{\numberline {5.1}全文总结}{47}{section.5.1}
+\contentsline {section}{\numberline {5.2}后续工作}{48}{section.5.2}
+\contentsline {chapter}{\hbox to\hsize {参考文献\hss }}{49}{chapter*.43}
+\contentsline {chapter}{致谢}{51}{section*.44}
 \contentsfinish 
