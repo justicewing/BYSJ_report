@@ -13,7 +13,7 @@
 \contentsline {section}{\numberline {2.5}波束域信道特性}{14}{section.2.5}
 \contentsline {subsection}{\numberline {2.5.1}DFT矩阵解相关}{14}{subsection.2.5.1}
 \contentsline {subsection}{\numberline {2.5.2}对应波束}{14}{subsection.2.5.2}
-\contentsline {subsection}{\numberline {2.5.3}特征矩阵稀疏性}{15}{subsection.2.5.3}
+\contentsline {subsection}{\numberline {2.5.3}特征矩阵稀疏性}{17}{subsection.2.5.3}
 \contentsline {section}{\numberline {2.6}本章小结}{18}{section.2.6}
 \contentsline {chapter}{\numberline {3}基于MMSE接收机复杂度优化}{19}{chapter.3}
 \contentsline {section}{\numberline {3.1}引言}{19}{section.3.1}
