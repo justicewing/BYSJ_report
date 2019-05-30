@@ -1,4 +1,4 @@
-run('BYSJ_channelmodel.m');
+% run('BYSJ_channelmodel.m');
 % ÐÅºÅÉú³É
 sample = rand(NoSamples,Nu,Nt);
 sample = round(sample);
